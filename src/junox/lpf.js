@@ -1,8 +1,3 @@
-import keymirror from 'keymirror'
-
-const SQRT2 = Math.sqrt(2.0)
-const TWOPI = Math.PI * 2.0
-
 export default class LPF {
   // resonance should be between 1 and 5
   constructor ({ type, cutoff, resonance, sampleRate }) {

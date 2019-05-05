@@ -1,12 +1,11 @@
-import keymirror from 'keymirror'
 import { lerp } from '../utils'
 
-const ENVELOPE_STATES = keymirror({
-  ATTACK: null,
-  DECAY: null,
-  SUSTAIN: null,
-  RELEASE: null
-})
+const ENVELOPE_STATES = {
+  ATTACK: 'attack',
+  DECAY: 'decay',
+  SUSTAIN: 'sustain',
+  RELEASE: 'release'
+}
 
 export default class ADSREnvelope {
   constructor ({ attack, decay, sustain, release, sampleRate }) {

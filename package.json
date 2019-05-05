@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "keymirror": "^0.1.1",
     "lodash.set": "^4.3.2",
     "pixi.js": "^4.8.7",
     "prop-types": "^15.7.2",

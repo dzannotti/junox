@@ -3918,11 +3918,6 @@ just-range@^2.1.0:
   resolved "https://registry.yarnpkg.com/just-range/-/just-range-2.1.0.tgz#b8738839878f80670e5a41ba9bfdc5ea7ebde273"
   integrity sha512-X5AaLuFTVrwWtozWjR+4TJi8vRBdgicVjaX0IWJ8o6VBavjQGIcF1e/b6rmFcXa8lWpKKKRgMT7PZt+ic36//w==
 
-keymirror@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
-  integrity sha1-kYiJ6hP40KQufFVyUO7nE63JXDU=
-
 kind-of@^3.0.2, kind-of@^3.0.3, kind-of@^3.2.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"

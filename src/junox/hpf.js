@@ -1,3 +1,6 @@
+const SQRT2 = Math.sqrt(2.0)
+const TWOPI = Math.PI * 2.0
+
 export default class Filter {
   // resonance should be between 1 and 5
   constructor ({ cutoff, resonance, sampleRate }) {
@@ -10,10 +13,10 @@ export default class Filter {
   }
 
   calculateCoeffients () {
-    this.z = Math.cos((Math.PI * 2.0 * this.cutoff) / this.sampleRate)
+    this.z = Math.cos((TWOPI * this.cutoff) / this.sampleRate)
     this.c = 2 - 2 * this.z
     this.r =
-      (Math.sqrt(2.0) * Math.sqrt(-Math.pow(this.z - 1.0, 3.0)) +
+      (SQRT2 * Math.sqrt(-Math.pow(this.z - 1.0, 3.0)) +
         this.resonance * (this.z - 1)) /
       (this.resonance * (this.z - 1))
   }

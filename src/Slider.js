@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Range, Direction } from 'react-range'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'

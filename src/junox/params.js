@@ -53,14 +53,14 @@ export function sliderToResonance (val) {
 }
 
 export function chorusModeToFreq (val) {
-  if (val == 1) {
+  if (val === 1) {
     return 0.513
   }
   return 1.263
 }
 
 export function chorusModeToFeedback (val) {
-  if (val == 1) {
+  if (val === 1) {
     return 0.15
   }
   return 0.3
