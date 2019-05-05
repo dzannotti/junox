@@ -80751,7 +80751,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.noteToFrequency = noteToFrequency;
 exports.lerp = lerp;
-exports.toFixed = toFixed;
 
 function noteToFrequency(note) {
   return Math.pow(2, (note - 81) / 12) * 440;
@@ -80760,143 +80759,6 @@ function noteToFrequency(note) {
 function lerp(a, b, t) {
   return (1 - t) * a + t * b;
 }
-
-function toFixed(val) {
-  return Math.round(val);
-}
-},{}],"reverb.js":[function(require,module,exports) {
-// 1:1 of https://github.com/web-audio-components/simple-reverb/blob/master/index.js
-function SimpleReverb(context, opts) {
-  this.input = this.output = context.createConvolver();
-  this._context = context;
-  var p = this.meta.params;
-  opts = opts || {};
-  this._seconds = opts.seconds || p.seconds.defaultValue;
-  this._decay = opts.decay || p.decay.defaultValue;
-  this._reverse = opts.reverse || p.reverse.defaultValue;
-
-  this._buildImpulse();
-}
-
-SimpleReverb.prototype = Object.create(null, {
-  /**
-   * AudioNode prototype `connect` method.
-   *
-   * @param {AudioNode} dest
-   */
-  connect: {
-    value: function value(dest) {
-      this.output.connect(dest.input ? dest.input : dest);
-    }
-  },
-
-  /**
-   * AudioNode prototype `disconnect` method.
-   */
-  disconnect: {
-    value: function value() {
-      this.output.disconnect();
-    }
-  },
-
-  /**
-   * Utility function for building an impulse response
-   * from the module parameters.
-   */
-  _buildImpulse: {
-    value: function value() {
-      var rate = this._context.sampleRate;
-      var length = rate * this.seconds;
-      var decay = this.decay;
-
-      var impulse = this._context.createBuffer(2, length, rate);
-
-      var impulseL = impulse.getChannelData(0);
-      var impulseR = impulse.getChannelData(1);
-      var n;
-      var i;
-
-      for (i = 0; i < length; i++) {
-        n = this.reverse ? length - i : i;
-        impulseL[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
-        impulseR[i] = (Math.random() * 2 - 1) * Math.pow(1 - n / length, decay);
-      }
-
-      this.input.buffer = impulse;
-    }
-  },
-
-  /**
-   * Module parameter metadata.
-   */
-  meta: {
-    value: {
-      name: 'SimpleReverb',
-      params: {
-        seconds: {
-          min: 1,
-          max: 50,
-          defaultValue: 3,
-          type: 'float'
-        },
-        decay: {
-          min: 0,
-          max: 100,
-          defaultValue: 2,
-          type: 'float'
-        },
-        reverse: {
-          min: 0,
-          max: 1,
-          defaultValue: 0,
-          type: 'bool'
-        }
-      }
-    }
-  },
-
-  /**
-   * Public parameters.
-   */
-  seconds: {
-    enumerable: true,
-    get: function get() {
-      return this._seconds;
-    },
-    set: function set(value) {
-      this._seconds = value;
-
-      this._buildImpulse();
-    }
-  },
-  decay: {
-    enumerable: true,
-    get: function get() {
-      return this._decay;
-    },
-    set: function set(value) {
-      this._decay = value;
-
-      this._buildImpulse();
-    }
-  },
-  reverse: {
-    enumerable: true,
-    get: function get() {
-      return this._reverse;
-    },
-    set: function set(value) {
-      this._reverse = value;
-
-      this._buildImpulse();
-    }
-  }
-});
-/**
- * Exports.
- */
-
-module.exports = SimpleReverb;
 },{}],"audio.js":[function(require,module,exports) {
 "use strict";
 
@@ -80910,22 +80772,15 @@ var _visualizer = _interopRequireDefault(require("./Visualizer/visualizer"));
 
 var _utils = require("./utils");
 
-var _reverb = _interopRequireDefault(require("./reverb"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // TODO: Refactor this mess
-var BUFFER_SIZE = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) ? 4096 : 1024;
+var BUFFER_SIZE = 4096;
 var SAMPLE_RATE = 44100;
 exports.SAMPLE_RATE = SAMPLE_RATE;
 var MS_PER_SAMPLE = 1000 / SAMPLE_RATE;
 var BUFFER_SIZE_MS = 1000 * BUFFER_SIZE / SAMPLE_RATE;
 var audioContext = new (window.AudioContext || window.webkitAudioContext)();
-var verb = new _reverb.default(audioContext, {
-  seconds: 0.25,
-  decay: 0.25,
-  reverse: 0.1
-});
 
 function init(synth, sequencer) {
   var visualizer = new _visualizer.default('analysis', 256, 35, 0xc0cf35, 0x2f3409, audioContext);
@@ -80935,8 +80790,7 @@ function init(synth, sequencer) {
 
 function setupAudioGraph(synth, sequencer, visualizer) {
   var scriptProcessor = audioContext.createScriptProcessor(BUFFER_SIZE, 0, 2);
-  scriptProcessor.connect(audioContext.destination); // verb.connect(audioContext.destination)
-
+  scriptProcessor.connect(audioContext.destination);
   scriptProcessor.connect(visualizer.getAudioNode()); // Attach to window to avoid GC. http://sriku.org/blog/2013/01/30/taming-the-scriptprocessornode
 
   scriptProcessor.onaudioprocess = window.audioProcess = function (e) {
@@ -80990,7 +80844,7 @@ function initAudio(synth, sequencer) {
     return init(synth, sequencer);
   }, 50);
 }
-},{"./Visualizer/visualizer":"Visualizer/visualizer.js","./utils":"utils.js","./reverb":"reverb.js"}],"../node_modules/just-range/index.js":[function(require,module,exports) {
+},{"./Visualizer/visualizer":"Visualizer/visualizer.js","./utils":"utils.js"}],"../node_modules/just-range/index.js":[function(require,module,exports) {
 module.exports = range;
 
 /*
@@ -84576,9 +84430,9 @@ function () {
     key: "tick",
     value: function tick(freqMod, pwmMod) {
       var frequency = this.frequency * Math.pow(2, freqMod / 12);
-      this.samplesPerPeriod = (this.sampleRate / frequency).toFixed();
+      this.samplesPerPeriod = Math.round(this.sampleRate / frequency);
       this.phase = (this.phase + 1) % this.samplesPerPeriod;
-      this.samplesPerPeriodSub = (this.sampleRate / (frequency / 2)).toFixed();
+      this.samplesPerPeriodSub = Math.round(this.sampleRate / (frequency / 2));
       this.phaseSub = (this.phaseSub + 1) % this.samplesPerPeriodSub;
 
       if (pwmMod > 0.01) {
@@ -84616,61 +84470,6 @@ function () {
 }();
 
 exports.default = Oscillator;
-},{}],"../node_modules/keymirror/index.js":[function(require,module,exports) {
-/**
- * Copyright 2013-2014 Facebook, Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
-"use strict";
-
-/**
- * Constructs an enumeration with keys equal to their value.
- *
- * For example:
- *
- *   var COLORS = keyMirror({blue: null, red: null});
- *   var myColor = COLORS.blue;
- *   var isColorValid = !!COLORS[myColor];
- *
- * The last line could not be performed if the values of the generated enum were
- * not equal to their keys.
- *
- *   Input:  {key1: val1, key2: val2}
- *   Output: {key1: key1, key2: key2}
- *
- * @param {object} obj
- * @return {object}
- */
-var keyMirror = function(obj) {
-  var ret = {};
-  var key;
-  if (!(obj instanceof Object && !Array.isArray(obj))) {
-    throw new Error('keyMirror(...): Argument must be an object.');
-  }
-  for (key in obj) {
-    if (!obj.hasOwnProperty(key)) {
-      continue;
-    }
-    ret[key] = key;
-  }
-  return ret;
-};
-
-module.exports = keyMirror;
-
 },{}],"junox/envelope.js":[function(require,module,exports) {
 "use strict";
 
@@ -84679,11 +84478,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _keymirror = _interopRequireDefault(require("keymirror"));
-
 var _utils = require("../utils");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -84691,12 +84486,12 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var ENVELOPE_STATES = (0, _keymirror.default)({
-  ATTACK: null,
-  DECAY: null,
-  SUSTAIN: null,
-  RELEASE: null
-});
+var ENVELOPE_STATES = {
+  ATTACK: 'attack',
+  DECAY: 'decay',
+  SUSTAIN: 'sustain',
+  RELEASE: 'release'
+};
 
 var ADSREnvelope =
 /*#__PURE__*/
@@ -84776,7 +84571,7 @@ function () {
 }();
 
 exports.default = ADSREnvelope;
-},{"keymirror":"../node_modules/keymirror/index.js","../utils":"utils.js"}],"junox/lpf.js":[function(require,module,exports) {
+},{"../utils":"utils.js"}],"junox/lpf.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -84784,18 +84579,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _keymirror = _interopRequireDefault(require("keymirror"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var SQRT2 = Math.sqrt(2.0);
-var TWOPI = Math.PI * 2.0;
 
 var LPF =
 /*#__PURE__*/
@@ -84849,7 +84637,7 @@ function () {
 }();
 
 exports.default = LPF;
-},{"keymirror":"../node_modules/keymirror/index.js"}],"junox/params.js":[function(require,module,exports) {
+},{}],"junox/params.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -84903,7 +84691,7 @@ function sliderToHPF(val) {
     2: 250,
     3: 720
   };
-  return hpfMap[(val * 3).toFixed()];
+  return hpfMap[Math.round(val * 3)];
 }
 
 function sliderToFilterFreqNorm(val) {
@@ -84917,7 +84705,7 @@ function sliderToResonance(val) {
 }
 
 function chorusModeToFreq(val) {
-  if (val == 1) {
+  if (val === 1) {
     return 0.513;
   }
 
@@ -84925,7 +84713,7 @@ function chorusModeToFreq(val) {
 }
 
 function chorusModeToFeedback(val) {
-  if (val == 1) {
+  if (val === 1) {
     return 0.15;
   }
 
@@ -85087,7 +84875,7 @@ function () {
   _createClass(LFO, [{
     key: "tick",
     value: function tick() {
-      this.samplesPerPeriod = (this.sampleRate / this.frequency).toFixed();
+      this.samplesPerPeriod = Math.round(this.sampleRate / this.frequency);
       this.phase = (this.phase + 1) % this.samplesPerPeriod;
     }
   }, {
@@ -85192,8 +84980,8 @@ function () {
       var rightDelayTime = this.delay + rightMod * 22050 * 0.00369;
       var lXN = inL;
       var rXN = inR;
-      var lYN = this.bufferL.getSample(leftDelayTime.toFixed());
-      var rYN = this.bufferR.getSample(rightDelayTime.toFixed());
+      var lYN = this.bufferL.getSample(Math.round(leftDelayTime));
+      var rYN = this.bufferR.getSample(Math.round(rightDelayTime));
       var lCombined = lXN + rYN * this.feedback;
       var rCombined = rXN + lYN * this.feedback;
       this.bufferL.addSample(lCombined);
@@ -85233,15 +85021,15 @@ function () {
 
     this.frequency = frequency;
     this.cap = 0;
+    this.feedback = 0.8;
+    this.filterGain = 1.0 / (this.frequency + 1.0);
   }
 
   _createClass(BassBoost, [{
     key: "render",
     value: function render(input, gain) {
-      var feedback = 0.8;
-      var filterGain = 1.0 / (this.frequency + 1.0);
-      this.cap = (input + this.cap * this.frequency) * filterGain;
-      return (input + this.cap * feedback) * gain;
+      this.cap = (input + this.cap * this.frequency) * this.filterGain;
+      return (input + this.cap * this.feedback) * gain;
     }
   }]);
 
@@ -85262,6 +85050,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var SQRT2 = Math.sqrt(2.0);
+var TWOPI = Math.PI * 2.0;
 
 var Filter =
 /*#__PURE__*/
@@ -85285,9 +85076,9 @@ function () {
   _createClass(Filter, [{
     key: "calculateCoeffients",
     value: function calculateCoeffients() {
-      this.z = Math.cos(Math.PI * 2.0 * this.cutoff / this.sampleRate);
+      this.z = Math.cos(TWOPI * this.cutoff / this.sampleRate);
       this.c = 2 - 2 * this.z;
-      this.r = (Math.sqrt(2.0) * Math.sqrt(-Math.pow(this.z - 1.0, 3.0)) + this.resonance * (this.z - 1)) / (this.resonance * (this.z - 1));
+      this.r = (SQRT2 * Math.sqrt(-Math.pow(this.z - 1.0, 3.0)) + this.resonance * (this.z - 1)) / (this.resonance * (this.z - 1));
     }
   }, {
     key: "render",
@@ -85406,9 +85197,10 @@ function () {
     value: function tick() {
       this.lfo.tick();
       var lfo = this.lfo.render();
-      this.voices.forEach(function (voice) {
-        return voice.tick(lfo);
-      });
+
+      for (var i = 0; i < this.voices.length; i++) {
+        this.voices[i].tick(lfo);
+      }
     }
   }, {
     key: "render",
@@ -85418,10 +85210,11 @@ function () {
       this.voices = this.voices.filter(function (voice) {
         return !voice.isFinished();
       });
-      var monoOut = this.voices.reduce(function (out, voice) {
-        return out + voice.render();
-      }, 0);
-      var hpf;
+      var monoOut = 0;
+
+      for (var i = 0; i < this.voices.length; i++) {
+        monoOut += this.voices[i].render();
+      }
 
       if (this.patch.hpf < 0.3) {
         var bassBoost = this.bassBoost.render(monoOut, 0.3);
@@ -86133,7 +85926,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = Slider;
 
-var _react = _interopRequireWildcard(require("react"));
+var _react = _interopRequireDefault(require("react"));
 
 var _reactRange = require("react-range");
 
@@ -86142,8 +85935,6 @@ var _styledComponents = _interopRequireDefault(require("styled-components"));
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _templateObject10() {
   var data = _taggedTemplateLiteral(["\n  width: 7px;\n  height: 135px;\n  background-color: #000000;\n  border-radius: 2px;\n"]);
@@ -86314,7 +86105,7 @@ function Slider(_ref2) {
   };
 
   return _react.default.createElement(Container, null, _react.default.createElement(_reactRange.Range, {
-    values: [(value * 127).toFixed()],
+    values: [Math.round(value * 127)],
     onChange: setValue,
     min: 0,
     max: resolution,
@@ -87221,7 +87012,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62810" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59916" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
