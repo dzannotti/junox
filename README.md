@@ -1,4 +1,4 @@
-#JunoX Softsynth Emulator
+# JunoX Softsynth Emulator
 
 A really not great emulator of a Roland Juno 60.
 
