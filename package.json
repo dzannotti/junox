@@ -1,0 +1,46 @@
+{
+  "name": "junox",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "keymirror": "^0.1.1",
+    "lodash.set": "^4.3.2",
+    "pixi.js": "^4.8.7",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-piano": "^3.1.2",
+    "react-range": "^1.0.5",
+    "react-select": "^2.4.3",
+    "styled-components": "^4.2.0",
+    "styled-reset": "^2.0.9"
+  },
+  "scripts": {
+    "start": "parcel src/index.html",
+    "lint": "eslint src"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-proposal-do-expressions": "^7.2.0",
+    "@babel/plugin-proposal-export-default-from": "^7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-stage-0": "^7.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^5.16.0",
+    "eslint-config-react-app": "^4.0.0",
+    "eslint-plugin-flowtype": "^3.6.1",
+    "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "eslint-plugin-react-hooks": "^1.6.0",
+    "parcel-bundler": "^1.12.3"
+  }
+}

@@ -1,0 +1,91 @@
+import DCO from './dco'
+import ADSREnvelope from './envelope'
+import { noteToFrequency } from '../utils'
+import LowPassFilter from './lpf'
+import {
+  paramToPWM,
+  sliderToTime,
+  sliderToFilterFreqNorm,
+  sliderToResonance,
+  sliderToSustain,
+  sliderToDecay
+} from './params'
+
+export default class Voice {
+  constructor ({ note, patch, velocity, sampleRate }) {
+    this.note = note
+    this.finished = false
+    this.velocity = velocity
+    this.patch = patch
+    this.dco = new DCO({
+      frequency: noteToFrequency(this.note),
+      sampleRate,
+      saw: patch.dco.saw,
+      pulse: patch.dco.pulse,
+      sub: patch.dco.sub,
+      noise: patch.dco.noise,
+      pwm: paramToPWM(patch.dco.pwm)
+    })
+    this.env = new ADSREnvelope({
+      attack: sliderToTime(patch.env.attack),
+      decay: sliderToDecay(patch.env.decay),
+      sustain: sliderToSustain(patch.env.sustain),
+      release: sliderToTime(patch.env.release),
+      sampleRate
+    })
+    this.vcf = new LowPassFilter({
+      sampleRate,
+      resonance: sliderToResonance(patch.vcf.resonance),
+      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency)
+    })
+
+    // preload for ticking
+    this.env.render()
+  }
+  render () {
+    const dco = this.dco.render()
+    const env = this.env.render()
+    const vcf = this.vcf.render(dco)
+    return this.velocity * vcf * env
+  }
+
+  noteOff () {
+    this.env.noteOff()
+  }
+
+  tick (lfo) {
+    const positiveLFO = lfo / 2 + 0.5
+    const vcfDirection = this.patch.vcf.modPositive ? 1 : -1
+    this.env.tick()
+    this.dco.tick(
+      lfo * this.patch.dco.lfo,
+      paramToPWM(positiveLFO * this.patch.dco.pwm * this.patch.dco.lfoMod)
+    )
+    const keyFollow = (this.dco.frequency - 33) / 1000
+    this.vcf.cutoff = sliderToFilterFreqNorm(
+      this.patch.vcf.frequency +
+        lfo * this.patch.vcf.lfoMod +
+        this.env.out * this.patch.vcf.envMod * vcfDirection +
+        this.patch.vcf.keyMod * keyFollow
+    )
+  }
+
+  isFinished () {
+    return this.env.isFinished()
+  }
+
+  updatePatch (patch) {
+    // TODO: fix me for real time
+    this.dco.saw = patch.dco.saw
+    this.dco.pulse = patch.dco.pulse
+    this.dco.sub = patch.dco.sub
+    this.dco.noise = patch.dco.noise
+    this.dco.pwm = paramToPWM(patch.dco.pwm)
+    this.env.attack = sliderToTime(patch.env.attack)
+    this.env.decay = sliderToDecay(patch.env.decay)
+    this.env.sustain = sliderToSustain(patch.env.sustain)
+    this.env.release = sliderToTime(patch.env.release)
+    this.vcf.resonance = sliderToResonance(patch.vcf.resonance)
+    this.vcf.cutoff = sliderToFilterFreqNorm(patch.vcf.frequency)
+  }
+}
