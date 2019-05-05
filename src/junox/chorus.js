@@ -45,8 +45,8 @@ export default class Chorus {
     const rightDelayTime = this.delay + rightMod * 22050 * 0.00369
     const lXN = inL
     const rXN = inR
-    const lYN = this.bufferL.getSample(leftDelayTime.toFixed())
-    const rYN = this.bufferR.getSample(rightDelayTime.toFixed())
+    const lYN = this.bufferL.getSample(Math.round(leftDelayTime))
+    const rYN = this.bufferR.getSample(Math.round(rightDelayTime))
     const lCombined = lXN + rYN * this.feedback
     const rCombined = rXN + lYN * this.feedback
     this.bufferL.addSample(lCombined)

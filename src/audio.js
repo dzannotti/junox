@@ -1,21 +1,13 @@
 import Visualizer from './Visualizer/visualizer'
 import { noteToFrequency } from './utils'
-import SimpleReverb from './reverb'
 
 // TODO: Refactor this mess
-const BUFFER_SIZE = /iPad|iPhone|iPod|Android/.test(navigator.userAgent)
-  ? 4096
-  : 1024
+const BUFFER_SIZE = 4096
 
 export const SAMPLE_RATE = 44100
 const MS_PER_SAMPLE = 1000 / SAMPLE_RATE
 const BUFFER_SIZE_MS = (1000 * BUFFER_SIZE) / SAMPLE_RATE
 const audioContext = new (window.AudioContext || window.webkitAudioContext)()
-const verb = new SimpleReverb(audioContext, {
-  seconds: 0.25,
-  decay: 0.25,
-  reverse: 0.1
-})
 
 function init (synth, sequencer) {
   const visualizer = new Visualizer(
@@ -33,7 +25,6 @@ function init (synth, sequencer) {
 function setupAudioGraph (synth, sequencer, visualizer) {
   const scriptProcessor = audioContext.createScriptProcessor(BUFFER_SIZE, 0, 2)
   scriptProcessor.connect(audioContext.destination)
-  // verb.connect(audioContext.destination)
   scriptProcessor.connect(visualizer.getAudioNode())
   // Attach to window to avoid GC. http://sriku.org/blog/2013/01/30/taming-the-scriptprocessornode
   scriptProcessor.onaudioprocess = window.audioProcess = e => {

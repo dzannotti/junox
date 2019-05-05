@@ -132,7 +132,7 @@ export default function Slider ({ label, value, onChange, step }) {
   return (
     <Container>
       <Range
-        values={[(value * 127).toFixed()]}
+        values={[Math.round(value * 127)]}
         onChange={setValue}
         min={0}
         max={resolution}

@@ -39,7 +39,7 @@ export function sliderToHPF (val) {
     2: 250,
     3: 720
   }
-  return hpfMap[(val * 3).toFixed()]
+  return hpfMap[Math.round(val * 3)]
 }
 
 export function sliderToFilterFreqNorm (val) {

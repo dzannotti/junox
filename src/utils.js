@@ -5,7 +5,3 @@ export function noteToFrequency (note) {
 export function lerp (a, b, t) {
   return (1 - t) * a + t * b
 }
-
-export function toFixed (val) {
-  return Math.round(val)
-}

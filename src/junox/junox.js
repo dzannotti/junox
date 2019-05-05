@@ -61,15 +61,19 @@ export default class Junox {
   tick () {
     this.lfo.tick()
     const lfo = this.lfo.render()
-    this.voices.forEach(voice => voice.tick(lfo))
+    for (let i = 0; i < this.voices.length; i++) {
+      this.voices[i].tick(lfo)
+    }
   }
 
   render () {
     let out = [0, 0]
     // remove dead voices first
     this.voices = this.voices.filter(voice => !voice.isFinished())
-    let monoOut = this.voices.reduce((out, voice) => out + voice.render(), 0)
-    let hpf
+    let monoOut = 0
+    for (let i = 0; i < this.voices.length; i++) {
+      monoOut += this.voices[i].render()
+    }
     if (this.patch.hpf < 0.3) {
       const bassBoost = this.bassBoost.render(monoOut, 0.3)
       monoOut = Math.min(Math.max(-1, bassBoost + monoOut), 1)

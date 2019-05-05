@@ -7,7 +7,7 @@ export default class LFO {
   }
 
   tick () {
-    this.samplesPerPeriod = (this.sampleRate / this.frequency).toFixed()
+    this.samplesPerPeriod = Math.round(this.sampleRate / this.frequency)
     this.phase = (this.phase + 1) % this.samplesPerPeriod
   }
 

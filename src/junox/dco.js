@@ -14,9 +14,9 @@ export default class Oscillator {
 
   tick (freqMod, pwmMod) {
     const frequency = this.frequency * Math.pow(2, freqMod / 12)
-    this.samplesPerPeriod = (this.sampleRate / frequency).toFixed()
+    this.samplesPerPeriod = Math.round(this.sampleRate / frequency)
     this.phase = (this.phase + 1) % this.samplesPerPeriod
-    this.samplesPerPeriodSub = (this.sampleRate / (frequency / 2)).toFixed()
+    this.samplesPerPeriodSub = Math.round(this.sampleRate / (frequency / 2))
     this.phaseSub = (this.phaseSub + 1) % this.samplesPerPeriodSub
     if (pwmMod > 0.01) {
       this.pwm = pwmMod
