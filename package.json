@@ -17,7 +17,9 @@
   },
   "scripts": {
     "start": "parcel src/index.html",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "build": "cross-env NODE_ENV=production rimraf dist && parcel dist src/index.html --public-url ./",
+    "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -34,6 +36,7 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-stage-0": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.0",
     "eslint-plugin-flowtype": "^3.6.1",
@@ -41,6 +44,8 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",
-    "parcel-bundler": "^1.12.3"
+    "gh-pages": "^2.0.1",
+    "parcel-bundler": "^1.12.3",
+    "rimraf": "^2.6.3"
   }
 }
