@@ -85,7 +85,7 @@ const sequencer = new Sequencer({ synth })
 
 initAudio(synth, sequencer)
 
-export default function App () {
+export default function App() {
   // force update on synth param set
   const [counter, setCounter] = useState(0)
   const [octave, setOctave] = useState(-12)
