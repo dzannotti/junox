@@ -60,10 +60,7 @@ export function chorusModeToFreq (val) {
 }
 
 export function chorusModeToFeedback (val) {
-  if (val === 1) {
-    return 0.15
-  }
-  return 0.3
+  return 0
 }
 
 export function chorusModeToDelay (val) {
