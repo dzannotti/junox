@@ -57,7 +57,7 @@ jobs:
           at: /tmp
       - add_ssh_keys:
           fingerprints:
-            - "ac:ab:f9:3f:62:93:48:40:82:74:82:4c:87:47:23:18"          
+            - "e7:41:26:b0:44:d1:59:f0:61:62:92:d8:45:c6:e9:6e"
       - run:
           name: Avoid hosts unknown for github
           command: mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
