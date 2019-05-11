@@ -55,6 +55,9 @@ jobs:
       - *restore_repo
       - attach_workspace:
           at: /tmp
+      - add_ssh_keys:
+          fingerprints:
+            - "ac:ab:f9:3f:62:93:48:40:82:74:82:4c:87:47:23:18"          
       - run:
           name: Avoid hosts unknown for github
           command: mkdir -p ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
