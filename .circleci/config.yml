@@ -60,7 +60,7 @@ jobs:
             - "e7:41:26:b0:44:d1:59:f0:61:62:92:d8:45:c6:e9:6e"
       - run:
           name: Avoid hosts unknown for github
-          command: mkdir ~/.ssh/ && echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+          command: echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
       - run:
           name: Deploy to GH pages
           command: yarn deploy
