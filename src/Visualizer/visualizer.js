@@ -1,4 +1,5 @@
 // mostly 1:1 of https://github.com/mmontag/dx7-synth-js/blob/master/src/visualizer.js
+/* eslint-disable */
 var PIXI = require('pixi.js')
 
 var MODE_DISABLED = 0
@@ -14,7 +15,7 @@ if (
   !global.AnalyserNode.prototype.getFloatTimeDomainData
 ) {
   var uint8 = new Uint8Array(2048)
-  global.AnalyserNode.prototype.getFloatTimeDomainData = function (array) {
+  global.AnalyserNode.prototype.getFloatTimeDomainData = function(array) {
     this.getByteTimeDomainData(uint8)
     for (var i = 0, imax = array.length; i < imax; i++) {
       array[i] = (uint8[i] - 128) * 0.0078125
@@ -22,7 +23,7 @@ if (
   }
 }
 
-function Visualizer (
+function Visualizer(
   containerId,
   width,
   height,
@@ -45,7 +46,7 @@ function Visualizer (
   this.stage = new PIXI.Container()
   this.renderer = PIXI.autoDetectRenderer(width, height, {
     backgroundColor: backgroundColor,
-    resolution: 2
+    resolution: 2,
   })
   this.el = this.renderer.view
   this.graphics = new PIXI.Graphics()
@@ -60,17 +61,17 @@ function Visualizer (
   this.setModeWave()
 }
 
-Visualizer.prototype.getAudioNode = function () {
+Visualizer.prototype.getAudioNode = function() {
   return this.analyzer
 }
 
-Visualizer.prototype.enable = function () {
+Visualizer.prototype.enable = function() {
   this.enabled = true
   this.el.style.visibility = 'visible'
   requestAnimationFrame(this.render)
 }
 
-Visualizer.prototype.cycleMode = function () {
+Visualizer.prototype.cycleMode = function() {
   this.mode = (this.mode + 1) % MODE_COUNT
   switch (this.mode) {
     case MODE_DISABLED:
@@ -85,13 +86,13 @@ Visualizer.prototype.cycleMode = function () {
   }
 }
 
-Visualizer.prototype.setModeDisabled = function () {
+Visualizer.prototype.setModeDisabled = function() {
   this.mode = MODE_DISABLED
   this.enabled = false
   this.el.style.visibility = 'hidden'
 }
 
-Visualizer.prototype.setModeFFT = function () {
+Visualizer.prototype.setModeFFT = function() {
   this.mode = MODE_FFT
   this.enable()
   try {
@@ -104,7 +105,7 @@ Visualizer.prototype.setModeFFT = function () {
   this.data = new Uint8Array(this.analyzer.frequencyBinCount)
 }
 
-Visualizer.prototype.setModeWave = function () {
+Visualizer.prototype.setModeWave = function() {
   this.mode = MODE_WAVE
   this.enable()
   // Analyzer needs extra data padding to do phase alignment across frames
@@ -112,17 +113,17 @@ Visualizer.prototype.setModeWave = function () {
   this.floatData = new Float32Array(this.analyzer.frequencyBinCount)
 }
 
-Visualizer.prototype.setPeriod = function (samplePeriod) {
+Visualizer.prototype.setPeriod = function(samplePeriod) {
   // TODO: make WAVE_PIXELS_PER_SAMPLE dynamic so that low freqs don't get cut off
   if (this.mode != MODE_WAVE) return
   this.period = samplePeriod
 }
 
-Visualizer.prototype.render = function () {
+Visualizer.prototype.render = function() {
   var data
   var graphics = this.graphics
   var height = this.height - 1
-  var i
+  var i, l
 
   // The time and data are sometimes duplicated. In this case we can bypass rendering.
   var sampleTime =

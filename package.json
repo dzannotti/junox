@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "lodash.set": "^4.3.2",
+    "audioworklet-polyfill": "^1.1.2",
     "pixi.js": "^4.8.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
@@ -15,9 +15,10 @@
     "styled-reset": "^2.0.9"
   },
   "scripts": {
-    "start": "parcel src/index.html",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --mode development --config webpack.config.js",
     "lint": "eslint src",
-    "build": "cross-env NODE_ENV=production rimraf dist && parcel dist src/index.html --public-url ./",
+    "build": "cross-env NODE_ENV=production rimraf dist && webpack --mode production --config webpack.config.js",
+    "stats": "cross-env NODE_ENV=production rimraf dist && webpack --mode production --config webpack.config.js --json > stats.json",
     "deploy": "gh-pages -d dist"
   },
   "eslintConfig": {
@@ -33,9 +34,14 @@
     "@babel/plugin-proposal-pipeline-operator": "^7.3.2",
     "@babel/plugin-proposal-throw-expressions": "^7.2.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-react": "^7.0.0",
     "@babel/preset-stage-0": "^7.0.0",
     "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-lodash": "^3.3.4",
     "cross-env": "^5.2.0",
+    "css-loader": "^2.1.1",
     "eslint": "^5.16.0",
     "eslint-config-react-app": "^4.0.0",
     "eslint-plugin-flowtype": "^3.6.1",
@@ -44,7 +50,13 @@
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",
     "gh-pages": "^2.0.1",
-    "parcel-bundler": "^1.12.3",
-    "rimraf": "^2.6.3"
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.6.0",
+    "rimraf": "^2.6.3",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.31.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1",
+    "worklet-loader": "^1.0.0"
   }
 }

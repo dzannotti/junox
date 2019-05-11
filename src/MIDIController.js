@@ -6,7 +6,8 @@ import PropTypes from 'prop-types'
 
 export default class MidiController extends React.Component {
   static propTypes = {
-    sequencer: PropTypes.object.isRequired
+    noteOn: PropTypes.func.isRequired,
+    noteOff: PropTypes.func.isRequired
   }
 
   constructor (props) {
@@ -54,7 +55,14 @@ export default class MidiController extends React.Component {
   }
 
   midiMessageReceived (event) {
-    this.props.sequencer.queueMidiEvent(event)
+    const cmd = event.data[0] >> 4
+    const note = event.data[1]
+    const velocity = event.data[2]
+    if (cmd === 8 || (cmd === 9 && velocity === 0)) {
+      this.props.noteOff(note)
+    } else if (cmd === 9) {
+      this.props.noteOn(note, velocity / 127)
+    }
   }
 
   render () {

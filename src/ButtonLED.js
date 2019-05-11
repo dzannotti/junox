@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import Button from './Button'
-import Led from './LED'
+import Led from './Led'
 
 const Wrapper = styled.div`
   display: flex;

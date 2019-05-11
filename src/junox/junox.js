@@ -1,4 +1,4 @@
-import set from 'lodash.set'
+import { set } from 'lodash'
 import Voice from './voice'
 import Chorus from './chorus'
 import LFO from './lfo'
@@ -66,26 +66,32 @@ export default class Junox {
     }
   }
 
-  render () {
-    let out = [0, 0]
-    // remove dead voices first
-    this.voices = this.voices.filter(voice => !voice.isFinished())
-    let monoOut = 0
-    for (let i = 0; i < this.voices.length; i++) {
-      monoOut += this.voices[i].render()
+  render (outL, outR) {
+    for (let i = 0; i < outL.length; i++) {
+      this.tick()
+      // remove dead voices first
+      this.voices = this.voices.filter(voice => !voice.isFinished())
+      let monoOut = 0
+      for (let j = 0; j < this.voices.length; j++) {
+        monoOut += this.voices[j].render()
+      }
+      if (this.patch.hpf < 0.3) {
+        const bassBoost = this.bassBoost.render(monoOut, 0.3)
+        monoOut = Math.min(Math.max(-1, bassBoost + monoOut), 1)
+      } else if (this.patch.hpf > 0.59) {
+        monoOut = this.hpf.render(monoOut)
+      }
+      if (this.patch.chorus) {
+        const chorus = this.chorus.render(monoOut)
+        outL[i] = chorus[0]
+        outR[i] = chorus[1]
+      } else {
+        outL[i] = monoOut
+        outR[i] = monoOut
+      }
+      outL[i] *= this.patch.vca
+      outR[i] *= this.patch.vca
     }
-    if (this.patch.hpf < 0.3) {
-      const bassBoost = this.bassBoost.render(monoOut, 0.3)
-      monoOut = Math.min(Math.max(-1, bassBoost + monoOut), 1)
-    } else if (this.patch.hpf > 0.59) {
-      monoOut = this.hpf.render(monoOut)
-    }
-    out[0] = monoOut
-    out[1] = monoOut
-    if (this.patch.chorus) {
-      out = this.chorus.render(out[0], out[1])
-    }
-    return [out[0] * this.patch.vca, out[1] * this.patch.vca]
   }
 
   setValue (path, value) {

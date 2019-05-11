@@ -80,7 +80,7 @@ export default function PatchSelector ({ patches, setPatch }) {
       styles={customStyles}
       value={options[selectedPatch]}
       onChange={({ value }) => {
-        setPatch(patches[value])
+        setPatch(value)
         selectPatch(value)
       }}
     />

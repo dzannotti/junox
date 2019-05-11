@@ -1,5 +1,9 @@
 {
+  "presets": [
+    "@babel/preset-react"
+  ],
   "plugins": [
+    "@babel/plugin-transform-runtime",
     // Stage 1
     "@babel/plugin-proposal-export-default-from",
     [
@@ -26,5 +30,6 @@
         "loose": false
       }
     ],
+    "lodash"
   ]
 }

@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import LCD from './lcd'
 import MIDIController from './MIDIController'
-import { initAudio, SAMPLE_RATE } from './audio'
+import { initAudio } from './audio'
 import Piano, { PianoOctaveSelector } from './Piano'
-import Junox from './junox'
-import Sequencer from './sequencer'
 import Section from './Section'
 import Slider from './Slider'
 import ButtonLED from './ButtonLED'
 import Button from './Button'
+import { set } from 'lodash'
 import patches from './junox/patches'
 
 const Container = styled.div`
@@ -73,35 +72,29 @@ const AfterButtonLED = styled.div`
   height: 100%;
 `
 
-const synth = new Junox({
-  sampleRate: SAMPLE_RATE,
-  patch: patches[0],
-  polyphony: 6
-})
+let synthNode
+initAudio().then(node => (synthNode = node))
 
-window.synth = synth
-
-const sequencer = new Sequencer({ synth })
-
-initAudio(synth, sequencer)
-
-export default function App() {
-  // force update on synth param set
-  const [counter, setCounter] = useState(0)
+export default function App () {
   const [octave, setOctave] = useState(-12)
-  const inc = () => setCounter(counter + 1)
+  const [patch, setPatchValues] = useState(patches[0])
 
   const setSynthValue = (name, forceValue) => value => {
-    synth.setValue(name, forceValue != null ? forceValue : value)
-    inc()
+    const paramValue = forceValue != null ? forceValue : value
+    synthNode.setParam(name, paramValue)
+    setPatchValues(patch => {
+      set(patch, name, paramValue)
+      return { ...patch }
+    })
   }
 
-  const setPatch = patch => {
-    synth.patch = patch
-    synth.update()
-    inc()
+  const noteOn = (note, velocity = 0.8) => synthNode.noteOn(note, velocity)
+  const noteOff = note => synthNode.noteOff(note)
+
+  const setPatch = patchIndex => {
+    synthNode.setPatch(patchIndex)
+    setPatchValues(patches[patchIndex])
   }
-  const patch = synth.patch
 
   return (
     <Container>
@@ -110,7 +103,7 @@ export default function App() {
         <Spacer />
         <LogoContainer>
           <Logo>JUNOX</Logo>
-          <MIDIController sequencer={sequencer} />
+          <MIDIController noteOn={noteOn} noteOff={noteOff} />
         </LogoContainer>
       </TopRow>
       <Row>
@@ -255,16 +248,12 @@ export default function App() {
       <BlackRow />
       <Row>
         <PianoOctaveSelector octave={octave} setOctave={setOctave}>
-          <Button onClick={() => synth.panic()}>Panic</Button>
-          <Button onClick={() => console.log(JSON.stringify(synth.patch))}>
+          <Button onClick={() => synthNode.panic()}>Panic</Button>
+          <Button onClick={() => console.log(JSON.stringify(patch))}>
             dump
           </Button>
         </PianoOctaveSelector>
-        <Piano
-          octave={octave}
-          noteOn={note => synth.noteOn(note, 0.8)}
-          noteOff={note => synth.noteOff(note)}
-        />
+        <Piano octave={octave} noteOn={noteOn} noteOff={noteOff} />
       </Row>
       <Copyright>Copyright d.zannotti@me.com - 2019</Copyright>
     </Container>

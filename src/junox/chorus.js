@@ -36,15 +36,15 @@ export default class Chorus {
     this.writeIndex = 0
   }
 
-  render (inL, inR) {
+  render (input) {
     this.lfo.tick()
     const lfo = this.lfo.render() / 2 + 0.5
     const leftMod = lfo
     const rightMod = 1 - lfo
     const leftDelayTime = this.delay + leftMod * 22050 * 0.00369
     const rightDelayTime = this.delay + rightMod * 22050 * 0.00369
-    const lXN = inL
-    const rXN = inR
+    const lXN = input
+    const rXN = input
     const lYN = this.bufferL.getSample(Math.round(leftDelayTime))
     const rYN = this.bufferR.getSample(Math.round(rightDelayTime))
     const lCombined = lXN + rYN * this.feedback
@@ -52,8 +52,6 @@ export default class Chorus {
     this.bufferL.addSample(lCombined)
     this.bufferR.addSample(rCombined)
     this.writeIndex = (this.writeIndex + 1) % (MAXBUFFERSIZE - 1)
-    const outL = inL + lYN * this.wet
-    const outR = inR + rYN * this.wet
-    return [outL, outR]
+    return [input + lYN * this.wet, input + rYN * this.wet]
   }
 }
