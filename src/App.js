@@ -113,6 +113,11 @@ export default function App () {
             value={patch.lfo.frequency}
             onChange={setSynthValue('lfo.frequency')}
           />
+          <Slider
+            label='DELAY'
+            value={patch.lfo.delay}
+            onChange={setSynthValue('lfo.delay')}
+          />
         </Section>
         <Section title='DCO'>
           <Slider

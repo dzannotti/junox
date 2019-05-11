@@ -28,8 +28,13 @@ export function sliderToSustain (val) {
 }
 
 export function sliderToLFOFreq (val) {
-  // linear??
-  return val * 14.8 + 0.2
+  return Math.pow(1.53, val * 10) * (1 + Math.sin(Math.PI * val) * 0.39)
+}
+
+export function sliderToLFODelay (val) {
+  return (
+    0.001 + ((Math.exp(val * 10 * 0.5) - 1) / (Math.exp(10 * 0.5) - 1)) * 2.25
+  )
 }
 
 export function sliderToHPF (val) {

@@ -37,7 +37,6 @@ export default class Chorus {
   }
 
   render (input) {
-    this.lfo.tick()
     const lfo = this.lfo.render() / 2 + 0.5
     const leftMod = lfo
     const rightMod = 1 - lfo
