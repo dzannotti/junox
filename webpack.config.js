@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'app.[hash].js',
-    publicPath: '/'
+    publicPath: isDev ? '/' : '/junox/'
   },
   resolve: {
     modules: ['node_modules', path.resolve(__dirname, 'src')],
