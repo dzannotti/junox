@@ -49,6 +49,13 @@ jobs:
           root: /tmp
           paths:
             - junox/dist
+  test:
+    <<: *defaults
+    steps:
+      - *restore_repo
+      - run:
+          name: Test
+          command: yarn test
   deploy:
     <<: *defaults
     steps:
@@ -75,6 +82,9 @@ workflows:
           requires:
             - checkout
       - build:
+          requires:
+            - checkout
+      - test:
           requires:
             - checkout
       - deploy:

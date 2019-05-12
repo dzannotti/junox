@@ -23,6 +23,7 @@ export default class Junox {
     this.chorus = new Chorus({ sampleRate, rate: 1 })
     this.lfo = new LFO({
       frequency: sliderToLFOFreq(patch.lfo.frequency),
+      delay: 0,
       sampleRate
     })
     this.bassBoost = new BassBoost({ frequency: 75 })
@@ -110,7 +111,7 @@ export default class Junox {
     this.chorus.delay = chorusModeToDelay(this.patch.chorus)
     this.chorus.render(0, 0)
     this.lfo.setRate(sliderToLFOFreq(this.patch.lfo.frequency))
-    this.lfo.delay = sliderToLFODelay(this.patch.lfo.delay)
+    this.lfo.setDelay(sliderToLFODelay(this.patch.lfo.delay))
     this.hpf.cutoff = sliderToHPF(this.patch.hpf)
     this.hpf.calculateCoeffients()
   }
