@@ -7,7 +7,7 @@ export function sliderToTime (val) {
     0.001 + ((Math.exp(val * 10 * 0.5) - 1) / (Math.exp(10 * 0.5) - 1)) * 3.25
   )
 }
-export function sliderToDecay (val) {
+export function sliderToDecay (val, maxValue = 17.46) {
   const slider = val * 10
   return (
     0.002 +
@@ -32,9 +32,7 @@ export function sliderToLFOFreq (val) {
 }
 
 export function sliderToLFODelay (val) {
-  return (
-    0.001 + ((Math.exp(val * 10 * 0.5) - 1) / (Math.exp(10 * 0.5) - 1)) * 2.25
-  )
+  return sliderToDecay(val, 2.25)
 }
 
 export function sliderToHPF (val) {
