@@ -35,7 +35,6 @@ export default class LFO {
       return 1
     } else if (this.delayPhase > this.delaySamples) {
       this.attackPhase = this.attackPhase + 1
-      // TODO: Normally attack is modelled as "newValue = (1-oldValue)*rateFactor"
       return this.attackPhase / this.attackSamples
     }
     return 0
