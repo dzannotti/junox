@@ -9,11 +9,12 @@ import {
   chorusModeToFeedback,
   chorusModeToDelay,
   sliderToLFOFreq,
+  sliderToLFODelay,
   sliderToHPF
 } from './params'
 
 export default class Junox {
-  constructor ({ patch, sampleRate, polyphony }) {
+  constructor({ patch, sampleRate, polyphony }) {
     this.patch = patch
     this.voices = []
     this.maxVoices = polyphony
@@ -22,6 +23,7 @@ export default class Junox {
     this.chorus = new Chorus({ sampleRate, rate: 1 })
     this.lfo = new LFO({
       frequency: sliderToLFOFreq(patch.lfo.frequency),
+      delay: 0,
       sampleRate
     })
     this.bassBoost = new BassBoost({ frequency: 75 })
@@ -33,8 +35,7 @@ export default class Junox {
     this.update()
   }
 
-  noteOn (note, velocity) {
-    this.lastNoteOn = note
+  noteOn(note, velocity) {
     const voiceIndex = this.voices.findIndex(voice => voice.note === note)
     const newVoice = new Voice({
       note,
@@ -42,6 +43,9 @@ export default class Junox {
       velocity,
       sampleRate: this.sampleRate
     })
+    if (!this.voices.length) {
+      this.lfo.trigger()
+    }
     if (this.voices.length < this.maxVoices) {
       this.voices.push(newVoice)
       return
@@ -54,23 +58,23 @@ export default class Junox {
     this.voices[0] = newVoice
   }
 
-  noteOff (note) {
+  noteOff(note) {
     this.voices.forEach(voice => voice.note === note && voice.noteOff())
   }
 
-  tick () {
-    this.lfo.tick()
+  tick() {
     const lfo = this.lfo.render()
     for (let i = 0; i < this.voices.length; i++) {
       this.voices[i].tick(lfo)
     }
   }
 
-  render (outL, outR) {
+  render(outL, outR) {
     for (let i = 0; i < outL.length; i++) {
       this.tick()
       // remove dead voices first
       this.voices = this.voices.filter(voice => !voice.isFinished())
+
       let monoOut = 0
       for (let j = 0; j < this.voices.length; j++) {
         monoOut += this.voices[j].render()
@@ -94,28 +98,25 @@ export default class Junox {
     }
   }
 
-  setValue (path, value) {
+  setValue(path, value) {
     set(this.patch, path, value)
     this.update()
   }
 
-  update () {
+  update() {
     // TODO: fix me for real time
     this.voices.forEach(voice => voice.updatePatch(this.patch))
     this.chorus.lfo.frequency = chorusModeToFreq(this.patch.chorus)
     this.chorus.feedback = chorusModeToFeedback(this.patch.chorus)
     this.chorus.delay = chorusModeToDelay(this.patch.chorus)
     this.chorus.render(0, 0)
-    this.lfo.frequency = sliderToLFOFreq(this.patch.lfo.frequency)
+    this.lfo.setRate(sliderToLFOFreq(this.patch.lfo.frequency))
+    this.lfo.setDelay(sliderToLFODelay(this.patch.lfo.delay))
     this.hpf.cutoff = sliderToHPF(this.patch.hpf)
     this.hpf.calculateCoeffients()
   }
 
-  panic () {
+  panic() {
     this.voices = []
-  }
-
-  getLatestNoteOn () {
-    return this.lastNoteOn
   }
 }
