@@ -14,7 +14,7 @@ import {
 } from './params'
 
 export default class Junox {
-  constructor ({ patch, sampleRate, polyphony }) {
+  constructor({ patch, sampleRate, polyphony }) {
     this.patch = patch
     this.voices = []
     this.maxVoices = polyphony
@@ -35,7 +35,7 @@ export default class Junox {
     this.update()
   }
 
-  noteOn (note, velocity) {
+  noteOn(note, velocity) {
     const voiceIndex = this.voices.findIndex(voice => voice.note === note)
     const newVoice = new Voice({
       note,
@@ -58,18 +58,18 @@ export default class Junox {
     this.voices[0] = newVoice
   }
 
-  noteOff (note) {
+  noteOff(note) {
     this.voices.forEach(voice => voice.note === note && voice.noteOff())
   }
 
-  tick () {
+  tick() {
     const lfo = this.lfo.render()
     for (let i = 0; i < this.voices.length; i++) {
       this.voices[i].tick(lfo)
     }
   }
 
-  render (outL, outR) {
+  render(outL, outR) {
     for (let i = 0; i < outL.length; i++) {
       this.tick()
       // remove dead voices first
@@ -98,12 +98,12 @@ export default class Junox {
     }
   }
 
-  setValue (path, value) {
+  setValue(path, value) {
     set(this.patch, path, value)
     this.update()
   }
 
-  update () {
+  update() {
     // TODO: fix me for real time
     this.voices.forEach(voice => voice.updatePatch(this.patch))
     this.chorus.lfo.frequency = chorusModeToFreq(this.patch.chorus)
@@ -111,12 +111,12 @@ export default class Junox {
     this.chorus.delay = chorusModeToDelay(this.patch.chorus)
     this.chorus.render(0, 0)
     this.lfo.setRate(sliderToLFOFreq(this.patch.lfo.frequency))
-    this.lfo.setDelay(sliderToLFODelay(this.patch.lfo.delay))
+    this.lfo.setDelay(2)
     this.hpf.cutoff = sliderToHPF(this.patch.hpf)
     this.hpf.calculateCoeffients()
   }
 
-  panic () {
+  panic() {
     this.voices = []
   }
 }

@@ -1,46 +1,62 @@
+import { delayToLFOAttackRate } from './params'
 export default class LFO {
-  constructor ({ frequency, delay = 0, sampleRate }) {
-    this.anchorRate = 1 / sampleRate
-    this.phase = 0
+  constructor({ frequency, delay = 0, sampleRate }) {
+    // we need the phase to go x4 because of triangle
+    this.anchorRate = 3.95 / sampleRate
+    this.msRate = 1 / sampleRate
+    this.direction = 1
+    this.value = 0
+    this.attackPhase = 0
+    this.attackRate = this.msRate
     this.setRate(frequency)
     this.setDelay(delay)
     this.trigger()
   }
 
-  setRate (frequency) {
-    this.incrementRate = this.anchorRate * frequency
+  setRate(frequency) {
+    this.rateFactor = frequency * this.anchorRate
+    this.value = -this.rateFactor
   }
 
-  setDelay (delay) {
-    this.delay = delay * this.anchorRate
+  setDelay(delay) {
+    this.delay = (1 / (delay + 0.001)) * this.msRate
+    this.attackRate = delayToLFOAttackRate(delay) * this.msRate
   }
 
-  trigger () {
+  trigger() {
+    this.direction = 1
     this.delayPhase = 0
+    this.attackPhase = 0
   }
 
-  delayEnv () {
+  delayEnv() {
     this.delayPhase += this.delay
-    if (this.delay < 0.0001 || this.delayPhase > 2) {
+    if (this.attackPhase > 1) {
       return 1
-    } else if (this.delayPhase < 1) {
-      return 0
+    } else if (this.delayPhase > 1) {
+      this.attackPhase += this.attackRate
+      return this.attackPhase
     }
-    // from juno manual the volume seems to grows by the same distance it's delayed
-    return this.delayPhase - 1
+    return 0
   }
 
-  render () {
-    let out = 0
-    this.phase += this.incrementRate
-    if (this.phase > 1.01) {
-      this.phase -= 1
-    }
-    if (this.phase < 0.5) {
-      out = -1 + this.phase * 4
+  render() {
+    let oldValue = this.value
+    let newValue = oldValue
+    if (this.direction === 1) {
+      newValue += this.rateFactor
+      if (newValue > 1) {
+        this.direction = -1
+        newValue = oldValue - this.rateFactor
+      }
     } else {
-      out = 2 - this.phase * 4 + 1
+      newValue -= this.rateFactor
+      if (newValue < -1) {
+        this.direction = 1
+        newValue = oldValue + this.rateFactor
+      }
     }
-    return out * this.delayEnv()
+    this.value = newValue
+    return this.value * this.delayEnv()
   }
 }
