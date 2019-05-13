@@ -1,13 +1,13 @@
 import { delayToLFOAttackRate } from './params'
+
 export default class LFO {
   constructor({ frequency, delay = 0, sampleRate }) {
     // we need the phase to go x4 because of triangle
     this.anchorRate = 3.95 / sampleRate
-    this.msRate = 1 / sampleRate
+    this.sampleRate = sampleRate
     this.direction = 1
     this.value = 0
     this.attackPhase = 0
-    this.attackRate = this.msRate
     this.setRate(frequency)
     this.setDelay(delay)
     this.trigger()
@@ -19,8 +19,8 @@ export default class LFO {
   }
 
   setDelay(delay) {
-    this.delay = (1 / (delay + 0.001)) * this.msRate
-    this.attackRate = delayToLFOAttackRate(delay) * this.msRate
+    this.delaySamples = delay * this.sampleRate
+    this.attackSamples = delayToLFOAttackRate(delay) * this.sampleRate
   }
 
   trigger() {
@@ -30,12 +30,13 @@ export default class LFO {
   }
 
   delayEnv() {
-    this.delayPhase += this.delay
-    if (this.attackPhase > 1) {
+    this.delayPhase = this.delayPhase + 1
+    if (this.attackPhase > this.attackSamples) {
       return 1
-    } else if (this.delayPhase > 1) {
-      this.attackPhase += this.attackRate
-      return this.attackPhase
+    } else if (this.delayPhase > this.delaySamples) {
+      this.attackPhase = this.attackPhase + 1
+      // TODO: Normally attack is modelled as "newValue = (1-oldValue)*rateFactor"
+      return this.attackPhase / this.attackSamples
     }
     return 0
   }

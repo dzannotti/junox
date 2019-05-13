@@ -63,7 +63,7 @@ const FaderMark = styled.div`
   margin-bottom: 3px;
 `
 
-function SliderThumb (props) {
+function SliderThumb(props) {
   return (
     <ThumbContainer {...props}>
       <ThumbMarker />
@@ -71,7 +71,7 @@ function SliderThumb (props) {
   )
 }
 
-function SliderTrackRange ({ props, label, children }) {
+function SliderTrackRange({ props, label, children }) {
   const faders = (
     <FaderMarks>
       <FaderMark bold />
@@ -126,9 +126,9 @@ Slider.propTypes = {
   step: PropTypes.number
 }
 
-export default function Slider ({ label, value, onChange, step }) {
+export default function Slider({ label, value, onChange, step }) {
   const resolution = 127
-  const setValue = values => onChange(values[0] / resolution)
+  const setValue = values => onChange(parseFloat(values[0]) / resolution)
   return (
     <Container>
       <Range

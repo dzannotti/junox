@@ -111,7 +111,7 @@ export default class Junox {
     this.chorus.delay = chorusModeToDelay(this.patch.chorus)
     this.chorus.render(0, 0)
     this.lfo.setRate(sliderToLFOFreq(this.patch.lfo.frequency))
-    this.lfo.setDelay(2)
+    this.lfo.setDelay(sliderToLFODelay(this.patch.lfo.delay))
     this.hpf.cutoff = sliderToHPF(this.patch.hpf)
     this.hpf.calculateCoeffients()
   }
