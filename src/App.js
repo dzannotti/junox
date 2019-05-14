@@ -75,9 +75,9 @@ const AfterButtonLED = styled.div`
 let synthNode
 initAudio().then(node => (synthNode = node))
 
-export default function App () {
+export default function App() {
   const [octave, setOctave] = useState(-12)
-  const [patch, setPatchValues] = useState(patches[0])
+  const [patch, setPatchValues] = useState(patches[5])
 
   const setSynthValue = (name, forceValue) => value => {
     const paramValue = forceValue != null ? forceValue : value
@@ -107,144 +107,144 @@ export default function App () {
         </LogoContainer>
       </TopRow>
       <Row>
-        <Section title='LFO'>
+        <Section title="LFO">
           <Slider
-            label='FREQ'
+            label="FREQ"
             value={patch.lfo.frequency}
             onChange={setSynthValue('lfo.frequency')}
           />
           <Slider
-            label='DELAY'
+            label="DELAY"
             value={patch.lfo.delay}
             onChange={setSynthValue('lfo.delay')}
           />
         </Section>
-        <Section title='DCO'>
+        <Section title="DCO">
           <Slider
-            label='LFO'
+            label="LFO"
             value={patch.dco.lfo}
             onChange={setSynthValue('dco.lfo')}
           />
           <Slider
-            label='PWM'
+            label="PWM"
             value={patch.dco.pwm}
             onChange={setSynthValue('dco.pwm')}
           />
           <ButtonLED
-            label='LFO MOD'
+            label="LFO MOD"
             active={patch.dco.lfoMod}
             toggle={setSynthValue('dco.lfoMod')}
           />
           <ButtonLED
-            label='PULSE'
+            label="PULSE"
             spaced
             active={patch.dco.pulse}
             toggle={setSynthValue('dco.pulse')}
           />
           <ButtonLED
-            label='SAW'
+            label="SAW"
             spaced
             active={patch.dco.saw}
             toggle={setSynthValue('dco.saw')}
           />
           <AfterButtonLED />
           <Slider
-            label='SUB'
+            label="SUB"
             value={patch.dco.sub}
             onChange={setSynthValue('dco.sub')}
           />
           <Slider
-            label='NOISE'
+            label="NOISE"
             value={patch.dco.noise}
             onChange={setSynthValue('dco.noise')}
           />
         </Section>
-        <Section title='ENV'>
+        <Section title="ENV">
           <Slider
-            label='A'
+            label="A"
             value={patch.env.attack}
             onChange={setSynthValue('env.attack')}
           />
           <Slider
-            label='D'
+            label="D"
             value={patch.env.decay}
             onChange={setSynthValue('env.decay')}
           />
           <Slider
-            label='S'
+            label="S"
             value={patch.env.sustain}
             onChange={setSynthValue('env.sustain')}
           />
           <Slider
-            label='R'
+            label="R"
             value={patch.env.release}
             onChange={setSynthValue('env.release')}
           />
         </Section>
       </Row>
       <Row centered>
-        <Section title='HPF'>
+        <Section title="HPF">
           <Slider
-            label='FREQ'
+            label="FREQ"
             value={patch.hpf}
             step={0.33}
             onChange={setSynthValue('hpf')}
           />
         </Section>
-        <Section title='VCF'>
+        <Section title="VCF">
           <Slider
-            label='FREQ'
+            label="FREQ"
             value={patch.vcf.frequency}
             onChange={setSynthValue('vcf.frequency')}
           />
           <Slider
-            label='RES'
+            label="RES"
             value={patch.vcf.resonance}
             onChange={setSynthValue('vcf.resonance')}
           />
           <ButtonLED
-            label='+'
+            label="+"
             active={patch.vcf.modPositive}
             toggle={setSynthValue('vcf.modPositive')}
           />
           <AfterButtonLED />
           <Slider
-            label='ENV'
+            label="ENV"
             value={patch.vcf.envMod}
             onChange={setSynthValue('vcf.envMod')}
           />
           <Slider
-            label='LFO'
+            label="LFO"
             value={patch.vcf.lfoMod}
             onChange={setSynthValue('vcf.lfoMod')}
           />
           <Slider
-            label='KEY'
+            label="KEY"
             value={patch.vcf.keyMod}
             onChange={setSynthValue('vcf.keyMod')}
           />
         </Section>
-        <Section title='VCA'>
+        <Section title="VCA">
           <AfterButtonLED />
           <Slider
-            label='level'
+            label="level"
             value={patch.vca}
             onChange={setSynthValue('vca')}
           />
         </Section>
-        <Section title='Chorus'>
+        <Section title="Chorus">
           <ButtonLED
-            label='Off'
+            label="Off"
             active={patch.chorus === 0}
             toggle={setSynthValue('chorus', 0)}
           />
           <ButtonLED
-            label='I'
+            label="I"
             active={patch.chorus === 1}
             toggle={setSynthValue('chorus', 1)}
           />
           <ButtonLED
-            label='II'
+            label="II"
             active={patch.chorus === 2}
             toggle={setSynthValue('chorus', 2)}
           />
