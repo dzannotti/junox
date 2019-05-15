@@ -22,6 +22,8 @@
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
     "audioworklet-polyfill": "^1.1.2",
+    "copy-to-clipboard": "^3.2.0",
+    "lz-string": "^1.4.4",
     "pixi.js": "^4.8.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

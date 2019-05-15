@@ -25,11 +25,17 @@ const Row = styled.div`
   margin-top: 10px;
 `
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+`
+
 const MarginatedLED = styled(Led)`
   margin-left: 0.5rem;
 `
 
-export function PianoOctaveSelector ({ octave, setOctave, children }) {
+export function PianoOctaveSelector({ octave, setOctave, children }) {
   const clamp = v => Math.max(-24, Math.min(v, 24))
   const changeOctave = direction => v =>
     setOctave(clamp(octave + 12 * direction))
@@ -49,12 +55,12 @@ export function PianoOctaveSelector ({ octave, setOctave, children }) {
           &gt;
         </Button>
       </Row>
-      <Row>{children}</Row>
+      <Column>{children}</Column>
     </OctaveWrapper>
   )
 }
 
-export default function PianoWrapper ({ noteOn, noteOff, octave }) {
+export default function PianoWrapper({ noteOn, noteOff, octave }) {
   const firstNote = MidiNumbers.fromNote('c3')
   const lastNote = MidiNumbers.fromNote('c5')
   const keyboardShortcuts = KeyboardShortcuts.create({

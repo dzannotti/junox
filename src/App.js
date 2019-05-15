@@ -1,5 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import copy from 'copy-to-clipboard'
+import LZ from 'lz-string'
+import { get } from 'lodash'
 import LCD from './lcd'
 import MIDIController from './MIDIController'
 import { initAudio } from './audio'
@@ -17,18 +20,24 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: auto;
+  overflow: hidden;
   min-width: 100%;
   min-height: 100%;
 `
 
-const Row = styled.div`
+const SimpleRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: ${props => (props.centered ? 'center' : 'flex-start')};
+  margin-top: ${props => (props.marginated ? '10px' : '0')};
+`
+
+const Row = styled(SimpleRow)`
   display: flex;
   flex-direction: row;
   width: 1000px;
   flex: 0 0 auto;
   background-color: #313036;
-  justify-content: ${props => (props.centered ? 'center' : 'flex-start')};
 `
 
 const BlackRow = styled.div`
@@ -72,20 +81,58 @@ const AfterButtonLED = styled.div`
   height: 100%;
 `
 
-let synthNode
-initAudio().then(node => (synthNode = node))
+let synthNode = {
+  queue: [],
+  setParam: function(name, value) {
+    this.queue.push({ name, value })
+  }
+}
+
+initAudio().then(node => {
+  synthNode.queue.forEach(({ name, value }) => node.setParam(name, value))
+  synthNode = node
+})
 
 export default function App() {
   const [octave, setOctave] = useState(-12)
-  const [patch, setPatchValues] = useState(patches[5])
+  const [patch, setPatchValues] = useState(patches[0])
+
+  useEffect(() => {
+    if (!window.location.hash) {
+      return
+    }
+    const patchJSON = JSON.parse(
+      LZ.decompressFromBase64(window.location.hash.slice(1))
+    )
+    const nested = ['lfo', 'env', 'dco', 'vcf']
+    const paths = Object.keys(patchJSON).filter(key => !nested.includes(key))
+    const allPaths = paths
+      .concat(
+        nested.map(nestedKey =>
+          Object.keys(patchJSON[nestedKey]).map(key => `${nestedKey}.${key}`)
+        )
+      )
+      .reduce((out, current) => {
+        if (Array.isArray(current)) {
+          return out.concat(current)
+        }
+        out.push(current)
+        return out
+      }, [])
+    allPaths.forEach(path => setSynthPatchValue(path, get(patchJSON, path)))
+  })
+
+  const setSynthPatchValue = (name, value) => {
+    synthNode.setParam(name, value)
+    setPatchValues(patch => {
+      set(patch, name, value)
+      return { ...patch }
+    })
+  }
 
   const setSynthValue = (name, forceValue) => value => {
     const paramValue = forceValue != null ? forceValue : value
-    synthNode.setParam(name, paramValue)
-    setPatchValues(patch => {
-      set(patch, name, paramValue)
-      return { ...patch }
-    })
+    setSynthPatchValue(name, paramValue)
   }
 
   const noteOn = (note, velocity = 0.8) => synthNode.noteOn(note, velocity)
@@ -94,6 +141,13 @@ export default function App() {
   const setPatch = patchIndex => {
     synthNode.setPatch(patchIndex)
     setPatchValues(patches[patchIndex])
+  }
+
+  const sharePatch = () => {
+    const patchBase64 = LZ.compressToBase64(JSON.stringify(patch))
+    window.location.hash = patchBase64
+    copy(window.location.href)
+    alert('Copied to clipboard')
   }
 
   return (
@@ -253,14 +307,22 @@ export default function App() {
       <BlackRow />
       <Row>
         <PianoOctaveSelector octave={octave} setOctave={setOctave}>
-          <Button onClick={() => synthNode.panic()}>Panic</Button>
-          <Button onClick={() => console.log(JSON.stringify(patch))}>
-            dump
-          </Button>
+          <SimpleRow centered>
+            <Button onClick={() => synthNode.panic()}>Panic</Button>
+            <Button onClick={() => console.log(JSON.stringify(patch))}>
+              dump
+            </Button>
+          </SimpleRow>
+          <SimpleRow centered marginated>
+            <Button onClick={sharePatch}>SHARE PATCH</Button>
+          </SimpleRow>
+          <SimpleRow centered marginated />
         </PianoOctaveSelector>
         <Piano octave={octave} noteOn={noteOn} noteOff={noteOff} />
       </Row>
-      <Copyright>Copyright d.zannotti@me.com - 2019</Copyright>
+      <Copyright>
+        Chrome 66+ ONLY - Copyright d.zannotti@me.com - 2019
+      </Copyright>
     </Container>
   )
 }
