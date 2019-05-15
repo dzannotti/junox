@@ -44,23 +44,27 @@ export function delayToLFOAttackRate(delay) {
 }
 
 export function sliderToHPF(val) {
+  // Juno 60 does not implement the bass boost
+  // but it sounds so good/realistic we should keep it
   const hpfMap = {
     0: 0,
-    1: 0,
-    2: 250,
-    3: 720
+    1: 250,
+    2: 520,
+    3: 1220
   }
   return hpfMap[Math.round(val * 3)]
 }
 
 export function sliderToFilterFreqNorm(val) {
-  const clamped = Math.max(Math.min(1, val), 0)
-  // return 0.001 + (Math.exp(clamped * 10 * 0.25) - 1) / (Math.exp(10 * 0.25) - 1)
-  return Math.pow(clamped, 4)
+  const freq = 5.0 * Math.pow(2, val)
+  if (freq > 22050) {
+    return 1
+  }
+  return freq / 22050
 }
 
 export function sliderToResonance(val) {
-  return val * 3 + 0.01
+  return val * 3.99 + 0.01
 }
 
 export function chorusModeToFreq(val) {
