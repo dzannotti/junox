@@ -82,7 +82,7 @@ export default class Junox {
       if (this.patch.hpf < 0.3) {
         const bassBoost = this.bassBoost.render(monoOut, 0.3)
         monoOut = Math.min(Math.max(-1, bassBoost + monoOut), 1)
-      } else if (this.patch.hpf > 0.59) {
+      } else {
         monoOut = this.hpf.render(monoOut)
       }
       if (this.patch.chorus) {
