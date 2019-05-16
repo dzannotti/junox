@@ -1,6 +1,6 @@
 import LFO from './lfo'
 
-const MAXBUFFERSIZE = 15000
+const MAXBUFFERSIZE = 256
 
 class RingBuffer {
   constructor() {
@@ -8,15 +8,24 @@ class RingBuffer {
     this.index = 0
   }
 
+  ringBufferIndex(index) {
+    if (index < 0) {
+      return index + MAXBUFFERSIZE
+    }
+    if (index >= MAXBUFFERSIZE) {
+      return index - MAXBUFFERSIZE
+    }
+    return index
+  }
+
   getSample(sampleIndex) {
-    let localIndex = this.index - sampleIndex
-    if (localIndex < 0) {
-      localIndex += MAXBUFFERSIZE
-    }
-    if (localIndex >= MAXBUFFERSIZE) {
-      localIndex -= MAXBUFFERSIZE
-    }
-    return this.buffer[localIndex]
+    let localIndex = this.ringBufferIndex(this.index - sampleIndex)
+    const fractional = localIndex - Math.abs(localIndex)
+    const indexA = Math.floor(localIndex)
+    const indexB = this.ringBufferIndex(Math.floor(localIndex + 1))
+    return (
+      this.buffer[indexA] * fractional + this.buffer[indexB] * (1 - fractional)
+    )
   }
 
   addSample(sample) {
@@ -44,8 +53,8 @@ export default class Chorus {
     const rightMod = 1 - lfo
     const leftDelayTime = this.delay + leftMod * this.sampleRate * 0.00369
     const rightDelayTime = this.delay + rightMod * this.sampleRate * 0.00369
-    const lYN = this.ringBuffer.getSample(Math.round(leftDelayTime))
-    const rYN = this.ringBuffer.getSample(Math.round(rightDelayTime))
+    const lYN = this.ringBuffer.getSample(leftDelayTime)
+    const rYN = this.ringBuffer.getSample(rightDelayTime)
     this.ringBuffer.addSample(input)
     return [input + lYN * this.wet, input + rYN * this.wet]
   }
