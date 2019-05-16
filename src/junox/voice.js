@@ -17,6 +17,7 @@ export default class Voice {
     this.finished = false
     this.velocity = velocity
     this.patch = patch
+    this.sampleRate = sampleRate
     this.dco = new DCO({
       frequency: noteToFrequency(this.note),
       sampleRate,
@@ -36,7 +37,7 @@ export default class Voice {
     this.vcf = new LowPassFilter({
       sampleRate,
       resonance: sliderToResonance(patch.vcf.resonance),
-      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency)
+      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency, sampleRate)
     })
 
     // preload for ticking
@@ -44,7 +45,7 @@ export default class Voice {
   }
   render() {
     const dco = this.dco.render()
-    const env = this.env.render()
+    const env = this.patch.vcaType == 'env' ? this.env.render() : 1
     const vcf = this.vcf.render(dco)
     return this.velocity * vcf * env
   }
@@ -70,7 +71,7 @@ export default class Voice {
       this.patch.vcf.keyMod *
       5 *
       ((this.note - C2NoteNumber) / keyFollowDenominator - 0.4)
-    this.vcf.cutoff = sliderToFilterFreqNorm(vcfCutoffValue)
+    this.vcf.cutoff = sliderToFilterFreqNorm(vcfCutoffValue, this.sampleRate)
   }
 
   isFinished() {

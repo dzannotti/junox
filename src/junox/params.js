@@ -55,12 +55,12 @@ export function sliderToHPF(val) {
   return hpfMap[Math.round(val * 3)]
 }
 
-export function sliderToFilterFreqNorm(val) {
+export function sliderToFilterFreqNorm(val, sampleRate) {
   const freq = 5.0 * Math.pow(2, val)
-  if (freq > 22050) {
+  if (freq > sampleRate) {
     return 1
   }
-  return freq / 22050
+  return freq / sampleRate
 }
 
 export function sliderToResonance(val) {

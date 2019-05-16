@@ -31,6 +31,13 @@ const Title = styled.div`
   font-weight: 600;
   justify-content: center;
 `
+const BottomBlock = styled.div`
+  width: calc(100% - 2px);
+  background-color: #b7081f;
+  color: white;
+  height: 0.5rem;
+  display: flex;
+`
 
 const Line = styled.div`
   height: 100%;
@@ -52,7 +59,7 @@ Section.propTypes = {
   title: PropTypes.string.isRequired
 }
 
-export default function Section ({ title, children }) {
+export default function Section({ title, children }) {
   return (
     <Column>
       <Title>{title}</Title>
@@ -61,6 +68,7 @@ export default function Section ({ title, children }) {
         {children}
         <LineEnd />
       </Row>
+      <BottomBlock />
     </Column>
   )
 }

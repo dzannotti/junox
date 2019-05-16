@@ -1,7 +1,7 @@
 export default [
   {
     name: 'Strings I',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0 },
     dco: {
@@ -27,7 +27,7 @@ export default [
   },
   {
     name: 'Strings II',
-    vca: -0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0 },
     dco: {
@@ -53,7 +53,7 @@ export default [
   },
   {
     name: 'Strings III',
-    vca: -0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -79,7 +79,7 @@ export default [
   },
   {
     name: 'Organ I',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'gate',
     lfo: { frequency: 0.2, delay: 0.8 },
     dco: {
@@ -105,7 +105,7 @@ export default [
   },
   {
     name: 'Organ II',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -131,7 +131,7 @@ export default [
   },
   {
     name: 'Organ III',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -157,7 +157,7 @@ export default [
   },
   {
     name: 'Brass',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -183,7 +183,7 @@ export default [
   },
   {
     name: 'Phase Brass',
-    vca: -0.1,
+    vca: 0.30000000000000004,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0 },
     dco: {
@@ -209,7 +209,7 @@ export default [
   },
   {
     name: 'Piano I',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.3 },
     dco: {
@@ -235,7 +235,7 @@ export default [
   },
   {
     name: 'Piano II',
-    vca: 0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0 },
     dco: {
@@ -261,7 +261,7 @@ export default [
   },
   {
     name: 'Celesta',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.6 },
     dco: {
@@ -273,7 +273,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.3,
       resonance: 0.8,
@@ -287,7 +287,7 @@ export default [
   },
   {
     name: 'Mellow Piano',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -313,7 +313,7 @@ export default [
   },
   {
     name: 'Harpsichord I',
-    vca: -0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -325,7 +325,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.3,
       resonance: 0,
@@ -339,7 +339,7 @@ export default [
   },
   {
     name: 'Harpsicord II',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -351,7 +351,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.5,
       resonance: 0.2,
@@ -365,7 +365,7 @@ export default [
   },
   {
     name: 'Guitar',
-    vca: 0.4,
+    vca: 0.6000000000000001,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.6 },
     dco: {
@@ -377,7 +377,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 2,
+    hpf: 0.6666666666666666,
     vcf: {
       frequency: 0.3,
       resonance: 0,
@@ -391,7 +391,7 @@ export default [
   },
   {
     name: 'Synthetiser Harp',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -417,7 +417,7 @@ export default [
   },
   {
     name: 'Bass I',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -443,7 +443,7 @@ export default [
   },
   {
     name: 'Bass II',
-    vca: -0.1,
+    vca: 0.30000000000000004,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -469,7 +469,7 @@ export default [
   },
   {
     name: 'Clavichord I',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -495,7 +495,7 @@ export default [
   },
   {
     name: 'Clavichord II',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.1, delay: 0 },
     dco: {
@@ -507,7 +507,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.5,
       resonance: 0.7,
@@ -521,7 +521,7 @@ export default [
   },
   {
     name: 'Pizzicato Sound I',
-    vca: 0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -547,7 +547,7 @@ export default [
   },
   {
     name: 'Pizzicato Sound II',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -573,7 +573,7 @@ export default [
   },
   {
     name: 'Xylophone',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -585,7 +585,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.4,
       resonance: 0.5,
@@ -599,7 +599,7 @@ export default [
   },
   {
     name: 'Glockenspiel',
-    vca: 0.4,
+    vca: 0.6000000000000001,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -611,7 +611,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.4,
       resonance: 0.5,
@@ -625,7 +625,7 @@ export default [
   },
   {
     name: 'Violin',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.6 },
     dco: {
@@ -637,7 +637,7 @@ export default [
       lfoMod: true,
       lfo: 0.2
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.6,
       resonance: 0,
@@ -651,7 +651,7 @@ export default [
   },
   {
     name: 'Trumpet',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.6 },
     dco: {
@@ -677,7 +677,7 @@ export default [
   },
   {
     name: 'Horn',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.7 },
     dco: {
@@ -703,7 +703,7 @@ export default [
   },
   {
     name: 'Tube',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.7 },
     dco: {
@@ -729,7 +729,7 @@ export default [
   },
   {
     name: 'Flute',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.5 },
     dco: {
@@ -741,7 +741,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.5,
       resonance: 0,
@@ -755,7 +755,7 @@ export default [
   },
   {
     name: 'Clarinet',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -767,7 +767,7 @@ export default [
       lfoMod: false,
       lfo: 0.1
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.5,
       resonance: 0.3,
@@ -781,7 +781,7 @@ export default [
   },
   {
     name: 'Oboe',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -793,7 +793,7 @@ export default [
       lfoMod: false,
       lfo: 0.1
     },
-    hpf: 3,
+    hpf: 1,
     vcf: {
       frequency: 0.4,
       resonance: 0.5,
@@ -807,7 +807,7 @@ export default [
   },
   {
     name: 'English Horn',
-    vca: 0.5,
+    vca: 0.7,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.7 },
     dco: {
@@ -819,7 +819,7 @@ export default [
       lfoMod: false,
       lfo: 0.2
     },
-    hpf: 3,
+    hpf: 1,
     vcf: {
       frequency: 0.5,
       resonance: 0.7,
@@ -833,7 +833,7 @@ export default [
   },
   {
     name: 'Funny Cat',
-    vca: 0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -845,7 +845,7 @@ export default [
       lfoMod: false,
       lfo: 0.3
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.1,
       resonance: 0.7,
@@ -859,7 +859,7 @@ export default [
   },
   {
     name: 'Wah Brass',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -885,7 +885,7 @@ export default [
   },
   {
     name: 'Phase Combination',
-    vca: -0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -911,7 +911,7 @@ export default [
   },
   {
     name: 'Reed I',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -937,7 +937,7 @@ export default [
   },
   {
     name: 'Popcorn',
-    vca: 0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0, delay: 0 },
     dco: {
@@ -949,7 +949,7 @@ export default [
       lfoMod: false,
       lfo: 0
     },
-    hpf: 1,
+    hpf: 0.3333333333333333,
     vcf: {
       frequency: 0.2,
       resonance: 0.2,
@@ -963,7 +963,7 @@ export default [
   },
   {
     name: 'Reed II',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -989,7 +989,7 @@ export default [
   },
   {
     name: 'Reed III',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -1015,7 +1015,7 @@ export default [
   },
   {
     name: 'PWM Chorus',
-    vca: -0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0 },
     dco: {
@@ -1041,7 +1041,7 @@ export default [
   },
   {
     name: 'Synthetiser Organ',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'gate',
     lfo: { frequency: 0.4, delay: 0.6 },
     dco: {
@@ -1067,7 +1067,7 @@ export default [
   },
   {
     name: 'Effect Sound',
-    vca: 0.2,
+    vca: 0.4,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0.6 },
     dco: {
@@ -1093,7 +1093,7 @@ export default [
   },
   {
     name: 'Effect Sound II',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.9 },
     dco: {
@@ -1119,7 +1119,7 @@ export default [
   },
   {
     name: 'Space Harm',
-    vca: 0.1,
+    vca: 0.30000000000000004,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -1145,7 +1145,7 @@ export default [
   },
   {
     name: 'Funk',
-    vca: -0.3,
+    vca: 0.5,
     vcaType: 'gate',
     lfo: { frequency: 0.3, delay: 0.2 },
     dco: {
@@ -1171,7 +1171,7 @@ export default [
   },
   {
     name: 'Space Sound I',
-    vca: -0.2,
+    vca: 0.4,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.7 },
     dco: {
@@ -1197,7 +1197,7 @@ export default [
   },
   {
     name: 'Mysterious Invention',
-    vca: 0,
+    vca: 0.2,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.8 },
     dco: {
@@ -1223,7 +1223,7 @@ export default [
   },
   {
     name: 'Space Sound II',
-    vca: -0.3,
+    vca: 0.5,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.3 },
     dco: {
