@@ -7,8 +7,7 @@ import ADSREnvelope from './envelope'
 import HighPassFilter from './hpf'
 import {
   chorusModeToFreq,
-  chorusModeToFeedback,
-  chorusModeToDelay,
+  chorusModeToWet,
   sliderToLFOFreq,
   sliderToLFODelay,
   sliderToHPF,
@@ -24,7 +23,7 @@ export default class Junox {
     this.maxVoices = polyphony
     this.patch = patch
     this.sampleRate = sampleRate
-    this.chorus = new Chorus({ sampleRate, rate: 1 })
+    this.chorus = new Chorus({ sampleRate, rate: 1, delay: 0.00166 })
     this.lfo = new LFO({
       frequency: sliderToLFOFreq(patch.lfo.frequency),
       delay: 0,
@@ -122,6 +121,9 @@ export default class Junox {
   }
 
   setValue(path, value) {
+    if (path === 'chorus') {
+      this.chorus.reset()
+    }
     set(this.patch, path, value)
     this.update()
   }
@@ -130,8 +132,7 @@ export default class Junox {
     // TODO: fix me for real time
     this.voices.forEach(voice => voice.updatePatch(this.patch))
     this.chorus.lfo.frequency = chorusModeToFreq(this.patch.chorus)
-    this.chorus.feedback = chorusModeToFeedback(this.patch.chorus)
-    this.chorus.delay = chorusModeToDelay(this.patch.chorus)
+    this.chorus.wet = chorusModeToWet(this.patch.chorus)
     this.chorus.render(0, 0)
     this.lfo.setRate(sliderToLFOFreq(this.patch.lfo.frequency))
     this.lfo.setDelay(sliderToLFODelay(this.patch.lfo.delay))
