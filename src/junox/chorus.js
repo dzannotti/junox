@@ -22,7 +22,7 @@ class RingBuffer {
     let localIndex = this.ringBufferIndex(this.index - sampleIndex)
     const fractional = localIndex - Math.abs(localIndex)
     const indexA = Math.floor(localIndex)
-    const indexB = this.ringBufferIndex(Math.floor(localIndex + 1))
+    const indexB = this.ringBufferIndex(indexA + 1)
     return (
       this.buffer[indexA] * fractional + this.buffer[indexB] * (1 - fractional)
     )
