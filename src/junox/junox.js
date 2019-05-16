@@ -3,6 +3,7 @@ import Voice from './voice'
 import Chorus from './chorus'
 import LFO from './lfo'
 import BassBoost from './bassboost'
+import ADSREnvelope from './envelope'
 import HighPassFilter from './hpf'
 import {
   chorusModeToFreq,
@@ -10,7 +11,10 @@ import {
   chorusModeToDelay,
   sliderToLFOFreq,
   sliderToLFODelay,
-  sliderToHPF
+  sliderToHPF,
+  sliderToTime,
+  sliderToDecay,
+  sliderToSustain
 } from './params'
 
 export default class Junox {
@@ -32,6 +36,13 @@ export default class Junox {
       resonance: 1,
       sampleRate
     })
+    this.vcaGate = new ADSREnvelope({
+      attack: sliderToTime(0.1),
+      decay: sliderToDecay(1),
+      sustain: sliderToSustain(1),
+      release: sliderToTime(0.1),
+      sampleRate
+    })
     this.update()
   }
 
@@ -43,6 +54,9 @@ export default class Junox {
       velocity,
       sampleRate: this.sampleRate
     })
+    if (this.vcaGate.state === 'release') {
+      this.vcaGate.reset()
+    }
     if (!this.voices.length) {
       this.lfo.trigger()
     }
@@ -60,10 +74,14 @@ export default class Junox {
 
   noteOff(note) {
     this.voices.forEach(voice => voice.note === note && voice.noteOff())
+    if (this.voices.length === 1) {
+      this.vcaGate.noteOff()
+    }
   }
 
   tick() {
     const lfo = this.lfo.render()
+    this.vcaGate.tick()
     for (let i = 0; i < this.voices.length; i++) {
       this.voices[i].tick(lfo)
     }
@@ -95,6 +113,11 @@ export default class Junox {
       }
       outL[i] *= this.patch.vca
       outR[i] *= this.patch.vca
+      if (this.patch.vcaType === 'gate') {
+        const vcaGate = this.vcaGate.render()
+        outL[i] *= vcaGate
+        outR[i] *= vcaGate
+      }
     }
   }
 

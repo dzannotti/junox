@@ -279,6 +279,16 @@ export default function App() {
           />
         </Section>
         <Section title="VCA">
+          <ButtonLED
+            label="ENV"
+            active={patch.vcaType === 'env'}
+            toggle={setSynthValue('vcaType', 'env')}
+          />
+          <ButtonLED
+            label="GATE"
+            active={patch.vcaType === 'gate'}
+            toggle={setSynthValue('vcaType', 'gate')}
+          />
           <AfterButtonLED />
           <Slider
             label="level"

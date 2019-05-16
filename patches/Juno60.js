@@ -26,7 +26,8 @@ function toJSON(results) {
     .filter(patch => parseInt(patch['Number']) < 71)
     .map((result, i) => ({
       name: result['Name'],
-      vca: toSlider(i, 'VCA Value'),
+      // this is a bit fudged, unsure what negative values do?
+      vca: Math.abs(toSlider(i, 'VCA Value')) + 0.2,
       vcaType: result['VCA Dir'] === 'G' ? 'gate' : 'env',
       lfo: {
         frequency: toSlider(i, 'LFO Rate'),
@@ -41,7 +42,7 @@ function toJSON(results) {
         lfoMod: result['DCO Lfo Mod'] === 'L',
         lfo: toSlider(i, 'DCO Lfo')
       },
-      hpf: toInteger(i, 'HPF'),
+      hpf: toInteger(i, 'HPF') / 3,
       vcf: {
         frequency: toSlider(i, 'VCF Freq'),
         resonance: toSlider(i, 'VCF Res'),
