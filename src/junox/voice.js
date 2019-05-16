@@ -45,7 +45,7 @@ export default class Voice {
   }
   render() {
     const dco = this.dco.render()
-    const env = this.patch.vcaType == 'env' ? this.env.render() : 1
+    const env = this.patch.vcaType === 'env' ? this.env.render() : 1
     const vcf = this.vcf.render(dco)
     return this.velocity * vcf * env
   }

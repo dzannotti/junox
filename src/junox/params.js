@@ -71,16 +71,12 @@ export function chorusModeToFreq(val) {
   if (val === 1) {
     return 0.513
   }
-  return 1.263
+  return 0.863
 }
 
-export function chorusModeToFeedback(val) {
-  return 0
-}
-
-export function chorusModeToDelay(val) {
+export function chorusModeToWet(val) {
   if (val === 1) {
-    return 0.03 * 22050
+    return 0.3
   }
-  return 0.06 * 22050
+  return 0.6
 }
