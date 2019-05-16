@@ -40,6 +40,7 @@ export default class Chorus {
     this.sampleRate = sampleRate
     this.lfo = new LFO({ frequency: rate, sampleRate })
     this.delay = delay * sampleRate
+    this.minDelaySamples = this.sampleRate * 0.00369
     this.wet = wet
   }
 
@@ -51,8 +52,8 @@ export default class Chorus {
     const lfo = this.lfo.render() / 2 + 0.5
     const leftMod = lfo
     const rightMod = 1 - lfo
-    const leftDelayTime = this.delay + leftMod * this.sampleRate * 0.00369
-    const rightDelayTime = this.delay + rightMod * this.sampleRate * 0.00369
+    const leftDelayTime = this.delay + leftMod * this.minDelaySamples
+    const rightDelayTime = this.delay + rightMod * this.minDelaySamples
     const lYN = this.ringBuffer.getSample(leftDelayTime)
     const rYN = this.ringBuffer.getSample(rightDelayTime)
     this.ringBuffer.addSample(input)
