@@ -3,16 +3,17 @@ import styled from 'styled-components'
 import copy from 'copy-to-clipboard'
 import LZ from 'lz-string'
 import { get } from 'lodash'
-import LCD from './lcd'
+import LCD from './LCD'
 import MIDIController from './MIDIController'
-import { initAudio } from './audio'
 import Piano, { PianoOctaveSelector } from './Piano'
 import Section from './Section'
 import Slider from './Slider'
 import ButtonLED from './ButtonLED'
 import Button from './Button'
+import Visualizer from './Visualizer'
 import { set } from 'lodash'
 import patches from './junox/patches'
+import { noteToFrequency } from './utils'
 
 const Container = styled.div`
   display: flex;
@@ -52,9 +53,10 @@ const LogoContainer = styled.div`
 `
 
 const Logo = styled.div`
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 600;
   font-family: Righteous;
+  margin-right: 1rem;
 `
 
 const Spacer = styled.div`
@@ -81,21 +83,10 @@ const AfterButtonLED = styled.div`
   height: 100%;
 `
 
-let synthNode = {
-  queue: [],
-  setParam: function(name, value) {
-    this.queue.push({ name, value })
-  }
-}
-
-initAudio().then(node => {
-  synthNode.queue.forEach(({ name, value }) => node.setParam(name, value))
-  synthNode = node
-})
-
-export default function App() {
+export default function App({ synth, audioContext }) {
   const [octave, setOctave] = useState(-12)
   const [patch, setPatchValues] = useState(patches[0])
+  const [lastNoteOn, setLastNoteOn] = useState(69)
 
   useEffect(() => {
     if (!window.location.hash) {
@@ -123,7 +114,7 @@ export default function App() {
   })
 
   const setSynthPatchValue = (name, value) => {
-    synthNode.setParam(name, value)
+    synth.setParam(name, value)
     setPatchValues(patch => {
       set(patch, name, value)
       return { ...patch }
@@ -135,11 +126,14 @@ export default function App() {
     setSynthPatchValue(name, paramValue)
   }
 
-  const noteOn = (note, velocity = 0.8) => synthNode.noteOn(note, velocity)
-  const noteOff = note => synthNode.noteOff(note)
+  const noteOn = (note, velocity = 0.8) => {
+    synth.noteOn(note, velocity)
+    setLastNoteOn(note)
+  }
+  const noteOff = note => synth.noteOff(note)
 
   const setPatch = patchIndex => {
-    synthNode.setPatch(patchIndex)
+    synth.setPatch(patchIndex)
     setPatchValues(patches[patchIndex])
   }
 
@@ -153,7 +147,14 @@ export default function App() {
   return (
     <Container>
       <TopRow>
-        <LCD patches={patches} setPatch={setPatch} />
+        <LCD patches={patches} setPatch={setPatch}>
+          <Visualizer
+            sampleRate={44100}
+            period={noteToFrequency(lastNoteOn)}
+            outNode={synth}
+            audioContext={audioContext}
+          />
+        </LCD>
         <Spacer />
         <LogoContainer>
           <Logo>JUNOX</Logo>
@@ -318,7 +319,7 @@ export default function App() {
       <Row>
         <PianoOctaveSelector octave={octave} setOctave={setOctave}>
           <SimpleRow centered>
-            <Button onClick={() => synthNode.panic()}>Panic</Button>
+            <Button onClick={() => synth.panic()}>Panic</Button>
             <Button onClick={() => console.log(JSON.stringify(patch))}>
               dump
             </Button>
