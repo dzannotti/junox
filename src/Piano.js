@@ -16,6 +16,7 @@ const OctaveWrapper = styled.div`
   height: 100%;
   flex-grow: 0;
   flex-shrink: 0;
+  padding-top: 15px;
   border-right: 2px solid #121212;
 `
 

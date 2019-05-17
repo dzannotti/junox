@@ -9,7 +9,8 @@ import Piano, { PianoOctaveSelector } from './Piano'
 import Section from './Section'
 import Slider from './Slider'
 import ButtonLED from './ButtonLED'
-import Button from './Button'
+import Button, { SmallButton } from './Button'
+import Record from './Record'
 import Visualizer from './Visualizer'
 import { set } from 'lodash'
 import patches from './junox/patches'
@@ -57,6 +58,7 @@ const Logo = styled.div`
   font-weight: 600;
   font-family: Righteous;
   margin-right: 1rem;
+  align-self: flex-end;
 `
 
 const Spacer = styled.div`
@@ -159,6 +161,11 @@ export default function App({ synth, audioContext }) {
         <LogoContainer>
           <Logo>JUNOX</Logo>
           <MIDIController noteOn={noteOn} noteOff={noteOff} />
+          <SimpleRow centered marginated>
+            <SmallButton onClick={() => synth.panic()}>Panic</SmallButton>
+            <AfterButtonLED />
+            <Record audioContext={audioContext} outNode={synth} />
+          </SimpleRow>
         </LogoContainer>
       </TopRow>
       <Row>
@@ -319,7 +326,6 @@ export default function App({ synth, audioContext }) {
       <Row>
         <PianoOctaveSelector octave={octave} setOctave={setOctave}>
           <SimpleRow centered>
-            <Button onClick={() => synth.panic()}>Panic</Button>
             <Button onClick={() => console.log(JSON.stringify(patch))}>
               dump
             </Button>
@@ -327,6 +333,7 @@ export default function App({ synth, audioContext }) {
           <SimpleRow centered marginated>
             <Button onClick={sharePatch}>SHARE PATCH</Button>
           </SimpleRow>
+          <SimpleRow centered marginated />
           <SimpleRow centered marginated />
         </PianoOctaveSelector>
         <Piano octave={octave} noteOn={noteOn} noteOff={noteOff} />
