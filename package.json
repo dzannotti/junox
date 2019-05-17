@@ -15,6 +15,9 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "eslintIgnore": [
+    "src/vendor"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"
@@ -24,6 +27,7 @@
     "@babel/preset-env": "^7.4.4",
     "audioworklet-polyfill": "^1.1.2",
     "copy-to-clipboard": "^3.2.0",
+    "filesaver.js": "^1.3.4",
     "lz-string": "^1.4.4",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

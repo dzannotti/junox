@@ -7,6 +7,7 @@ const Button = styled.div`
   background-color: #323232;
   border: 1px solid black;
   border-radius: 4px;
+  font-size: 13px;
   text-transform: uppercase;
   color: white;
   display: flex;
@@ -16,6 +17,10 @@ const Button = styled.div`
   &:active {
     background-color: #121212;
   }
+`
+
+export const SmallButton = styled(Button)`
+  width: 100px;
 `
 
 export default Button
