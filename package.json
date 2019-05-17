@@ -1,7 +1,7 @@
 {
   "name": "junox",
   "version": "0.1.0",
-  "private": true,
+  "license": "GPL",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server --hot --mode development --config webpack.config.js",
     "lint": "eslint src",
@@ -9,6 +9,7 @@
     "stats": "cross-env NODE_ENV=production rimraf dist && webpack --mode production --config webpack.config.js --json > stats.json",
     "deploy": "gh-pages --dist dist",
     "test": "jest",
+    "tdd": "jest --watch",
     "convert:patches": "node patches/Juno60.js"
   },
   "eslintConfig": {
