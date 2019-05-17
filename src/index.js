@@ -2,9 +2,12 @@ import 'audioworklet-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createGlobalStyle } from 'styled-components'
+import { initAudio } from './audio'
 import App from './App'
+import Splashscreen from './Splashscreen'
 import reset from 'styled-reset'
 import 'react-piano/dist/styles.css'
+import 'react-loader-spinner/dist/loader/css/Triangle.css'
 import './piano.css'
 
 const GlobalStyle = createGlobalStyle`
@@ -28,11 +31,28 @@ const GlobalStyle = createGlobalStyle`
     flex-direction: column;
   }
 `
+// TODO: can/should this be refactored within a react component?
+let synth = null
+let audioContext = null
 
-ReactDOM.render(
-  <React.Fragment>
-    <GlobalStyle />
-    <App />
-  </React.Fragment>,
-  document.getElementById('root')
-)
+initAudio().then(({ synthNode, context }) => {
+  synth = synthNode
+  audioContext = context
+  render()
+})
+
+function render() {
+  return ReactDOM.render(
+    <React.Fragment>
+      <GlobalStyle />
+      {synth ? (
+        <App synth={synth} audioContext={audioContext} />
+      ) : (
+        <Splashscreen />
+      )}
+    </React.Fragment>,
+    document.getElementById('root')
+  )
+}
+
+render()
