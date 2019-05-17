@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { VisualizerDisplay } from './elements'
 
-const WAVE_PIXELS_PER_SAMPLE = 0.4
+const WAVE_PIXELS_PER_SAMPLE = 0.4 * 2
 
 // TODO: Figure out a way of doing this with hooks
 export default class Visualizer extends React.Component {
@@ -21,7 +21,7 @@ export default class Visualizer extends React.Component {
     this.width = 510
     this.height = 60
     this.paint = this.paint.bind(this)
-    this.dataArray = new Float32Array(2048)
+    this.dataArray = new Float32Array(1024)
   }
 
   paint() {
@@ -48,9 +48,10 @@ export default class Visualizer extends React.Component {
     }
 
     const scale = Math.min(1 / max, 4) * 0.48
+    const sampleTime =
+      this.props.sampleRate * this.props.audioContext.currentTime
     const period = this.props.sampleRate / this.props.period
-    const sampleOffset = (this.props.sampleRate % period) - period
-    console.log(scale)
+    const sampleOffset = (sampleTime % period) - period
     this.ctx.moveTo(0, this.height * 1.5 - (this.dataArray[0] >> 2) - 1)
     for (let i = 0, l = this.dataArray.length; i < l; i++) {
       const x = (i + sampleOffset) * WAVE_PIXELS_PER_SAMPLE
