@@ -7,8 +7,10 @@ export default class OnePoleFilter {
     this.epsilon = 0.0
     this.a0 = 1.0
     this.feedback = 0.0
-    this.T = 1 / sampleRate
-    this.setCutoff(cutoff)
+    this.sampleRate = sampleRate
+    if (cutoff) {
+      this.setCutoff(cutoff)
+    }
   }
 
   setFeedback(feedback) {
@@ -20,9 +22,10 @@ export default class OnePoleFilter {
   }
 
   setCutoff(cutoff) {
+    const T = 1 / this.sampleRate
     const wd = 2 * Math.PI * cutoff
-    const wa = (2 / this.T) * Math.tan((wd * this.T) / 2)
-    const g = (wa * this.T) / 2
+    const wa = (2 / T) * Math.tan((wd * T) / 2)
+    const g = (wa * T) / 2
     this.alpha = g / (1.0 + g)
   }
 

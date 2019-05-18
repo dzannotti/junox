@@ -45,12 +45,12 @@ export default class Voice {
     this.moogVCF = new LowPassFilter({
       sampleRate,
       resonance: sliderToResonance(patch.vcf.resonance),
-      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency, sampleRate)
+      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency, sampleRate) * 3.99
     })
     this.diodeLadderVCF = new DiodeLadder({
       sampleRate,
-      cutoff: 12000,
-      resonance: sliderToResonance(patch.vcf.resonance)
+      cutoff: sliderToFilterFreqNorm(patch.vcf.frequency, sampleRate) * 18000,
+      resonance: sliderToResonance(patch.vcf.resonance) * 9 + 1
     })
 
     // preload for ticking
@@ -61,8 +61,10 @@ export default class Voice {
     const dco = this.dco.render()
     const env = this.env.render()
     const gate = this.gate.render()
-    // const vcf = this.moogVCF.render(dco)
-    const vcf = this.diodeLadderVCF.render(dco)
+    const vcf =
+      this.patch.vcf.type === 'diode-ladder'
+        ? this.diodeLadderVCF.render(dco)
+        : this.moogVCF.render(dco)
     const vca = this.patch.vcaType === 'env' ? env : gate
     return this.velocity * vcf * vca
   }
@@ -95,7 +97,7 @@ export default class Voice {
       this.sampleRate
     )
     this.diodeLadderVCF.setCutoff(
-      sliderToFilterFreqNorm(vcfCutoffValue, this.sampleRate) * 22050
+      sliderToFilterFreqNorm(vcfCutoffValue, this.sampleRate) * 18000
     )
   }
 
@@ -114,11 +116,13 @@ export default class Voice {
     this.env.decay = sliderToDecay(patch.env.decay)
     this.env.sustain = sliderToSustain(patch.env.sustain)
     this.env.release = sliderToTime(patch.env.release)
-    this.moogVCF.resonance = sliderToResonance(patch.vcf.resonance)
+    this.moogVCF.resonance = sliderToResonance(patch.vcf.resonance) * 3.99
     this.moogVCF.cutoff = sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4)
     this.diodeLadderVCF.setCutoff(
-      sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4) * 22050
+      sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4) * 18000
     )
-    this.diodeLadderVCF.setResonance(sliderToResonance(patch.vcf.resonance))
+    this.diodeLadderVCF.setResonance(
+      sliderToResonance(patch.vcf.resonance) * 9 + 1
+    )
   }
 }

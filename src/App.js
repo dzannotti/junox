@@ -34,6 +34,13 @@ const SimpleRow = styled.div`
   margin-top: ${props => (props.marginated ? '10px' : '0')};
 `
 
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 const Row = styled(SimpleRow)`
   display: flex;
   flex-direction: row;
@@ -123,8 +130,8 @@ export default function App({ synth, audioContext }) {
     })
   }
 
-  const setSynthValue = (name, forceValue) => value => {
-    const paramValue = forceValue != null ? forceValue : value
+  const setSynthValue = (name, forceValue, transformer = v => v) => value => {
+    const paramValue = forceValue != null ? forceValue : transformer(value)
     setSynthPatchValue(name, paramValue)
   }
 
@@ -253,7 +260,7 @@ export default function App({ synth, audioContext }) {
             onChange={setSynthValue('hpf')}
           />
         </Section>
-        <Section title="VCF">
+        <Section title="VCFVCF">
           <Slider
             label="FREQ"
             value={patch.vcf.frequency}
@@ -264,11 +271,20 @@ export default function App({ synth, audioContext }) {
             value={patch.vcf.resonance}
             onChange={setSynthValue('vcf.resonance')}
           />
-          <ButtonLED
-            label="+"
-            active={patch.vcf.modPositive}
-            toggle={setSynthValue('vcf.modPositive')}
-          />
+          <Column>
+            <ButtonLED
+              label="+"
+              active={patch.vcf.modPositive}
+              toggle={setSynthValue('vcf.modPositive')}
+            />
+            <ButtonLED
+              label="moog"
+              active={patch.vcf.type === 'moog'}
+              toggle={setSynthValue('vcf.type', undefined, val =>
+                val ? 'moog' : 'diode-ladder'
+              )}
+            />
+          </Column>
           <AfterButtonLED />
           <Slider
             label="ENV"
@@ -290,12 +306,9 @@ export default function App({ synth, audioContext }) {
           <ButtonLED
             label="ENV"
             active={patch.vcaType === 'env'}
-            toggle={setSynthValue('vcaType', 'env')}
-          />
-          <ButtonLED
-            label="GATE"
-            active={patch.vcaType === 'gate'}
-            toggle={setSynthValue('vcaType', 'gate')}
+            toggle={setSynthValue('vcaType', undefined, val =>
+              val ? 'env' : 'gate'
+            )}
           />
           <AfterButtonLED />
           <Slider
