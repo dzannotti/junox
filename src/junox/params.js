@@ -56,7 +56,7 @@ export function sliderToHPF(val) {
 }
 
 export function sliderToFilterFreqNorm(val, sampleRate) {
-  const freq = 5.0 * Math.pow(2, val)
+  const freq = 60.0 * Math.pow(2, val)
   if (freq > sampleRate) {
     return 1
   }
