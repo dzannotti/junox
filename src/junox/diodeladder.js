@@ -97,7 +97,7 @@ export default class DiodeLadder {
       this.SG4 * this.lpf4.feedbackOutput()
 
     // --- form input
-    const U = (xn - this.K * sigma) / (1 + this.K * this.gamma)
+    let U = (xn - this.K * sigma) / (1 + this.K * this.gamma)
     U = Math.tanh(U)
 
     // ---NLP
