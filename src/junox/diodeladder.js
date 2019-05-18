@@ -98,9 +98,9 @@ export default class DiodeLadder {
 
     // --- form input
     let U = (xn - this.K * sigma) / (1 + this.K * this.gamma)
-    U = Math.tanh(U)
 
     // ---NLP
+    U = Math.tanh(U)
     // --- cascade of four filters
     return this.lpf4.render(
       this.lpf3.render(this.lpf2.render(this.lpf1.render(U)))
