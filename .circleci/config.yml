@@ -81,18 +81,21 @@ workflows:
       - lint:
           requires:
             - checkout
-          branches:
-            ignore: gh-pages
+          filters:
+            branches:
+              ignore: gh-pages
       - build:
           requires:
             - checkout
-          branches:
-            ignore: gh-pages
+          filters:
+            branches:
+              ignore: gh-pages
       - test:
           requires:
             - checkout
-          branches:
-            ignore: gh-pages
+          filters:
+            branches:
+              ignore: gh-pages
       - deploy:
           requires:
             - lint
