@@ -34,6 +34,13 @@ export default class Voice {
       release: sliderToTime(patch.env.release),
       sampleRate
     })
+    this.gate = new ADSREnvelope({
+      attack: sliderToTime(0.1),
+      decay: sliderToDecay(0.1),
+      sustain: sliderToSustain(1),
+      release: sliderToTime(0.1),
+      sampleRate
+    })
     this.vcf = new LowPassFilter({
       sampleRate,
       resonance: sliderToResonance(patch.vcf.resonance),
@@ -42,16 +49,20 @@ export default class Voice {
 
     // preload for ticking
     this.env.render()
+    this.gate.render()
   }
   render() {
     const dco = this.dco.render()
-    const env = this.patch.vcaType === 'env' ? this.env.render() : 1
+    const env = this.env.render()
+    const gate = this.gate.render()
     const vcf = this.vcf.render(dco)
-    return this.velocity * vcf * env
+    const vca = this.patch.vcaType === 'env' ? env : gate
+    return this.velocity * vcf * vca
   }
 
   noteOff() {
     this.env.noteOff()
+    this.gate.noteOff()
   }
 
   tick(lfo) {
@@ -60,11 +71,12 @@ export default class Voice {
     const keyFollowDenominator = 5 * 12
     const vcfDirection = this.patch.vcf.modPositive ? 1 : -1
     this.env.tick()
+    this.gate.tick()
     this.dco.tick(
       lfo * this.patch.dco.lfo,
       paramToPWM(positiveLFO * this.patch.dco.pwm * this.patch.dco.lfoMod)
     )
-    let vcfCutoffValue = this.patch.vcf.frequency * 1.4 * 10
+    let vcfCutoffValue = this.patch.vcf.frequency * 1.1 * 10
     vcfCutoffValue += this.env.out * this.patch.vcf.envMod * 14 * vcfDirection
     vcfCutoffValue += lfo * this.patch.vcf.lfoMod * 3.5
     vcfCutoffValue +=
@@ -75,7 +87,7 @@ export default class Voice {
   }
 
   isFinished() {
-    return this.env.isFinished()
+    return this.env.isFinished() && this.gate.isFinished()
   }
 
   updatePatch(patch) {
