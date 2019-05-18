@@ -27,7 +27,7 @@ function toJSON(results) {
     .map((result, i) => ({
       name: result['Name'],
       // this is a bit fudged, unsure what negative values do?
-      vca: Math.abs(toSlider(i, 'VCA Value')) + 0.2,
+      vca: Math.abs(toSlider(i, 'VCA Value')) + 0.35,
       vcaType: result['VCA Dir'] === 'G' ? 'gate' : 'env',
       lfo: {
         frequency: toSlider(i, 'LFO Rate'),
@@ -44,6 +44,7 @@ function toJSON(results) {
       },
       hpf: toInteger(i, 'HPF') / 3,
       vcf: {
+        type: 'diode-ladder',
         frequency: toSlider(i, 'VCF Freq'),
         resonance: toSlider(i, 'VCF Res'),
         modPositive: result['VCF Dir'] === 'N',
