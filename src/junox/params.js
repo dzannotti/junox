@@ -64,7 +64,7 @@ export function sliderToFilterFreqNorm(val, sampleRate) {
 }
 
 export function sliderToResonance(val) {
-  return val * 3.99 + 0.01
+  return val + 0.01
 }
 
 export function chorusModeToFreq(val) {

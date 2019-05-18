@@ -32,7 +32,7 @@ export default class Junox {
     this.bassBoost = new BassBoost({ frequency: 75 })
     this.hpf = new HighPassFilter({
       cutoff: sliderToHPF(patch.hpf),
-      resonance: 1,
+      resonance: 0.707,
       sampleRate
     })
     this.update()

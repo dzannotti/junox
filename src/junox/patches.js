@@ -1,7 +1,7 @@
 export default [
   {
     name: 'Strings I',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0 },
     dco: {
@@ -15,6 +15,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.7,
       resonance: 0,
       modPositive: true,
@@ -27,7 +28,7 @@ export default [
   },
   {
     name: 'Strings II',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0 },
     dco: {
@@ -41,6 +42,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.7,
       resonance: 0,
       modPositive: true,
@@ -53,7 +55,7 @@ export default [
   },
   {
     name: 'Strings III',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -67,6 +69,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0,
       modPositive: true,
@@ -79,7 +82,7 @@ export default [
   },
   {
     name: 'Organ I',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'gate',
     lfo: { frequency: 0.2, delay: 0.8 },
     dco: {
@@ -93,6 +96,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.4,
       resonance: 0.6,
       modPositive: true,
@@ -105,7 +109,7 @@ export default [
   },
   {
     name: 'Organ II',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -119,6 +123,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.5,
       modPositive: true,
@@ -131,7 +136,7 @@ export default [
   },
   {
     name: 'Organ III',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -145,6 +150,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.5,
       modPositive: true,
@@ -157,7 +163,7 @@ export default [
   },
   {
     name: 'Brass',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -171,6 +177,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0,
       resonance: 0,
       modPositive: true,
@@ -183,7 +190,7 @@ export default [
   },
   {
     name: 'Phase Brass',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0 },
     dco: {
@@ -197,6 +204,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.1,
       modPositive: true,
@@ -209,7 +217,7 @@ export default [
   },
   {
     name: 'Piano I',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.3 },
     dco: {
@@ -223,6 +231,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.1,
       resonance: 0,
       modPositive: true,
@@ -235,7 +244,7 @@ export default [
   },
   {
     name: 'Piano II',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0 },
     dco: {
@@ -249,6 +258,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0,
       modPositive: true,
@@ -261,7 +271,7 @@ export default [
   },
   {
     name: 'Celesta',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.6 },
     dco: {
@@ -275,6 +285,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.8,
       modPositive: true,
@@ -287,7 +298,7 @@ export default [
   },
   {
     name: 'Mellow Piano',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -301,6 +312,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0,
       modPositive: true,
@@ -313,7 +325,7 @@ export default [
   },
   {
     name: 'Harpsichord I',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.4 },
     dco: {
@@ -327,6 +339,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0,
       modPositive: true,
@@ -339,7 +352,7 @@ export default [
   },
   {
     name: 'Harpsicord II',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -353,6 +366,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0.2,
       modPositive: true,
@@ -365,7 +379,7 @@ export default [
   },
   {
     name: 'Guitar',
-    vca: 0.6000000000000001,
+    vca: 0.75,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.6 },
     dco: {
@@ -379,6 +393,7 @@ export default [
     },
     hpf: 0.6666666666666666,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0,
       modPositive: true,
@@ -391,7 +406,7 @@ export default [
   },
   {
     name: 'Synthetiser Harp',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -405,6 +420,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0,
       modPositive: true,
@@ -417,7 +433,7 @@ export default [
   },
   {
     name: 'Bass I',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -431,6 +447,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.2,
       modPositive: true,
@@ -443,7 +460,7 @@ export default [
   },
   {
     name: 'Bass II',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -457,6 +474,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.5,
       modPositive: true,
@@ -469,7 +487,7 @@ export default [
   },
   {
     name: 'Clavichord I',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -483,6 +501,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0,
       resonance: 0.3,
       modPositive: true,
@@ -495,7 +514,7 @@ export default [
   },
   {
     name: 'Clavichord II',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.1, delay: 0 },
     dco: {
@@ -509,6 +528,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0.7,
       modPositive: true,
@@ -521,7 +541,7 @@ export default [
   },
   {
     name: 'Pizzicato Sound I',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -535,6 +555,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.4,
       resonance: 0.4,
       modPositive: true,
@@ -547,7 +568,7 @@ export default [
   },
   {
     name: 'Pizzicato Sound II',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -561,6 +582,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0.4,
       modPositive: true,
@@ -573,7 +595,7 @@ export default [
   },
   {
     name: 'Xylophone',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -587,6 +609,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.4,
       resonance: 0.5,
       modPositive: true,
@@ -599,7 +622,7 @@ export default [
   },
   {
     name: 'Glockenspiel',
-    vca: 0.6000000000000001,
+    vca: 0.75,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -613,6 +636,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.4,
       resonance: 0.5,
       modPositive: true,
@@ -625,7 +649,7 @@ export default [
   },
   {
     name: 'Violin',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.6 },
     dco: {
@@ -639,6 +663,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0,
       modPositive: true,
@@ -651,7 +676,7 @@ export default [
   },
   {
     name: 'Trumpet',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.6 },
     dco: {
@@ -665,6 +690,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0,
       resonance: 0,
       modPositive: true,
@@ -677,7 +703,7 @@ export default [
   },
   {
     name: 'Horn',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.7 },
     dco: {
@@ -691,6 +717,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.2,
       resonance: 0,
       modPositive: true,
@@ -703,7 +730,7 @@ export default [
   },
   {
     name: 'Tube',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.2, delay: 0.7 },
     dco: {
@@ -717,6 +744,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.1,
       resonance: 0,
       modPositive: true,
@@ -729,7 +757,7 @@ export default [
   },
   {
     name: 'Flute',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.5 },
     dco: {
@@ -743,6 +771,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0,
       modPositive: true,
@@ -755,7 +784,7 @@ export default [
   },
   {
     name: 'Clarinet',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -769,6 +798,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0.3,
       modPositive: true,
@@ -781,7 +811,7 @@ export default [
   },
   {
     name: 'Oboe',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.6 },
     dco: {
@@ -795,6 +825,7 @@ export default [
     },
     hpf: 1,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.4,
       resonance: 0.5,
       modPositive: true,
@@ -807,7 +838,7 @@ export default [
   },
   {
     name: 'English Horn',
-    vca: 0.7,
+    vca: 0.85,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0.7 },
     dco: {
@@ -821,6 +852,7 @@ export default [
     },
     hpf: 1,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.5,
       resonance: 0.7,
       modPositive: true,
@@ -833,7 +865,7 @@ export default [
   },
   {
     name: 'Funny Cat',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -847,6 +879,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.1,
       resonance: 0.7,
       modPositive: true,
@@ -859,7 +892,7 @@ export default [
   },
   {
     name: 'Wah Brass',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -873,6 +906,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.7,
       modPositive: true,
@@ -885,7 +919,7 @@ export default [
   },
   {
     name: 'Phase Combination',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -899,6 +933,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0.2,
       modPositive: true,
@@ -911,7 +946,7 @@ export default [
   },
   {
     name: 'Reed I',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -925,6 +960,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.1,
       resonance: 0.6,
       modPositive: true,
@@ -937,7 +973,7 @@ export default [
   },
   {
     name: 'Popcorn',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0, delay: 0 },
     dco: {
@@ -951,6 +987,7 @@ export default [
     },
     hpf: 0.3333333333333333,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.2,
       resonance: 0.2,
       modPositive: true,
@@ -963,7 +1000,7 @@ export default [
   },
   {
     name: 'Reed II',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.8 },
     dco: {
@@ -977,6 +1014,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.2,
       resonance: 0,
       modPositive: true,
@@ -989,7 +1027,7 @@ export default [
   },
   {
     name: 'Reed III',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.2 },
     dco: {
@@ -1003,6 +1041,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.3,
       resonance: 0.2,
       modPositive: true,
@@ -1015,7 +1054,7 @@ export default [
   },
   {
     name: 'PWM Chorus',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0 },
     dco: {
@@ -1029,6 +1068,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.8,
       resonance: 0,
       modPositive: true,
@@ -1041,7 +1081,7 @@ export default [
   },
   {
     name: 'Synthetiser Organ',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'gate',
     lfo: { frequency: 0.4, delay: 0.6 },
     dco: {
@@ -1055,6 +1095,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.2,
       resonance: 0,
       modPositive: true,
@@ -1067,7 +1108,7 @@ export default [
   },
   {
     name: 'Effect Sound',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'env',
     lfo: { frequency: 0.4, delay: 0.6 },
     dco: {
@@ -1081,6 +1122,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0,
       modPositive: false,
@@ -1093,7 +1135,7 @@ export default [
   },
   {
     name: 'Effect Sound II',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'gate',
     lfo: { frequency: 0.5, delay: 0.9 },
     dco: {
@@ -1107,6 +1149,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0.3,
       modPositive: false,
@@ -1119,7 +1162,7 @@ export default [
   },
   {
     name: 'Space Harm',
-    vca: 0.30000000000000004,
+    vca: 0.44999999999999996,
     vcaType: 'env',
     lfo: { frequency: 0.5, delay: 0 },
     dco: {
@@ -1133,6 +1176,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0.5,
       modPositive: true,
@@ -1145,7 +1189,7 @@ export default [
   },
   {
     name: 'Funk',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'gate',
     lfo: { frequency: 0.3, delay: 0.2 },
     dco: {
@@ -1159,6 +1203,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.7,
       resonance: 0.6,
       modPositive: false,
@@ -1171,7 +1216,7 @@ export default [
   },
   {
     name: 'Space Sound I',
-    vca: 0.4,
+    vca: 0.55,
     vcaType: 'gate',
     lfo: { frequency: 0.6, delay: 0.7 },
     dco: {
@@ -1185,6 +1230,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.6,
       resonance: 0.7,
       modPositive: false,
@@ -1197,7 +1243,7 @@ export default [
   },
   {
     name: 'Mysterious Invention',
-    vca: 0.2,
+    vca: 0.35,
     vcaType: 'env',
     lfo: { frequency: 0.6, delay: 0.8 },
     dco: {
@@ -1211,6 +1257,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.8,
       resonance: 0.7,
       modPositive: false,
@@ -1223,7 +1270,7 @@ export default [
   },
   {
     name: 'Space Sound II',
-    vca: 0.5,
+    vca: 0.6499999999999999,
     vcaType: 'env',
     lfo: { frequency: 0.3, delay: 0.3 },
     dco: {
@@ -1237,6 +1284,7 @@ export default [
     },
     hpf: 0,
     vcf: {
+      type: 'diode-ladder',
       frequency: 0.2,
       resonance: 0.8,
       modPositive: true,
