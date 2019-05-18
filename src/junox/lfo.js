@@ -27,6 +27,8 @@ export default class LFO {
     this.direction = 1
     this.delayPhase = 0
     this.attackPhase = 0
+    this.attackRateFactor = 0
+    this.attackOutput = 0.01
   }
 
   delayEnv() {
@@ -35,7 +37,9 @@ export default class LFO {
       return 1
     } else if (this.delayPhase > this.delaySamples) {
       this.attackPhase = this.attackPhase + 1
-      return this.attackPhase / this.attackSamples
+      this.attackRateFactor = this.attackPhase / this.attackSamples
+      this.attackOutput = (1 - this.attackOutput) * this.attackRateFactor
+      return Math.max(this.attackOutput * 2, 1)
     }
     return 0
   }
