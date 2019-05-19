@@ -19,7 +19,7 @@ export default class CPUUsageDisplay extends React.Component {
   }
 
   componentWillUnmount() {
-    cancelInterval(this.intervalId)
+    clearInterval(this.intervalId)
   }
 
   updateCPU = () => {

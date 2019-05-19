@@ -3,17 +3,13 @@ import Voice from './voice'
 import Chorus from './chorus'
 import LFO from './lfo'
 import BassBoost from './bassboost'
-import ADSREnvelope from './envelope'
 import HighPassFilter from './hpf'
 import {
   chorusModeToFreq,
   chorusModeToWet,
   sliderToLFOFreq,
   sliderToLFODelay,
-  sliderToHPF,
-  sliderToTime,
-  sliderToDecay,
-  sliderToSustain
+  sliderToHPF
 } from './params'
 
 export default class Junox {
