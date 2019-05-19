@@ -1,12 +1,8 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import AudioRecorder from './vendor/AudioRecorder'
+import AudioRecorder from '../../vendor/AudioRecorder'
 import { saveAs } from 'filesaver.js'
-import { SmallButton } from './Button'
-
-const RedButton = styled(SmallButton)`
-  color: red;
-`
+import { FixedSizeButton } from '../Button'
+import { RedButton } from './elements'
 
 export default function Record({ audioContext, outNode }) {
   const [isRecording, setRecording] = useState(false)
@@ -24,7 +20,7 @@ export default function Record({ audioContext, outNode }) {
   }
 
   if (isRecording) {
-    return <SmallButton onClick={stopRecording}>Stop</SmallButton>
+    return <FixedSizeButton onClick={stopRecording}>Stop</FixedSizeButton>
   }
   return <RedButton onClick={startRecording}>Record</RedButton>
 }
