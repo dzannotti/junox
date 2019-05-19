@@ -20,8 +20,8 @@ class RingBuffer {
 
   getSample(sampleIndex) {
     let localIndex = this.ringBufferIndex(this.index - sampleIndex)
-    const fractional = localIndex - Math.abs(localIndex)
-    const indexA = Math.floor(localIndex)
+    const indexA = Math.trunc(localIndex)
+    const fractional = localIndex - indexA
     const indexB = this.ringBufferIndex(indexA + 1)
     return (
       this.buffer[indexA] * fractional + this.buffer[indexB] * (1 - fractional)
@@ -42,6 +42,7 @@ export default class Chorus {
     this.delay = delay * sampleRate
     this.minDelaySamples = this.sampleRate * 0.00369
     this.wet = wet
+    this.dry = 1 - wet
   }
 
   reset() {
@@ -52,8 +53,8 @@ export default class Chorus {
     const lfo = this.lfo.render() / 2 + 0.5
     const leftMod = lfo
     const rightMod = 1 - lfo
-    const leftDelayTime = this.delay + leftMod * this.minDelaySamples
-    const rightDelayTime = this.delay + rightMod * this.minDelaySamples
+    const leftDelayTime = this.delay * leftMod + this.minDelaySamples
+    const rightDelayTime = this.delay * rightMod + this.minDelaySamples
     const lYN = this.ringBuffer.getSample(leftDelayTime)
     const rYN = this.ringBuffer.getSample(rightDelayTime)
     this.ringBuffer.addSample(input)

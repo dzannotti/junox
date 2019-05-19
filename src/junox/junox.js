@@ -11,6 +11,7 @@ import {
   sliderToLFODelay,
   sliderToHPF
 } from './params'
+import { clampVolume } from './utils'
 
 export default class Junox {
   constructor({ patch, sampleRate, polyphony }) {
@@ -28,7 +29,7 @@ export default class Junox {
     this.bassBoost = new BassBoost({ frequency: 75 })
     this.hpf = new HighPassFilter({
       cutoff: sliderToHPF(patch.hpf),
-      resonance: 0.707,
+      resonance: 1,
       sampleRate
     })
     this.update()
@@ -62,10 +63,10 @@ export default class Junox {
   }
 
   tick() {
-    const lfo = this.lfo.render()
     const canLFO = this.patch.lfo.autoTrigger || this.lfoTriggered
+    const lfo = canLFO ? this.lfo.render() : 0
     for (let i = 0; i < this.voices.length; i++) {
-      this.voices[i].tick(canLFO ? lfo : 0)
+      this.voices[i].tick(lfo)
     }
   }
 
@@ -88,9 +89,10 @@ export default class Junox {
       for (let j = 0; j < this.voices.length; j++) {
         monoOut += this.voices[j].render()
       }
+
       if (this.patch.hpf < 0.3) {
         const bassBoost = this.bassBoost.render(monoOut, 0.3)
-        monoOut = Math.min(Math.max(-1, bassBoost + monoOut), 1)
+        monoOut = clampVolume(bassBoost + monoOut)
       } else {
         monoOut = this.hpf.render(monoOut)
       }
