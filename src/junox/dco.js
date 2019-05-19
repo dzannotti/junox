@@ -7,7 +7,7 @@ export default class Oscillator {
     sub,
     subAmount,
     noise,
-    rate,
+    range,
     pwm = 0.5
   }) {
     this.sampleRate = sampleRate
@@ -19,7 +19,7 @@ export default class Oscillator {
     this.noise = noise
     this.pulse = pulse
     this.saw = saw
-    this.frequency = frequency * rate
+    this.frequency = frequency * range
     this.tick(0, this.pwm)
   }
 

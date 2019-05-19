@@ -45,6 +45,14 @@ export default class SynthWorkletNode extends AudioWorkletNode {
     })
   }
 
+  lfoTrigger() {
+    this.port.postMessage({ action: 'lfo-trigger-on' })
+  }
+
+  lfoRelease() {
+    this.port.postMessage({ action: 'lfo-trigger-off' })
+  }
+
   panic() {
     this.port.postMessage({
       action: 'panic'

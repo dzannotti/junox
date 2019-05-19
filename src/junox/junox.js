@@ -46,7 +46,7 @@ export default class Junox {
       velocity,
       sampleRate: this.sampleRate
     })
-    if (!this.voices.length) {
+    if (!this.voices.length && this.patch.lfo.autoTrigger) {
       this.lfo.trigger()
     }
     if (this.voices.length < this.maxVoices) {
@@ -67,9 +67,19 @@ export default class Junox {
 
   tick() {
     const lfo = this.lfo.render()
+    const canLFO = this.patch.lfo.autoTrigger || this.lfoTriggered
     for (let i = 0; i < this.voices.length; i++) {
-      this.voices[i].tick(lfo)
+      this.voices[i].tick(canLFO ? lfo : 0)
     }
+  }
+
+  lfoTrigger() {
+    this.lfo.trigger()
+    this.lfoTriggered = true
+  }
+
+  lfoRelease() {
+    this.lfoTriggered = false
   }
 
   render(outL, outR) {

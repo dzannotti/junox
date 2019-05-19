@@ -2,7 +2,7 @@ import Junox from './junox'
 import patches from './junox/patches'
 
 class JunoxWorker extends AudioWorkletProcessor {
-  constructor () {
+  constructor() {
     super()
     this.synth = new Junox({
       patch: patches[0],
@@ -14,7 +14,7 @@ class JunoxWorker extends AudioWorkletProcessor {
     this.port.onmessage = this.handleMessage.bind(this)
   }
 
-  handleMessage (event) {
+  handleMessage(event) {
     if (event.data.action === 'note-on') {
       this.synth.noteOn(event.data.note, event.data.velocity)
     } else if (event.data.action === 'note-off') {
@@ -24,6 +24,10 @@ class JunoxWorker extends AudioWorkletProcessor {
     } else if (event.data.action === 'set-patch') {
       this.synth.patch = patches[event.data.index]
       this.synth.update()
+    } else if (event.data.action === 'lfo-trigger-on') {
+      this.synth.lfoTrigger()
+    } else if (event.data.action === 'lfo-trigger-off') {
+      this.synth.lfoRelease()
     } else if (event.data.action === 'panic') {
       this.synth.panic()
     } else {
@@ -31,7 +35,7 @@ class JunoxWorker extends AudioWorkletProcessor {
     }
   }
 
-  process (inputs, outputs) {
+  process(inputs, outputs) {
     const output = outputs[0]
     if (output[0].length > this.bufferL.length) {
       this.bufferL = new Float32Array(output[0].length)

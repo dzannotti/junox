@@ -26,7 +26,7 @@ export default class Voice {
       pulse: patch.dco.pulse,
       sub: patch.dco.sub,
       subAmount: patch.dco.subAmount,
-      rate: patch.dco.rate,
+      range: patch.dco.range,
       noise: patch.dco.noise,
       pwm: paramToPWM(patch.dco.pwm)
     })

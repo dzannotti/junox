@@ -154,6 +154,9 @@ export default function App({ synth, audioContext }) {
     alert('Copied to clipboard')
   }
 
+  const lfoTrigger = () => synth.lfoTrigger()
+  const lfoRelease = () => synth.lfoRelease()
+
   return (
     <Container>
       <TopRow>
@@ -200,23 +203,28 @@ export default function App({ synth, audioContext }) {
               toggle={setSynthValue('lfo.autoTrigger', false)}
             />
           </Column>
-          <ButtonLED label="TRG" hideLed />
+          <ButtonLED
+            label="TRG"
+            hideLed
+            onMouseDown={lfoTrigger}
+            onMouseUp={lfoRelease}
+          />
         </Section>
         <Section title="DCO">
           <ButtonLED
             label="4'"
-            active={patch.dco.range > 1}
-            toggle={setSynthValue('patch.dco.range', 2)}
+            active={patch.dco.range === 2}
+            toggle={setSynthValue('dco.range', 2)}
           />
           <ButtonLED
             label="8'"
             active={patch.dco.range === 1}
-            toggle={setSynthValue('patch.dco.range', 1)}
+            toggle={setSynthValue('dco.range', 1)}
           />
           <ButtonLED
             label="16'"
-            active={patch.dco.range < 1}
-            toggle={setSynthValue('patch.dco.range', 0.5)}
+            active={patch.dco.range === 0.5}
+            toggle={setSynthValue('dco.range', 0.5)}
           />
           <AfterButtonLED />
           <Slider

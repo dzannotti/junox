@@ -51,6 +51,8 @@ ButtonLED.propTypes = {
   label: PropTypes.string.isRequired,
   spaced: PropTypes.bool,
   toggle: PropTypes.func,
+  onMouseDown: PropTypes.func,
+  onMouseUp: PropTypes.func,
   hideLed: PropTypes.bool,
   small: PropTypes.bool
 }
@@ -63,18 +65,22 @@ export default function ButtonLED({
   hideLed,
   small,
   color,
-  ...props
+  onMouseDown,
+  onMouseUp
 }) {
+  const onClick =
+    (!onMouseDown || !onMouseUp) && toggle ? () => toggle(!active) : undefined
   return (
     <Wrapper>
       <Label>{label}</Label>
       {spaced && <Spacer />}
       {!hideLed && <MarginatedLED active={active} />}
       <EmptyButton
-        onClick={() => toggle && toggle(!active)}
+        onClick={onClick}
         small={small}
         color={color}
-        {...props}
+        onMouseDown={onMouseDown}
+        onMouseUp={onMouseUp}
       />
       {spaced && <Spacer />}
     </Wrapper>
