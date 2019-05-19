@@ -81,6 +81,8 @@ export default function ButtonLED({
         color={color}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
+        onTouchStart={onMouseDown}
+        onTouchEnd={onMouseUp}
       />
       {spaced && <Spacer />}
     </Wrapper>

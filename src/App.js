@@ -11,6 +11,7 @@ import Slider from './Slider'
 import ButtonLED from './ButtonLED'
 import Button, { SmallButton } from './Button'
 import Record from './Record'
+import CpuUsage from './CpuUsage'
 import Visualizer from './Visualizer'
 import { set } from 'lodash'
 import patches from './junox/patches'
@@ -59,6 +60,7 @@ const BlackRow = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 `
 
 const Logo = styled.div`
@@ -177,6 +179,7 @@ export default function App({ synth, audioContext }) {
             <AfterButtonLED />
             <Record audioContext={audioContext} outNode={synth} />
           </SimpleRow>
+          <CpuUsage synth={synth} />
         </LogoContainer>
       </TopRow>
       <Row first centered>

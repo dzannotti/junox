@@ -1,11 +1,17 @@
 export default class SynthWorkletNode extends AudioWorkletNode {
   constructor(context, options) {
     super(context, 'junox-synth', options)
+    this.sampleTimes = []
     this.port.onmessage = this.handleMessage.bind(this)
   }
 
   handleMessage(event) {
-    console.log('[Node:handleMessage] ' + event.data.message)
+    if (event.data.type === 'start-sample-time') {
+      this.startTime = performance.now()
+    }
+    if (event.data.type === 'stop-sample-time') {
+      this.sampleTimes.push(performance.now() - this.startTime)
+    }
   }
 
   sendMessage(action, payload) {
@@ -57,5 +63,15 @@ export default class SynthWorkletNode extends AudioWorkletNode {
     this.port.postMessage({
       action: 'panic'
     })
+  }
+
+  sampleTime() {
+    let average = 0
+    for (let i = 0; i < this.sampleTimes.length; i++) {
+      average += this.sampleTimes[i]
+    }
+    average = average / this.sampleTimes.length
+    this.sampleTimes = []
+    return average
   }
 }
