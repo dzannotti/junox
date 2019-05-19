@@ -1,3 +1,7 @@
+import FTrig from '../vendor/FTrig'
+
+export const fastTrig = new FTrig(FTrig.HIGH)
+
 export const SQRT2 = Math.sqrt(2.0)
 export const TWOPI = Math.PI * 2.0
 
@@ -21,4 +25,13 @@ export function clamp(val) {
     return 0
   }
   return val
+}
+
+export function fastTanh(x) {
+  if (x < -3) {
+    return -1
+  } else if (x > 3) {
+    return 1
+  }
+  return (x * (27 + x * x)) / (27 + 9 * x * x)
 }

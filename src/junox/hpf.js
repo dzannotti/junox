@@ -1,4 +1,4 @@
-import { SQRT2, TWOPI } from './utils'
+import { SQRT2, TWOPI, fastTrig } from './utils'
 
 export default class Filter {
   // resonance should be between 1 and 5
@@ -12,7 +12,7 @@ export default class Filter {
   }
 
   calculateCoeffients() {
-    this.z = Math.cos((TWOPI * this.cutoff) / this.sampleRate)
+    this.z = fastTrig.cos((TWOPI * this.cutoff) / this.sampleRate)
     this.c = 2 - 2 * this.z
     const z1 = this.z - 1
     const resonance = this.resonance * z1

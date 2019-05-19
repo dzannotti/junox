@@ -1,6 +1,6 @@
 // Diode Ladder Filter based on Will Pirkle's C++ Code
 import OnePoleFilter from './onepolefilter'
-import { TWOPI } from './utils'
+import { TWOPI, fastTanh } from './utils'
 
 export default class DiodeLadder {
   constructor({ cutoff, resonance, sampleRate }) {
@@ -104,7 +104,7 @@ export default class DiodeLadder {
     let U = (xn - this.K * sigma) / (1 + this.K * this.gamma)
 
     // ---NLP
-    U = Math.tanh(U)
+    U = fastTanh(U)
 
     // --- cascade of four filters
     return this.lpf4.render(
