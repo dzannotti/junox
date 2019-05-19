@@ -46,7 +46,8 @@ const Row = styled(SimpleRow)`
   flex-direction: row;
   width: 1000px;
   flex: 0 0 auto;
-  background-color: #313036;
+  background-color: #2b2c2e;
+  padding-bottom: ${props => (props.first ? '3px' : '0')};
 `
 
 const BlackRow = styled.div`
@@ -175,7 +176,7 @@ export default function App({ synth, audioContext }) {
           </SimpleRow>
         </LogoContainer>
       </TopRow>
-      <Row>
+      <Row first>
         <Section title="LFO">
           <Slider
             label="FREQ"
@@ -207,20 +208,29 @@ export default function App({ synth, audioContext }) {
           <ButtonLED
             label="PULSE"
             spaced
+            color="one"
             active={patch.dco.pulse}
             toggle={setSynthValue('dco.pulse')}
           />
           <ButtonLED
             label="SAW"
             spaced
+            color="two"
             active={patch.dco.saw}
             toggle={setSynthValue('dco.saw')}
+          />
+          <ButtonLED
+            label="SUB"
+            spaced
+            color="three"
+            active={patch.dco.sub}
+            toggle={setSynthValue('dco.sub')}
           />
           <AfterButtonLED />
           <Slider
             label="SUB"
-            value={patch.dco.sub}
-            onChange={setSynthValue('dco.sub')}
+            value={patch.dco.subAmount}
+            onChange={setSynthValue('dco.subAmount')}
           />
           <Slider
             label="NOISE"
@@ -228,30 +238,6 @@ export default function App({ synth, audioContext }) {
             onChange={setSynthValue('dco.noise')}
           />
         </Section>
-        <Section title="ENV">
-          <Slider
-            label="A"
-            value={patch.env.attack}
-            onChange={setSynthValue('env.attack')}
-          />
-          <Slider
-            label="D"
-            value={patch.env.decay}
-            onChange={setSynthValue('env.decay')}
-          />
-          <Slider
-            label="S"
-            value={patch.env.sustain}
-            onChange={setSynthValue('env.sustain')}
-          />
-          <Slider
-            label="R"
-            value={patch.env.release}
-            onChange={setSynthValue('env.release')}
-          />
-        </Section>
-      </Row>
-      <Row centered>
         <Section title="HPF">
           <Slider
             label="FREQ"
@@ -260,7 +246,9 @@ export default function App({ synth, audioContext }) {
             onChange={setSynthValue('hpf')}
           />
         </Section>
-        <Section title="VCFVCF">
+      </Row>
+      <Row centered>
+        <Section title="VCF">
           <Slider
             label="FREQ"
             value={patch.vcf.frequency}
@@ -317,19 +305,44 @@ export default function App({ synth, audioContext }) {
             onChange={setSynthValue('vca')}
           />
         </Section>
+        <Section title="ENV">
+          <Slider
+            label="A"
+            value={patch.env.attack}
+            onChange={setSynthValue('env.attack')}
+          />
+          <Slider
+            label="D"
+            value={patch.env.decay}
+            onChange={setSynthValue('env.decay')}
+          />
+          <Slider
+            label="S"
+            value={patch.env.sustain}
+            onChange={setSynthValue('env.sustain')}
+          />
+          <Slider
+            label="R"
+            value={patch.env.release}
+            onChange={setSynthValue('env.release')}
+          />
+        </Section>
         <Section title="Chorus">
           <ButtonLED
             label="Off"
+            color="one"
             active={patch.chorus === 0}
             toggle={setSynthValue('chorus', 0)}
           />
           <ButtonLED
             label="I"
+            color="two"
             active={patch.chorus === 1}
             toggle={setSynthValue('chorus', 1)}
           />
           <ButtonLED
             label="II"
+            color="three"
             active={patch.chorus === 2}
             toggle={setSynthValue('chorus', 2)}
           />

@@ -36,10 +36,11 @@ function toJSON(results) {
       dco: {
         saw: toBoolean(i, 'DCO Saw'),
         pulse: toBoolean(i, 'DCO Pulse'),
-        sub: toSlider(i, 'DCO Sub'),
+        sub: toBoolean(i, 'DCO Sub Enabled'),
+        subAmount: toSlider(i, 'DCO Sub'),
         noise: toSlider(i, 'DCO Noise'),
         pwm: toSlider(i, 'DCO PWM'),
-        lfoMod: result['DCO Lfo Mod'] === 'L',
+        pwmMod: result['DCO Lfo Mod'].toLowerCase(),
         lfo: toSlider(i, 'DCO Lfo')
       },
       hpf: toInteger(i, 'HPF') / 3,

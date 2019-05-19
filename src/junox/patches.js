@@ -7,10 +7,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -34,10 +35,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.6,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -61,10 +63,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.7,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -88,10 +91,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -115,10 +119,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.8,
+      sub: true,
+      subAmount: 0.8,
       noise: 0,
       pwm: 0.5,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -142,10 +147,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.8,
+      sub: true,
+      subAmount: 0.8,
       noise: 0,
       pwm: 0.5,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -169,10 +175,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 0,
@@ -196,10 +203,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 1,
-      lfoMod: false,
+      pwmMod: 'e',
       lfo: 0
     },
     hpf: 0,
@@ -223,10 +231,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.4
     },
     hpf: 0,
@@ -250,10 +259,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.4,
+      sub: true,
+      subAmount: 0.4,
       noise: 0,
       pwm: 0.4,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -277,10 +287,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'e',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -304,10 +315,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -331,10 +343,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.7,
+      sub: true,
+      subAmount: 0.7,
       noise: 0,
       pwm: 0.3,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -358,10 +371,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.8,
+      sub: true,
+      subAmount: 0.8,
       noise: 0,
       pwm: 0.2,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -385,10 +399,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.6666666666666666,
@@ -412,10 +427,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -439,10 +455,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0.3,
+      sub: true,
+      subAmount: 0.3,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -466,10 +483,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0.3,
+      sub: false,
+      subAmount: 0.3,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -493,10 +511,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.9,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.4
     },
     hpf: 0,
@@ -520,10 +539,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0.8,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -547,10 +567,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.3,
+      sub: false,
+      subAmount: 0.3,
       noise: 0,
       pwm: 0.3,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -574,10 +595,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.3,
+      sub: true,
+      subAmount: 0.3,
       noise: 0,
       pwm: 0.2,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -601,10 +623,11 @@ export default [
     dco: {
       saw: false,
       pulse: false,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -628,10 +651,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -655,10 +679,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0.2
     },
     hpf: 0.3333333333333333,
@@ -682,10 +707,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 0,
@@ -709,10 +735,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -736,10 +763,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 0,
@@ -763,10 +791,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0.1,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -790,10 +819,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 0.3333333333333333,
@@ -817,10 +847,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 1,
@@ -844,10 +875,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.2
     },
     hpf: 1,
@@ -871,10 +903,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.3
     },
     hpf: 0.3333333333333333,
@@ -898,10 +931,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.3
     },
     hpf: 0,
@@ -925,10 +959,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0.8,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -952,10 +987,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0,
+      sub: true,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.4
     },
     hpf: 0,
@@ -979,10 +1015,11 @@ export default [
     dco: {
       saw: false,
       pulse: false,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0.3333333333333333,
@@ -1006,10 +1043,11 @@ export default [
     dco: {
       saw: false,
       pulse: false,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -1033,10 +1071,11 @@ export default [
     dco: {
       saw: false,
       pulse: false,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.2
     },
     hpf: 0,
@@ -1060,10 +1099,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.5,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -1087,10 +1127,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 0.7,
+      sub: true,
+      subAmount: 0.7,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -1114,10 +1155,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0.7,
+      sub: true,
+      subAmount: 0.7,
       noise: 0,
       pwm: 1,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.1
     },
     hpf: 0,
@@ -1141,10 +1183,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0.6,
+      sub: true,
+      subAmount: 0.6,
       noise: 0,
       pwm: 0.3,
-      lfoMod: true,
+      pwmMod: 'l',
       lfo: 0
     },
     hpf: 0,
@@ -1168,10 +1211,11 @@ export default [
     dco: {
       saw: true,
       pulse: false,
-      sub: 0,
+      sub: false,
+      subAmount: 0,
       noise: 0,
       pwm: 0,
-      lfoMod: false,
+      pwmMod: 'e',
       lfo: 0.2
     },
     hpf: 0,
@@ -1195,10 +1239,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,
@@ -1222,10 +1267,11 @@ export default [
     dco: {
       saw: false,
       pulse: true,
-      sub: 1,
+      sub: true,
+      subAmount: 1,
       noise: 0,
       pwm: 0.4,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0.2
     },
     hpf: 0,
@@ -1249,10 +1295,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 1,
+      sub: false,
+      subAmount: 1,
       noise: 0,
       pwm: 0.8,
-      lfoMod: false,
+      pwmMod: 'e',
       lfo: 0.2
     },
     hpf: 0,
@@ -1276,10 +1323,11 @@ export default [
     dco: {
       saw: true,
       pulse: true,
-      sub: 0.8,
+      sub: false,
+      subAmount: 0.8,
       noise: 0,
       pwm: 0.6,
-      lfoMod: false,
+      pwmMod: 'm',
       lfo: 0
     },
     hpf: 0,

@@ -6,7 +6,6 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 3px;
-  margin-bottom: 3px;
   flex-grow: 0;
   flex-shrink: 0;
   height: 220px;
@@ -22,10 +21,10 @@ const Row = styled.div`
 const Title = styled.div`
   width: calc(100% - 2px);
   margin-left: 1px;
-  background-color: #a00601;
+  background-color: #cc2d27;
   color: white;
   text-transform: uppercase;
-  height: 1.3rem;
+  height: 1.7rem;
   display: flex;
   align-items: center;
   font-weight: 600;
@@ -33,7 +32,7 @@ const Title = styled.div`
 `
 const BottomBlock = styled.div`
   width: calc(100% - 2px);
-  background-color: #a00601;
+  background-color: #cc2d27;
   color: white;
   height: 0.5rem;
   display: flex;
@@ -59,9 +58,9 @@ Section.propTypes = {
   title: PropTypes.string.isRequired
 }
 
-export default function Section({ title, children }) {
+export default function Section({ title, children, first }) {
   return (
-    <Column>
+    <Column first={first}>
       <Title>{title}</Title>
       <Row>
         <LineStart />
