@@ -176,7 +176,7 @@ export default function App({ synth, audioContext }) {
           </SimpleRow>
         </LogoContainer>
       </TopRow>
-      <Row first>
+      <Row first centered>
         <Section title="LFO">
           <Slider
             label="FREQ"
@@ -188,8 +188,37 @@ export default function App({ synth, audioContext }) {
             value={patch.lfo.delay}
             onChange={setSynthValue('lfo.delay')}
           />
+          <Column>
+            <ButtonLED
+              label="Auto"
+              active={patch.lfo.autoTrigger}
+              toggle={setSynthValue('lfo.autoTrigger', true)}
+            />
+            <ButtonLED
+              label="Man"
+              active={!patch.lfo.autoTrigger}
+              toggle={setSynthValue('lfo.autoTrigger', false)}
+            />
+          </Column>
+          <ButtonLED label="TRG" hideLed />
         </Section>
         <Section title="DCO">
+          <ButtonLED
+            label="4'"
+            active={patch.dco.range > 1}
+            toggle={setSynthValue('patch.dco.range', 2)}
+          />
+          <ButtonLED
+            label="8'"
+            active={patch.dco.range === 1}
+            toggle={setSynthValue('patch.dco.range', 1)}
+          />
+          <ButtonLED
+            label="16'"
+            active={patch.dco.range < 1}
+            toggle={setSynthValue('patch.dco.range', 0.5)}
+          />
+          <AfterButtonLED />
           <Slider
             label="LFO"
             value={patch.dco.lfo}
@@ -200,11 +229,18 @@ export default function App({ synth, audioContext }) {
             value={patch.dco.pwm}
             onChange={setSynthValue('dco.pwm')}
           />
-          <ButtonLED
-            label="LFO MOD"
-            active={patch.dco.lfoMod}
-            toggle={setSynthValue('dco.lfoMod')}
-          />
+          <Column>
+            <ButtonLED
+              label="LFO"
+              active={patch.dco.lfoMod}
+              toggle={setSynthValue('dco.lfoMod', true)}
+            />
+            <ButtonLED
+              label="Man"
+              active={!patch.dco.lfoMod}
+              toggle={setSynthValue('dco.lfoMod', false)}
+            />
+          </Column>
           <ButtonLED
             label="PULSE"
             spaced

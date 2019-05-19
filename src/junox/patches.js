@@ -1,10 +1,11 @@
 export default [
   {
     name: 'Strings I',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -29,10 +30,11 @@ export default [
   },
   {
     name: 'Strings II',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.4, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.4, delay: 0 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -57,10 +59,11 @@ export default [
   },
   {
     name: 'Strings III',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0.8 },
+    lfo: { autoTrigger: false, frequency: 0.3, delay: 0.8 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: true,
@@ -85,10 +88,11 @@ export default [
   },
   {
     name: 'Organ I',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.2, delay: 0.8 },
+    lfo: { autoTrigger: true, frequency: 0.2, delay: 0.8 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -113,10 +117,11 @@ export default [
   },
   {
     name: 'Organ II',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.5, delay: 0.4 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.4 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -141,10 +146,11 @@ export default [
   },
   {
     name: 'Organ III',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.5, delay: 0.4 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.4 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -169,10 +175,11 @@ export default [
   },
   {
     name: 'Brass',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -197,10 +204,11 @@ export default [
   },
   {
     name: 'Phase Brass',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.6, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -225,10 +233,11 @@ export default [
   },
   {
     name: 'Piano I',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.3 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.3 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -253,10 +262,11 @@ export default [
   },
   {
     name: 'Piano II',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.4, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.4, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -281,10 +291,11 @@ export default [
   },
   {
     name: 'Celesta',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.3, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -309,10 +320,11 @@ export default [
   },
   {
     name: 'Mellow Piano',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0 },
+    lfo: { autoTrigger: false, frequency: 0.5, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -337,10 +349,11 @@ export default [
   },
   {
     name: 'Harpsichord I',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.4 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.4 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -365,10 +378,11 @@ export default [
   },
   {
     name: 'Harpsicord II',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -395,8 +409,9 @@ export default [
     name: 'Guitar',
     vca: 0.75,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -421,10 +436,11 @@ export default [
   },
   {
     name: 'Synthetiser Harp',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0.8 },
+    lfo: { autoTrigger: false, frequency: 0.3, delay: 0.8 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -449,10 +465,11 @@ export default [
   },
   {
     name: 'Bass I',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: true,
@@ -477,10 +494,11 @@ export default [
   },
   {
     name: 'Bass II',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -505,10 +523,11 @@ export default [
   },
   {
     name: 'Clavichord I',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -535,8 +554,9 @@ export default [
     name: 'Clavichord II',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.1, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.1, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -561,10 +581,11 @@ export default [
   },
   {
     name: 'Pizzicato Sound I',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -589,10 +610,11 @@ export default [
   },
   {
     name: 'Pizzicato Sound II',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -619,8 +641,9 @@ export default [
     name: 'Xylophone',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: false,
       sub: true,
@@ -647,8 +670,9 @@ export default [
     name: 'Glockenspiel',
     vca: 0.75,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -673,10 +697,11 @@ export default [
   },
   {
     name: 'Violin',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -701,10 +726,11 @@ export default [
   },
   {
     name: 'Trumpet',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.2, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.2, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -729,10 +755,11 @@ export default [
   },
   {
     name: 'Horn',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.2, delay: 0.7 },
+    lfo: { autoTrigger: true, frequency: 0.2, delay: 0.7 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -759,8 +786,9 @@ export default [
     name: 'Tube',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.2, delay: 0.7 },
+    lfo: { autoTrigger: true, frequency: 0.2, delay: 0.7 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -787,8 +815,9 @@ export default [
     name: 'Flute',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.5 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.5 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -813,10 +842,11 @@ export default [
   },
   {
     name: 'Clarinet',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -843,8 +873,9 @@ export default [
     name: 'Oboe',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -871,8 +902,9 @@ export default [
     name: 'English Horn',
     vca: 0.85,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0.7 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.7 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: false,
@@ -897,10 +929,11 @@ export default [
   },
   {
     name: 'Funny Cat',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -925,10 +958,11 @@ export default [
   },
   {
     name: 'Wah Brass',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -953,10 +987,11 @@ export default [
   },
   {
     name: 'Phase Combination',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -981,10 +1016,11 @@ export default [
   },
   {
     name: 'Reed I',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -1009,10 +1045,11 @@ export default [
   },
   {
     name: 'Popcorn',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: false,
       sub: true,
@@ -1037,10 +1074,11 @@ export default [
   },
   {
     name: 'Reed II',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0.8 },
+    lfo: { autoTrigger: false, frequency: 0.3, delay: 0.8 },
     dco: {
+      range: 1,
       saw: false,
       pulse: false,
       sub: true,
@@ -1065,10 +1103,11 @@ export default [
   },
   {
     name: 'Reed III',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.2 },
+    lfo: { autoTrigger: false, frequency: 0.6, delay: 0.2 },
     dco: {
+      range: 1,
       saw: false,
       pulse: false,
       sub: true,
@@ -1093,10 +1132,11 @@ export default [
   },
   {
     name: 'PWM Chorus',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0 },
+    lfo: { autoTrigger: false, frequency: 0.3, delay: 0 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -1121,10 +1161,11 @@ export default [
   },
   {
     name: 'Synthetiser Organ',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.4, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.4, delay: 0.6 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -1149,10 +1190,11 @@ export default [
   },
   {
     name: 'Effect Sound',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.4, delay: 0.6 },
+    lfo: { autoTrigger: true, frequency: 0.4, delay: 0.6 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: true,
@@ -1177,10 +1219,11 @@ export default [
   },
   {
     name: 'Effect Sound II',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.5, delay: 0.9 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0.9 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: true,
@@ -1205,10 +1248,11 @@ export default [
   },
   {
     name: 'Space Harm',
-    vca: 0.44999999999999996,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.5, delay: 0 },
+    lfo: { autoTrigger: true, frequency: 0.5, delay: 0 },
     dco: {
+      range: 1,
       saw: true,
       pulse: false,
       sub: false,
@@ -1233,10 +1277,11 @@ export default [
   },
   {
     name: 'Funk',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.3, delay: 0.2 },
+    lfo: { autoTrigger: true, frequency: 0.3, delay: 0.2 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: true,
@@ -1261,10 +1306,11 @@ export default [
   },
   {
     name: 'Space Sound I',
-    vca: 0.55,
+    vca: 0.7,
     vcaType: 'gate',
-    lfo: { frequency: 0.6, delay: 0.7 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0.7 },
     dco: {
+      range: 1,
       saw: false,
       pulse: true,
       sub: true,
@@ -1289,10 +1335,11 @@ export default [
   },
   {
     name: 'Mysterious Invention',
-    vca: 0.35,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.6, delay: 0.8 },
+    lfo: { autoTrigger: true, frequency: 0.6, delay: 0.8 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,
@@ -1317,10 +1364,11 @@ export default [
   },
   {
     name: 'Space Sound II',
-    vca: 0.6499999999999999,
+    vca: 0.7,
     vcaType: 'env',
-    lfo: { frequency: 0.3, delay: 0.3 },
+    lfo: { autoTrigger: true, frequency: 0.3, delay: 0.3 },
     dco: {
+      range: 1,
       saw: true,
       pulse: true,
       sub: false,

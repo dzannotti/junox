@@ -9,12 +9,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 0.75rem;
+  margin-left: 0.5rem;
   height: 100%;
 `
 const Label = styled.div`
   font-weight: 600;
-  color: white;
+  color: #cfcfcf;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
   height: 1.25rem;
@@ -37,8 +37,8 @@ function buttonColor(color) {
   return '#323232'
 }
 const EmptyButton = styled(Button)`
-  height: 2rem;
-  width: ${props => (props.small ? '1rem' : '2.4rem')};
+  height: ${props => (props.small ? '1.5rem' : '2rem')};
+  width: ${props => (props.small ? '1.5rem' : '2.4rem')};
   background-color: ${props => buttonColor(props.color)};
 `
 
@@ -50,7 +50,8 @@ ButtonLED.propTypes = {
   active: PropTypes.bool,
   label: PropTypes.string.isRequired,
   spaced: PropTypes.bool,
-  toggle: PropTypes.func.isRequired,
+  toggle: PropTypes.func,
+  hideLed: PropTypes.bool,
   small: PropTypes.bool
 }
 
@@ -59,18 +60,21 @@ export default function ButtonLED({
   label,
   spaced,
   toggle,
+  hideLed,
   small,
-  color
+  color,
+  ...props
 }) {
   return (
     <Wrapper>
       <Label>{label}</Label>
       {spaced && <Spacer />}
-      <MarginatedLED active={active} />
+      {!hideLed && <MarginatedLED active={active} />}
       <EmptyButton
-        onClick={() => toggle(!active)}
+        onClick={() => toggle && toggle(!active)}
         small={small}
         color={color}
+        {...props}
       />
       {spaced && <Spacer />}
     </Wrapper>

@@ -25,6 +25,8 @@ export default class Voice {
       saw: patch.dco.saw,
       pulse: patch.dco.pulse,
       sub: patch.dco.sub,
+      subAmount: patch.dco.subAmount,
+      rate: patch.dco.rate,
       noise: patch.dco.noise,
       pwm: paramToPWM(patch.dco.pwm)
     })

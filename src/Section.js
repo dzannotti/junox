@@ -21,7 +21,7 @@ const Row = styled.div`
 const Title = styled.div`
   width: calc(100% - 2px);
   margin-left: 1px;
-  background-color: #cc2d27;
+  background-color: #a40000;
   color: white;
   text-transform: uppercase;
   height: 1.7rem;
@@ -32,7 +32,7 @@ const Title = styled.div`
 `
 const BottomBlock = styled.div`
   width: calc(100% - 2px);
-  background-color: #cc2d27;
+  background-color: #a40000;
   color: white;
   height: 0.5rem;
   display: flex;
