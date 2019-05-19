@@ -65,8 +65,9 @@ export default class Junox {
   tick() {
     const canLFO = this.patch.lfo.autoTrigger || this.lfoTriggered
     const lfo = canLFO ? this.lfo.render() : 0
+    const positiveLFO = lfo / 2 + 0.5
     for (let i = 0; i < this.voices.length; i++) {
-      this.voices[i].tick(lfo)
+      this.voices[i].tick(lfo, positiveLFO)
     }
   }
 

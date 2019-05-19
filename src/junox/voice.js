@@ -5,11 +5,12 @@ import LowPassFilter from './lpf'
 import DiodeLadder from './diodeladder'
 import {
   paramToPWM,
-  sliderToTime,
+  sliderToAttack,
   sliderToFilterFreqNorm,
   sliderToResonance,
   sliderToSustain,
-  sliderToDecay
+  sliderToDecay,
+  sliderToRelease
 } from './params'
 
 export default class Voice {
@@ -31,17 +32,17 @@ export default class Voice {
       pwm: paramToPWM(patch.dco.pwm)
     })
     this.env = new ADSREnvelope({
-      attack: sliderToTime(patch.env.attack),
+      attack: sliderToAttack(patch.env.attack),
       decay: sliderToDecay(patch.env.decay),
       sustain: sliderToSustain(patch.env.sustain),
-      release: sliderToTime(patch.env.release),
+      release: sliderToRelease(patch.env.release),
       sampleRate
     })
     this.gate = new ADSREnvelope({
-      attack: sliderToTime(0.1),
+      attack: sliderToAttack(0.1),
       decay: sliderToDecay(0.1),
       sustain: sliderToSustain(1),
-      release: sliderToTime(0.1),
+      release: sliderToRelease(0.1),
       sampleRate
     })
     this.moogVCF = new LowPassFilter({
@@ -76,8 +77,7 @@ export default class Voice {
     this.gate.noteOff()
   }
 
-  tick(lfo) {
-    const positiveLFO = lfo / 2 + 0.5
+  tick(lfo, positiveLFO) {
     const C2NoteNumber = 36
     const keyFollowDenominator = 5 * 12
     const vcfDirection = this.patch.vcf.modPositive ? 1 : -1
@@ -94,13 +94,12 @@ export default class Voice {
       this.patch.vcf.keyMod *
       5 *
       ((this.note - C2NoteNumber) / keyFollowDenominator - 0.4)
-    this.moogVCF.cutoff = sliderToFilterFreqNorm(
+    const cutoffNormalized = sliderToFilterFreqNorm(
       vcfCutoffValue,
       this.sampleRate
     )
-    this.diodeLadderVCF.setCutoff(
-      sliderToFilterFreqNorm(vcfCutoffValue, this.sampleRate) * 18000
-    )
+    this.moogVCF.cutoff = cutoffNormalized
+    this.diodeLadderVCF.setCutoff(cutoffNormalized * 18000)
   }
 
   isFinished() {
@@ -108,16 +107,16 @@ export default class Voice {
   }
 
   updatePatch(patch) {
-    // TODO: fix me for real time
+    // TODO: this can be optimised by updating only what changed
     this.dco.saw = patch.dco.saw
     this.dco.pulse = patch.dco.pulse
     this.dco.sub = patch.dco.sub
     this.dco.noise = patch.dco.noise
     this.dco.pwm = paramToPWM(patch.dco.pwm)
-    this.env.attack = sliderToTime(patch.env.attack)
+    this.env.attack = sliderToAttack(patch.env.attack)
     this.env.decay = sliderToDecay(patch.env.decay)
     this.env.sustain = sliderToSustain(patch.env.sustain)
-    this.env.release = sliderToTime(patch.env.release)
+    this.env.release = sliderToRelease(patch.env.release)
     this.moogVCF.resonance = sliderToResonance(patch.vcf.resonance) * 3.99
     this.moogVCF.cutoff = sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4)
     this.diodeLadderVCF.setCutoff(

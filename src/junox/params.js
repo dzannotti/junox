@@ -4,9 +4,10 @@ export function paramToPWM(value) {
   return 0.5 + value * 0.45
 }
 
-const sliderToTimeDenominator = (Math.exp(10 * 0.5) - 1) * 3.25
-export function sliderToTime(val) {
-  return (0.001 + Math.exp(val * 10 * 0.5) - 1) / sliderToTimeDenominator
+const sliderToAttackDenominator = Math.exp(10 * 0.5) - 1
+export function sliderToAttack(val) {
+  const slider = val * 10
+  return 0.001 + ((Math.exp(val * 5) - 1) / sliderToAttackDenominator) * 3.25
 }
 
 const sliderToDecayDenominator = Math.exp(10 * 0.4) - 1
@@ -24,6 +25,17 @@ export function sliderToDecay(val, maxValue = 17.46) {
 export function sliderToSustain(val) {
   const x = 1 // how far we are in the decay phase?
   return val + (1 - val) * Math.exp(-3.5 * x) - Math.exp(-3.5)
+}
+
+export function sliderToRelease(val) {
+  const slider = val * 10
+  return (
+    0.002 +
+    ((Math.exp(slider * 0.4) - 1) / (Math.exp(10 * 0.4) - 1)) *
+      slider *
+      0.1 *
+      17.46
+  )
 }
 
 // 0 => 0.3Hz, 0.5 => 3.5Hz, 1 => 21Hz
@@ -59,7 +71,8 @@ export function sliderToHPF(val) {
 
 export function sliderToFilterFreqNorm(val, sampleRate) {
   const freq = 60.0 * Math.pow(2, val)
-  if (freq > sampleRate) {
+  const nyquist = sampleRate / 2
+  if (freq > nyquist) {
     return 1
   }
   return freq / sampleRate
