@@ -20,7 +20,7 @@ describe('Envelope', () => {
     out.forEach((val, index) => {
       expect(val).toBeLessThanOrEqual(1)
       if (index) {
-        expect(out[index - 1]).toBeLessThan(val)
+        expect(out[index - 1]).toBeLessThanOrEqual(val)
       }
     })
     expect(out[out.length - 1]).toBeCloseTo(1, 1)
@@ -51,7 +51,8 @@ describe('Envelope', () => {
       })
     out.forEach((val, index) => {
       expect(val).toBeLessThanOrEqual(1)
-      expect(val).toBeGreaterThan(sustain)
+      // rounding errors (0.49999 ~= 0.5 => sustain)
+      expect(val).toBeGreaterThanOrEqual(sustain)
       if (index) {
         expect(out[index - 1]).toBeGreaterThan(val)
       }
@@ -95,7 +96,7 @@ describe('Envelope', () => {
       attack,
       decay,
       sustain,
-      release: 0,
+      release,
       sampleRate
     })
     // skip attack phase
