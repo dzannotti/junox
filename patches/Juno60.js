@@ -27,19 +27,22 @@ function toJSON(results) {
     .map((result, i) => ({
       name: result['Name'],
       // this is a bit fudged, unsure what negative values do?
-      vca: Math.abs(toSlider(i, 'VCA Value')) + 0.35,
+      vca: Math.max(0.7, Math.abs(toSlider(i, 'VCA Value')) + 0.35),
       vcaType: result['VCA Dir'] === 'G' ? 'gate' : 'env',
       lfo: {
+        autoTrigger: result['LFO Trigger'] === 'A',
         frequency: toSlider(i, 'LFO Rate'),
         delay: toSlider(i, 'LFO Delay')
       },
       dco: {
+        range: 1,
         saw: toBoolean(i, 'DCO Saw'),
         pulse: toBoolean(i, 'DCO Pulse'),
-        sub: toSlider(i, 'DCO Sub'),
+        sub: toBoolean(i, 'DCO Sub Enabled'),
+        subAmount: toSlider(i, 'DCO Sub'),
         noise: toSlider(i, 'DCO Noise'),
         pwm: toSlider(i, 'DCO PWM'),
-        lfoMod: result['DCO Lfo Mod'] === 'L',
+        pwmMod: result['DCO Lfo Mod'].toLowerCase(),
         lfo: toSlider(i, 'DCO Lfo')
       },
       hpf: toInteger(i, 'HPF') / 3,

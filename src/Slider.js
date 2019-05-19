@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const Container = styled.div`
-  width: 69px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
