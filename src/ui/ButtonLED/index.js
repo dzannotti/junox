@@ -22,7 +22,7 @@ export default function ButtonLED({
   toggle,
   hideLed,
   small,
-  color,
+  variant,
   onMouseDown,
   onMouseUp
 }) {
@@ -36,7 +36,7 @@ export default function ButtonLED({
       <EmptyButton
         onClick={onClick}
         small={small}
-        color={color}
+        variant={variant}
         onMouseDown={onMouseDown}
         onMouseUp={onMouseUp}
         onTouchStart={onMouseDown}

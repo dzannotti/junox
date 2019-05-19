@@ -7,19 +7,19 @@ export default React.memo(function Chorus({ chorus, setValue }) {
     <Section title="Chorus">
       <ButtonLED
         label="Off"
-        color="one"
+        variant="white"
         active={chorus === 0}
         toggle={setValue('chorus', 0)}
       />
       <ButtonLED
         label="I"
-        color="two"
+        variant="yellow"
         active={chorus === 1}
         toggle={setValue('chorus', 1)}
       />
       <ButtonLED
         label="II"
-        color="three"
+        variant="orange"
         active={chorus === 2}
         toggle={setValue('chorus', 2)}
       />
