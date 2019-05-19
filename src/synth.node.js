@@ -67,11 +67,15 @@ export default class SynthWorkletNode extends AudioWorkletNode {
 
   sampleTime() {
     let average = 0
+    let max = 0
     for (let i = 0; i < this.sampleTimes.length; i++) {
+      if (this.sampleTimes[i] > max) {
+        max = this.sampleTimes[i]
+      }
       average += this.sampleTimes[i]
     }
     average = average / this.sampleTimes.length
     this.sampleTimes = []
-    return average
+    return [average, max]
   }
 }

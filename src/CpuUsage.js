@@ -11,7 +11,7 @@ const CPUUsage = styled.div`
 
 export default class CPUUsageDisplay extends React.Component {
   state = {
-    cpuUsage: 33
+    cpuUsage: [0, 0]
   }
 
   componentDidMount() {
@@ -29,6 +29,11 @@ export default class CPUUsageDisplay extends React.Component {
 
   render() {
     const { cpuUsage } = this.state
-    return <CPUUsage>{cpuUsage.toFixed(2)}ms per 128samples</CPUUsage>
+    return (
+      <CPUUsage>
+        {cpuUsage[0].toFixed(2)}ms (max {cpuUsage[1].toFixed(2)}ms) per
+        128samples
+      </CPUUsage>
+    )
   }
 }
