@@ -1,24 +1,22 @@
-import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-const Column = styled.div`
+export const Column = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 3px;
   flex-grow: 0;
   flex-shrink: 0;
-  height: 220px;
+  height: 230px;
 `
 
-const Row = styled.div`
+export const Row = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
   align-items: center;
 `
 
-const Title = styled.div`
+export const Title = styled.div`
   width: calc(100% - 2px);
   margin-left: 1px;
   background-color: #a40000;
@@ -30,7 +28,8 @@ const Title = styled.div`
   font-weight: 600;
   justify-content: center;
 `
-const BottomBlock = styled.div`
+
+export const BottomBlock = styled.div`
   width: calc(100% - 2px);
   background-color: #a40000;
   color: white;
@@ -38,36 +37,18 @@ const BottomBlock = styled.div`
   display: flex;
 `
 
-const Line = styled.div`
+export const Line = styled.div`
   height: 100%;
   width: 1px;
   background-color: white;
 `
 
-const LineStart = styled(Line)`
+export const LineStart = styled(Line)`
   align-self: flex-start;
   margin-right: 10px;
 `
 
-const LineEnd = styled(Line)`
+export const LineEnd = styled(Line)`
   align-self: flex-end;
   margin-left: 10px;
 `
-
-Section.propTypes = {
-  title: PropTypes.string.isRequired
-}
-
-export default function Section({ title, children, first }) {
-  return (
-    <Column first={first}>
-      <Title>{title}</Title>
-      <Row>
-        <LineStart />
-        {children}
-        <LineEnd />
-      </Row>
-      <BottomBlock />
-    </Column>
-  )
-}

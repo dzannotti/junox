@@ -1,9 +1,7 @@
 import React from 'react'
-import { Range, Direction } from 'react-range'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 
-const Container = styled.div`
+export const Container = styled.div`
   width: 60px;
   display: flex;
   justify-content: center;
@@ -63,15 +61,19 @@ const FaderMark = styled.div`
   margin-bottom: 3px;
 `
 
-function SliderThumb(props) {
+export const SliderThumb = React.memo(function SliderThumb(props) {
   return (
     <ThumbContainer {...props}>
       <ThumbMarker />
     </ThumbContainer>
   )
-}
+})
 
-function SliderTrackRange({ props, label, children }) {
+export const SliderTrackRange = React.memo(function SliderTrackRange({
+  props,
+  label,
+  children
+}) {
   const faders = (
     <FaderMarks>
       <FaderMark bold />
@@ -104,7 +106,7 @@ function SliderTrackRange({ props, label, children }) {
       </SliderTrackContainer>
     </SliderTrackWrapper>
   )
-}
+})
 
 const SliderTrackContainer = styled.div`
   height: 140px;
@@ -118,33 +120,3 @@ const SliderTrack = styled.div`
   background-color: #000000;
   border-radius: 2px;
 `
-
-Slider.propTypes = {
-  label: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
-  step: PropTypes.number
-}
-
-export default function Slider({ label, value, onChange, step }) {
-  const resolution = 127
-  const setValue = values => onChange(parseFloat(values[0]) / resolution)
-  return (
-    <Container>
-      <Range
-        values={[Math.round(value * 127)]}
-        onChange={setValue}
-        min={0}
-        max={resolution}
-        step={step * resolution || 1}
-        direction={Direction.Up}
-        renderTrack={({ props, children }) => (
-          <SliderTrackRange props={props} label={label}>
-            {children}
-          </SliderTrackRange>
-        )}
-        renderThumb={({ props }) => <SliderThumb {...props} />}
-      />
-    </Container>
-  )
-}

@@ -64,7 +64,7 @@ export default class Visualizer extends React.Component {
       )
     }
     this.ctx.stroke()
-    requestAnimationFrame(this.paint)
+    setTimeout(() => requestAnimationFrame(this.paint), 25)
   }
 
   componentDidMount() {

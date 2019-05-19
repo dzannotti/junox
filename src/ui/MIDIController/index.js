@@ -10,21 +10,21 @@ export default class MidiController extends React.Component {
     noteOff: PropTypes.func.isRequired
   }
 
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.midiStarted = this.midiStarted.bind(this)
     this.midiSystemError = this.midiSystemError.bind(this)
     this.midiMessageReceived = this.midiMessageReceived.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     if (navigator.requestMIDIAccess) {
       navigator.requestMIDIAccess().then(this.midiStarted, this.midiSystemError)
     }
   }
 
   // TODO: Fix this with a midi dropdown selector
-  midiStarted (midiAccess) {
+  midiStarted(midiAccess) {
     let midiIn = null
     let inputs = midiAccess.inputs.values()
     for (
@@ -49,12 +49,12 @@ export default class MidiController extends React.Component {
     }
   }
 
-  midiSystemError (err) {
+  midiSystemError(err) {
     // TODO: surface this one better?
     console.log('MIDI not initialized - error encountered:' + err.code)
   }
 
-  midiMessageReceived (event) {
+  midiMessageReceived(event) {
     const cmd = event.data[0] >> 4
     const note = event.data[1]
     const velocity = event.data[2]
@@ -65,7 +65,7 @@ export default class MidiController extends React.Component {
     }
   }
 
-  render () {
+  render() {
     return null
   }
 }

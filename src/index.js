@@ -3,12 +3,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { createGlobalStyle } from 'styled-components'
 import { initAudio } from './audio'
-import App from './App'
-import Splashscreen from './Splashscreen'
+import App from './ui/App'
+import Splashscreen from './ui/Splashscreen'
 import reset from 'styled-reset'
 import 'react-piano/dist/styles.css'
 import 'react-loader-spinner/dist/loader/css/Triangle.css'
-import './piano.css'
+import './ui/Piano/piano.css'
 
 const GlobalStyle = createGlobalStyle`
   ${reset}

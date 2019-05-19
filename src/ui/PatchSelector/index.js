@@ -71,7 +71,7 @@ PatchSelector.propTypes = {
   setPatch: PropTypes.func.isRequired
 }
 
-export default function PatchSelector ({ patches, setPatch }) {
+export default function PatchSelector({ patches, setPatch }) {
   const [selectedPatch, selectPatch] = useState(0)
   const options = patches.map(({ name }, idx) => ({ value: idx, label: name }))
   return (
