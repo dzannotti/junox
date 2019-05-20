@@ -39,10 +39,10 @@ export default class Oscillator {
     const phaseSub = this.phaseSub / this.samplesPerPeriodSub
     let out = 0
     if (this.pulse) {
-      out += phase > this.pwm ? -0.4 : 0.4
+      out += phase > this.pwm ? -0.5 : 0.5
     }
     if (this.saw) {
-      out += (0.5 - phase) * 0.6
+      out += (0.5 - phase) * 0.5
     }
     if (this.sub) {
       out += (phaseSub > 0.5 ? 0.5 : -0.5) * this.subAmount

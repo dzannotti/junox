@@ -1,4 +1,6 @@
+// Diode Ladder Filter based on Will Pirkle's C++ Code
 import OnePoleFilter from './onepolefilter'
+import { TWOPI, fastTanh } from './utils'
 
 export default class DiodeLadder {
   constructor({ cutoff, resonance, sampleRate }) {
@@ -7,7 +9,7 @@ export default class DiodeLadder {
     this.lpf3 = new OnePoleFilter({ sampleRate })
     this.lpf4 = new OnePoleFilter({ sampleRate })
 
-    this.sampleRate = sampleRate
+    this.T = 1 / sampleRate
 
     this.K = 0
     this.gamma = 0.0
@@ -32,10 +34,9 @@ export default class DiodeLadder {
 
   setCutoff(cutoff) {
     // calculate alphas
-    const wd = 2 * Math.PI * cutoff
-    const T = 1 / this.sampleRate
-    const wa = (2 / T) * Math.tan((wd * T) / 2)
-    const g = (wa * T) / 2
+    const wd = TWOPI * cutoff
+    const wa = (2 / this.T) * Math.tan((wd * this.T) / 2)
+    const g = (wa * this.T) / 2
 
     // Big G's
     const G4 = (0.5 * g) / (1.0 + g)
@@ -52,16 +53,18 @@ export default class DiodeLadder {
     this.SG4 = 1.0
 
     // set alphas
-    this.lpf1.alpha = g / (1.0 + g)
-    this.lpf2.alpha = g / (1.0 + g)
-    this.lpf3.alpha = g / (1.0 + g)
-    this.lpf4.alpha = g / (1.0 + g)
+    const alphaG = g / (1.0 + g)
+    this.lpf1.alpha = alphaG
+    this.lpf2.alpha = alphaG
+    this.lpf3.alpha = alphaG
+    this.lpf4.alpha = alphaG
 
     // set betas
-    this.lpf1.beta = 1.0 / (1.0 + g - g * G2)
-    this.lpf2.beta = 1.0 / (1.0 + g - 0.5 * g * G3)
-    this.lpf3.beta = 1.0 / (1.0 + g - 0.5 * g * G4)
-    this.lpf4.beta = 1.0 / (1.0 + g)
+    const betaG = 1.0 + g
+    this.lpf1.beta = 1.0 / (betaG - g * G2)
+    this.lpf2.beta = 1.0 / (betaG - 0.5 * g * G3)
+    this.lpf3.beta = 1.0 / (betaG - 0.5 * g * G4)
+    this.lpf4.beta = 1.0 / betaG
 
     // set gammas
     this.lpf1.gamma = 1.0 + G1 * G2
@@ -69,9 +72,10 @@ export default class DiodeLadder {
     this.lpf3.gamma = 1.0 + G3 * G4
 
     // set deltas
+    const deltaG = 0.5 * g
     this.lpf1.delta = g
-    this.lpf2.delta = 0.5 * g
-    this.lpf3.delta = 0.5 * g
+    this.lpf2.delta = deltaG
+    this.lpf3.delta = deltaG
 
     // set epsilons
     this.lpf1.epsilon = G2
@@ -79,9 +83,9 @@ export default class DiodeLadder {
     this.lpf3.epsilon = G4
   }
 
-  // decode the Q value; Q on UI is 1->10
+  // decode the resonance value - resonance is [1..10]
   setResonance(resonance) {
-    this.K = (17.0 * (resonance - 1.0)) / (10.0 - 1.0)
+    this.K = (17.0 * (resonance - 1.0)) / 9.0
   }
 
   render(xn) {
@@ -100,7 +104,8 @@ export default class DiodeLadder {
     let U = (xn - this.K * sigma) / (1 + this.K * this.gamma)
 
     // ---NLP
-    U = Math.tanh(U)
+    U = fastTanh(U)
+
     // --- cascade of four filters
     return this.lpf4.render(
       this.lpf3.render(this.lpf2.render(this.lpf1.render(U)))

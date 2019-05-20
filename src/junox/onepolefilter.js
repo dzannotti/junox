@@ -1,3 +1,6 @@
+// One Pole Filter based on Will Pirkle's C++ Code
+import { TWOPI } from './utils'
+
 export default class OnePoleFilter {
   constructor({ sampleRate, cutoff }) {
     this.beta = 0.0
@@ -7,10 +10,10 @@ export default class OnePoleFilter {
     this.epsilon = 0.0
     this.a0 = 1.0
     this.feedback = 0.0
-    this.sampleRate = sampleRate
     if (cutoff) {
       this.setCutoff(cutoff)
     }
+    this.T = 1 / sampleRate
   }
 
   setFeedback(feedback) {
@@ -22,10 +25,9 @@ export default class OnePoleFilter {
   }
 
   setCutoff(cutoff) {
-    const T = 1 / this.sampleRate
-    const wd = 2 * Math.PI * cutoff
-    const wa = (2 / T) * Math.tan((wd * T) / 2)
-    const g = (wa * T) / 2
+    const wd = TWOPI * cutoff
+    const wa = (2 / this.T) * Math.tan((wd * this.T) / 2)
+    const g = (wa * this.T) / 2
     this.alpha = g / (1.0 + g)
   }
 

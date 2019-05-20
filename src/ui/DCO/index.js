@@ -51,21 +51,21 @@ export default React.memo(function DCO({
       <ButtonLED
         label="PULSE"
         spaced
-        color="one"
+        variant="white"
         active={pulse}
         toggle={setValue('dco.pulse')}
       />
       <ButtonLED
         label="SAW"
         spaced
-        color="two"
+        variant="yellow"
         active={saw}
         toggle={setValue('dco.saw')}
       />
       <ButtonLED
         label="SUB"
         spaced
-        color="three"
+        variant="orange"
         active={sub}
         toggle={setValue('dco.sub')}
       />
