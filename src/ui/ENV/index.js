@@ -11,10 +11,10 @@ export default React.memo(function ENV({
 }) {
   return (
     <Section title="ENV">
-      <Slider label="A" value={attack} onChange={setValue('env.attack')} />
-      <Slider label="D" value={decay} onChange={setValue('env.decay')} />
-      <Slider label="S" value={sustain} onChange={setValue('env.sustain')} />
-      <Slider label="R" value={release} onChange={setValue('env.release')} />
+      <Slider label="A" onChange={setValue('env.attack')} value={attack} />
+      <Slider label="D" onChange={setValue('env.decay')} value={decay} />
+      <Slider label="S" onChange={setValue('env.sustain')} value={sustain} />
+      <Slider label="R" onChange={setValue('env.release')} value={release} />
     </Section>
   )
 })

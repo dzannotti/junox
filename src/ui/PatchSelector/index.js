@@ -5,14 +5,14 @@ import PropTypes from 'prop-types'
 const customStyles = {
   control: provided => ({
     ...provided,
+    backgroundColor: 'transparent',
     borderColor: 'transparent',
     borderRadius: 0,
-    width: 200,
-    backgroundColor: 'transparent',
-    fontFamily: 'Orbitron',
     boxShadow: 'none',
+    fontFamily: 'Orbitron',
     fontWeight: 600,
     marginRight: '1rem',
+    width: 200,
     ':hover': {
       borderColor: 'transparent'
     },

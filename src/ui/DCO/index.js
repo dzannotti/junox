@@ -19,18 +19,18 @@ export default React.memo(function DCO({
   return (
     <Section title="DCO">
       <ButtonLED
-        label="4'"
         active={range === 2}
+        label="4'"
         toggle={setValue('dco.range', 2)}
       />
       <ButtonLED
-        label="8'"
         active={range === 1}
+        label="8'"
         toggle={setValue('dco.range', 1)}
       />
       <ButtonLED
-        label="16'"
         active={range === 0.5}
+        label="16'"
         toggle={setValue('dco.range', 0.5)}
       />
       <AfterButtonLED />
@@ -38,42 +38,42 @@ export default React.memo(function DCO({
       <Slider label="PWM" value={pwm} onChange={setValue('dco.pwm')} />
       <Column>
         <ButtonLED
-          label="LFO"
           active={lfoMod}
+          label="LFO"
           toggle={setValue('dco.lfoMod', true)}
         />
         <ButtonLED
-          label="Man"
           active={!lfoMod}
+          label="Man"
           toggle={setValue('dco.lfoMod', false)}
         />
       </Column>
       <ButtonLED
+        active={pulse}
         label="PULSE"
         spaced
-        variant="white"
-        active={pulse}
         toggle={setValue('dco.pulse')}
+        variant="white"
       />
       <ButtonLED
+        active={saw}
         label="SAW"
         spaced
-        variant="yellow"
-        active={saw}
         toggle={setValue('dco.saw')}
+        variant="yellow"
       />
       <ButtonLED
+        active={sub}
         label="SUB"
         spaced
-        variant="orange"
-        active={sub}
         toggle={setValue('dco.sub')}
+        variant="orange"
       />
       <AfterButtonLED />
       <Slider
         label="SUB"
-        value={subAmount}
         onChange={setValue('dco.subAmount')}
+        value={subAmount}
       />
       <Slider label="NOISE" value={noise} onChange={setValue('dco.noise')} />
     </Section>

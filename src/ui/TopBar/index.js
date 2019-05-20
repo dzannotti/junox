@@ -12,23 +12,23 @@ import { TopRow, Spacer, LogoContainer, Logo } from './elements'
 import { noteToFrequency } from '../../utils'
 
 export default function TopBar({
+  audioContext,
+  lastNoteOn,
+  noteOff,
+  noteOn,
   patches,
   setPatch,
-  lastNoteOn,
-  synth,
-  audioContext,
-  noteOn,
-  noteOff
+  synth
 }) {
   return (
     <TopRow>
       <LCD>
         <PatchSelector patches={patches} setPatch={setPatch} />
         <Visualizer
-          sampleRate={44100}
-          period={noteToFrequency(lastNoteOn)}
-          outNode={synth}
           audioContext={audioContext}
+          outNode={synth}
+          period={noteToFrequency(lastNoteOn)}
+          sampleRate={44100}
         />
       </LCD>
       <Spacer />

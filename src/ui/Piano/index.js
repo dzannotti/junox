@@ -14,11 +14,11 @@ export default React.memo(function PianoWrapper({ noteOn, noteOff, octave }) {
   })
   return (
     <Piano
+      keyboardShortcuts={keyboardShortcuts}
       noteRange={{ first: firstNote, last: lastNote }}
       playNote={note => noteOn(note + octave)}
       stopNote={note => noteOff(note + octave)}
       width={850}
-      keyboardShortcuts={keyboardShortcuts}
     />
   )
 })

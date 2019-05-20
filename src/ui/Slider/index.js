@@ -8,18 +8,18 @@ export default React.memo(function Slider({ label, value, onChange, step }) {
   return (
     <Container>
       <Range
-        values={[Math.round(value * 127)]}
-        onChange={setValue}
-        min={0}
-        max={resolution}
-        step={step * resolution || 1}
         direction={Direction.Up}
+        max={resolution}
+        min={0}
+        onChange={setValue}
+        step={step * resolution || 1}
         renderTrack={({ props, children }) => (
           <SliderTrackRange props={props} label={label}>
             {children}
           </SliderTrackRange>
         )}
         renderThumb={({ props }) => <SliderThumb {...props} />}
+        values={[Math.round(value * 127)]}
       />
     </Container>
   )

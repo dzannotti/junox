@@ -32,13 +32,13 @@ export default function useSynth(synth, setLastNoteOn) {
   const lfoRelease = () => synth.lfoRelease()
 
   return {
-    setSynthValue,
-    setSynthPatchValue,
-    patch,
-    noteOn,
-    noteOff,
-    setPatch,
+    lfoRelease,
     lfoTrigger,
-    lfoRelease
+    noteOff,
+    noteOn,
+    patch,
+    setPatch,
+    setSynthPatchValue,
+    setSynthValue
   }
 }

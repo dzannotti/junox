@@ -6,7 +6,7 @@ LCD.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-export default function LCD({ patches, setPatch, children }) {
+export default function LCD({ children }) {
   return (
     <Wrapper>
       <LCDBorderTop />

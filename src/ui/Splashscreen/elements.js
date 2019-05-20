@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   min-height: 100%;
+  min-width: 100%;
+  overflow: hidden;
 `
 
 export const Logo = styled.div`
+  font-family: Righteous;
   font-size: 45px;
   font-weight: 600;
-  font-family: Righteous;
   margin-bottom: 1rem;
 `
 

@@ -1,7 +1,7 @@
 import DCO from './dco'
 import ADSREnvelope from './envelope'
 import { noteToFrequency } from '../utils'
-import LowPassFilter from './lpf'
+import MoogLowPassFilter from './mooglpf'
 import DiodeLadder from './diodeladder'
 import {
   paramToPWM,
@@ -12,6 +12,7 @@ import {
   sliderToDecay,
   sliderToRelease
 } from './params'
+import { VCA_ENV, VCF_DIODELADDER, VCF_MOOG } from './constants'
 
 export default class Voice {
   constructor({ note, patch, velocity, sampleRate }) {
@@ -45,7 +46,7 @@ export default class Voice {
       release: sliderToRelease(0.1),
       sampleRate
     })
-    this.moogVCF = new LowPassFilter({
+    this.moogVCF = new MoogLowPassFilter({
       sampleRate,
       resonance: sliderToResonance(patch.vcf.resonance),
       cutoff: sliderToFilterFreqNorm(patch.vcf.frequency, sampleRate) * 3.99
@@ -65,10 +66,10 @@ export default class Voice {
     const env = this.env.render()
     const gate = this.gate.render()
     const vcf =
-      this.patch.vcf.type === 'diode-ladder'
+      this.patch.vcf.type === VCF_DIODELADDER
         ? this.diodeLadderVCF.render(dco)
         : this.moogVCF.render(dco)
-    const vca = this.patch.vcaType === 'env' ? env : gate
+    const vca = this.patch.vcaType === VCA_ENV ? env : gate
     return this.velocity * vcf * vca
   }
 
@@ -98,8 +99,11 @@ export default class Voice {
       vcfCutoffValue,
       this.sampleRate
     )
-    this.moogVCF.cutoff = cutoffNormalized
-    this.diodeLadderVCF.setCutoff(cutoffNormalized * 18000)
+    if (this.patch.vcf.type === VCF_MOOG) {
+      this.moogVCF.cutoff = cutoffNormalized
+    } else {
+      this.diodeLadderVCF.setCutoff(cutoffNormalized * 18000)
+    }
   }
 
   isFinished() {
@@ -117,13 +121,12 @@ export default class Voice {
     this.env.decay = sliderToDecay(patch.env.decay)
     this.env.sustain = sliderToSustain(patch.env.sustain)
     this.env.release = sliderToRelease(patch.env.release)
-    this.moogVCF.resonance = sliderToResonance(patch.vcf.resonance) * 3.99
-    this.moogVCF.cutoff = sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4)
-    this.diodeLadderVCF.setCutoff(
-      sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4) * 18000
-    )
-    this.diodeLadderVCF.setResonance(
-      sliderToResonance(patch.vcf.resonance) * 9 + 1
-    )
+
+    const sliderResonance = sliderToResonance(patch.vcf.resonance)
+    const sliderCutoff = sliderToFilterFreqNorm(patch.vcf.frequency * 10 * 1.4)
+    this.moogVCF.resonance = sliderResonance * 3.99
+    this.moogVCF.cutoff = sliderCutoff
+    this.diodeLadderVCF.setCutoff(sliderCutoff * 18000)
+    this.diodeLadderVCF.setResonance(sliderResonance * 9 + 1)
   }
 }

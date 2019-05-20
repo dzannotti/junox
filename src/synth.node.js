@@ -1,3 +1,15 @@
+import {
+  LFO_TRIGGER_OFF,
+  LFO_TRIGGER_ON,
+  NOTE_OFF,
+  NOTE_ON,
+  PANIC,
+  SET_PARAM,
+  SET_PATCH,
+  START_SAMPLE_TIME,
+  STOP_SAMPLE_TIME
+} from './synth.constants'
+
 export default class SynthWorkletNode extends AudioWorkletNode {
   constructor(context, options) {
     super(context, 'junox-synth', options)
@@ -6,10 +18,10 @@ export default class SynthWorkletNode extends AudioWorkletNode {
   }
 
   handleMessage(event) {
-    if (event.data.type === 'start-sample-time') {
+    if (event.data.type === START_SAMPLE_TIME) {
       this.startTime = performance.now()
     }
-    if (event.data.type === 'stop-sample-time') {
+    if (event.data.type === STOP_SAMPLE_TIME) {
       this.sampleTimes.push(performance.now() - this.startTime)
     }
   }
@@ -23,7 +35,7 @@ export default class SynthWorkletNode extends AudioWorkletNode {
 
   noteOn(note, velocity) {
     this.port.postMessage({
-      action: 'note-on',
+      action: NOTE_ON,
       note,
       velocity
     })
@@ -31,14 +43,14 @@ export default class SynthWorkletNode extends AudioWorkletNode {
 
   noteOff(note) {
     this.port.postMessage({
-      action: 'note-off',
+      action: NOTE_OFF,
       note
     })
   }
 
   setParam(name, value) {
     this.port.postMessage({
-      action: 'set-param',
+      action: SET_PARAM,
       name,
       value
     })
@@ -46,22 +58,22 @@ export default class SynthWorkletNode extends AudioWorkletNode {
 
   setPatch(index) {
     this.port.postMessage({
-      action: 'set-patch',
+      action: SET_PATCH,
       index
     })
   }
 
   lfoTrigger() {
-    this.port.postMessage({ action: 'lfo-trigger-on' })
+    this.port.postMessage({ action: LFO_TRIGGER_ON })
   }
 
   lfoRelease() {
-    this.port.postMessage({ action: 'lfo-trigger-off' })
+    this.port.postMessage({ action: LFO_TRIGGER_OFF })
   }
 
   panic() {
     this.port.postMessage({
-      action: 'panic'
+      action: PANIC
     })
   }
 

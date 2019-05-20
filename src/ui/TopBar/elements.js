@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { Row } from '../Flexbox'
 
 export const TopRow = styled(Row)`
-  height: 120px;
-  background-color: #232326;
   align-items: center;
+  background-color: #232326;
+  height: 120px;
   padding-left: 1rem;
   padding-right: 1rem;
 `
@@ -20,9 +20,9 @@ export const LogoContainer = styled.div`
 `
 
 export const Logo = styled.div`
+  align-self: flex-end;
+  font-family: Righteous;
   font-size: 36px;
   font-weight: 600;
-  font-family: Righteous;
   margin-right: 1rem;
-  align-self: flex-end;
 `

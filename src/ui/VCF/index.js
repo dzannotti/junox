@@ -3,47 +3,47 @@ import Section from '../Section'
 import Slider from '../Slider'
 import { Column } from '../Flexbox'
 import ButtonLED, { AfterButtonLED } from '../ButtonLED'
+import { VCF_MOOG, VCF_DIODELADDER } from '../../junox/constants'
 
 export default React.memo(function VCF({
-  frequency,
-  resonance,
-  modPositive,
-  type,
   envMod,
-  lfoMod,
+  frequency,
   keyMod,
-  setValue
+  lfoMod,
+  modPositive,
+  resonance,
+  setValue,
+  type
 }) {
+  const toggleFilterType = val => (val ? VCF_MOOG : VCF_DIODELADDER)
   return (
     <Section title="VCF">
       <Slider
         label="FREQ"
-        value={frequency}
         onChange={setValue('vcf.frequency')}
+        value={frequency}
       />
       <Slider
         label="RES"
-        value={resonance}
         onChange={setValue('vcf.resonance')}
+        value={resonance}
       />
       <Column>
         <ButtonLED
-          label="+"
           active={modPositive}
+          label="+"
           toggle={setValue('vcf.modPositive')}
         />
         <ButtonLED
+          active={type === VCF_MOOG}
           label="moog"
-          active={type === 'moog'}
-          toggle={setValue('vcf.type', undefined, val =>
-            val ? 'moog' : 'diode-ladder'
-          )}
+          toggle={setValue('vcf.type', undefined, toggleFilterType)}
         />
       </Column>
       <AfterButtonLED />
-      <Slider label="ENV" value={envMod} onChange={setValue('vcf.envMod')} />
-      <Slider label="LFO" value={lfoMod} onChange={setValue('vcf.lfoMod')} />
-      <Slider label="KEY" value={keyMod} onChange={setValue('vcf.keyMod')} />
+      <Slider label="ENV" onChange={setValue('vcf.envMod')} value={envMod} />
+      <Slider label="LFO" onChange={setValue('vcf.lfoMod')} value={lfoMod} />
+      <Slider label="KEY" onChange={setValue('vcf.keyMod')} value={keyMod} />
     </Section>
   )
 })

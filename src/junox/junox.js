@@ -111,9 +111,6 @@ export default class Junox {
   }
 
   setValue(path, value) {
-    if (path === 'chorus') {
-      this.chorus.reset()
-    }
     set(this.patch, path, value)
     this.update()
   }

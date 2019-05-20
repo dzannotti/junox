@@ -12,18 +12,18 @@ function buttonColor(color) {
 }
 
 export const Button = styled.div`
-  padding: 0.5rem;
-  cursor: pointer;
-  background-color: ${props => buttonColor(props.variant)};
-  border: 1px solid black;
-  border-radius: 4px;
-  font-size: 13px;
-  text-transform: uppercase;
-  color: white;
-  display: flex;
   align-items: center;
-  justify-content: center;
+  background-color: ${props => buttonColor(props.variant)};
+  border-radius: 4px;
+  border: 1px solid black;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-size: 13px;
   font-weight: 600;
+  justify-content: center;
+  padding: 0.5rem;
+  text-transform: uppercase;
   &:active {
     background-color: #121212;
   }

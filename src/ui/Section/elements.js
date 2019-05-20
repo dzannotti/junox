@@ -3,44 +3,44 @@ import styled from 'styled-components'
 export const Column = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 3px;
   flex-grow: 0;
   flex-shrink: 0;
   height: 230px;
+  margin-top: 3px;
 `
 
 export const Row = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
   height: 100%;
-  align-items: center;
 `
 
 export const Title = styled.div`
-  width: calc(100% - 2px);
-  margin-left: 1px;
+  align-items: center;
   background-color: #a40000;
   color: white;
-  text-transform: uppercase;
-  height: 1.7rem;
   display: flex;
-  align-items: center;
   font-weight: 600;
+  height: 1.7rem;
   justify-content: center;
+  margin-left: 1px;
+  text-transform: uppercase;
+  width: calc(100% - 2px);
 `
 
 export const BottomBlock = styled.div`
-  width: calc(100% - 2px);
   background-color: #a40000;
   color: white;
-  height: 0.5rem;
   display: flex;
+  height: 0.5rem;
+  width: calc(100% - 2px);
 `
 
 export const Line = styled.div`
+  background-color: white;
   height: 100%;
   width: 1px;
-  background-color: white;
 `
 
 export const LineStart = styled(Line)`

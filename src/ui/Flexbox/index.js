@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
 export const Column = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 `
 
 export const SimpleRow = styled.div`
@@ -15,10 +15,10 @@ export const SimpleRow = styled.div`
 `
 
 export const Row = styled(SimpleRow)`
+  background-color: #2b2c2e;
   display: flex;
   flex-direction: row;
-  width: 1000px;
   flex: 0 0 auto;
-  background-color: #2b2c2e;
   padding-bottom: ${props => (props.first ? '3px' : '0')};
+  width: 1000px;
 `
