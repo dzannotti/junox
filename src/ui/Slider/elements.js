@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  width: 60px;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 60px;
 `
 
 const Spacer = styled.div`
@@ -18,47 +18,47 @@ const SliderTrackWrapper = styled.div`
 `
 
 const SliderTrackLabel = styled.div`
-  text-transform: uppercase;
-  height: 1.25rem;
-  line-height: 1.25rem;
+  align-items: center;
+  color: #cfcfcf;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   font-weight: 600;
+  height: 1.25rem;
+  justify-content: center;
+  line-height: 1.25rem;
   margin-bottom: 1rem;
-  color: #cfcfcf;
+  text-transform: uppercase;
 `
 
 const ThumbContainer = styled.div`
+  align-items: center;
+  background-color: #000000;
+  border-radius: 2px;
   display: flex;
   height: 22px;
   width: 44px;
-  background-color: #000000;
-  align-items: center;
-  border-radius: 2px;
 `
 
 const ThumbMarker = styled.div`
+  background-color: white;
   flex-grow: 0;
   flex-shrink: 0;
   height: 2px;
-  background-color: white;
   width: 100%;
 `
 
 const FaderMarks = styled.div`
-  width: 31px;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 31px;
 `
 
 const FaderMark = styled.div`
   background-color: white;
   height: ${props => (props.bold ? '2px' : '1px')};
-  width: 100%;
   margin-bottom: 3px;
+  width: 100%;
 `
 
 export const SliderThumb = React.memo(function SliderThumb(props) {
@@ -70,9 +70,9 @@ export const SliderThumb = React.memo(function SliderThumb(props) {
 })
 
 export const SliderTrackRange = React.memo(function SliderTrackRange({
-  props,
+  children,
   label,
-  children
+  props
 }) {
   const faders = (
     <FaderMarks>
@@ -109,14 +109,14 @@ export const SliderTrackRange = React.memo(function SliderTrackRange({
 })
 
 const SliderTrackContainer = styled.div`
-  height: 140px;
-  width: 70px;
   display: flex;
   flex-direction: row;
+  height: 140px;
+  width: 70px;
 `
 const SliderTrack = styled.div`
-  width: 7px;
-  height: 135px;
   background-color: #000000;
   border-radius: 2px;
+  height: 135px;
+  width: 7px;
 `

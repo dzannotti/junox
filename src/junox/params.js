@@ -6,7 +6,6 @@ export function paramToPWM(value) {
 
 const sliderToAttackDenominator = Math.exp(10 * 0.5) - 1
 export function sliderToAttack(val) {
-  const slider = val * 10
   return 0.001 + ((Math.exp(val * 5) - 1) / sliderToAttackDenominator) * 3.25
 }
 

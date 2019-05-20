@@ -5,36 +5,36 @@ import ButtonLED from '../ButtonLED'
 import { Column } from '../Flexbox'
 
 export default React.memo(function LFO({
-  frequency,
-  delay,
   autoTrigger,
-  setValue,
+  delay,
+  frequency,
+  lfoRelease,
   lfoTrigger,
-  lfoRelease
+  setValue
 }) {
   return (
     <Section title="LFO">
       <Slider
         label="FREQ"
-        value={frequency}
         onChange={setValue('lfo.frequency')}
+        value={frequency}
       />
-      <Slider label="DELAY" value={delay} onChange={setValue('lfo.delay')} />
+      <Slider label="DELAY" onChange={setValue('lfo.delay')} value={delay} />
       <Column>
         <ButtonLED
-          label="Auto"
           active={autoTrigger}
+          label="Auto"
           toggle={setValue('lfo.autoTrigger', true)}
         />
         <ButtonLED
-          label="Man"
           active={!autoTrigger}
+          label="Man"
           toggle={setValue('lfo.autoTrigger', false)}
         />
       </Column>
       <ButtonLED
-        label="TRG"
         hideLed
+        label="TRG"
         onMouseDown={lfoTrigger}
         onMouseUp={lfoRelease}
       />

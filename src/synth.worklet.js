@@ -1,5 +1,16 @@
 import Junox from './junox'
 import patches from './junox/patches'
+import {
+  LFO_TRIGGER_OFF,
+  LFO_TRIGGER_ON,
+  NOTE_OFF,
+  NOTE_ON,
+  PANIC,
+  SET_PARAM,
+  SET_PATCH,
+  START_SAMPLE_TIME,
+  STOP_SAMPLE_TIME
+} from './synth.constants'
 
 class JunoxWorker extends AudioWorkletProcessor {
   constructor() {
@@ -16,32 +27,32 @@ class JunoxWorker extends AudioWorkletProcessor {
 
   sendStartTime(samples) {
     this.port.postMessage({
-      type: 'start-sample-time',
+      type: START_SAMPLE_TIME,
       samples
     })
   }
 
   sendStopTime() {
     this.port.postMessage({
-      type: 'stop-sample-time'
+      type: STOP_SAMPLE_TIME
     })
   }
 
   handleMessage(event) {
-    if (event.data.action === 'note-on') {
+    if (event.data.action === NOTE_ON) {
       this.synth.noteOn(event.data.note, event.data.velocity)
-    } else if (event.data.action === 'note-off') {
+    } else if (event.data.action === NOTE_OFF) {
       this.synth.noteOff(event.data.note)
-    } else if (event.data.action === 'set-param') {
+    } else if (event.data.action === SET_PARAM) {
       this.synth.setValue(event.data.name, event.data.value)
-    } else if (event.data.action === 'set-patch') {
+    } else if (event.data.action === SET_PATCH) {
       this.synth.patch = patches[event.data.index]
       this.synth.update()
-    } else if (event.data.action === 'lfo-trigger-on') {
+    } else if (event.data.action === LFO_TRIGGER_ON) {
       this.synth.lfoTrigger()
-    } else if (event.data.action === 'lfo-trigger-off') {
+    } else if (event.data.action === LFO_TRIGGER_OFF) {
       this.synth.lfoRelease()
-    } else if (event.data.action === 'panic') {
+    } else if (event.data.action === PANIC) {
       this.synth.panic()
     } else {
       console.log('Unamanaged message', JSON.stringify(event.data))

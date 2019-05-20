@@ -2,18 +2,18 @@ import styled from 'styled-components'
 import Led from '../Led'
 
 export const OctaveWrapper = styled.div`
+  align-items: center;
+  border-right: 2px solid #121212;
+  color: white;
   display: flex;
   flex-direction: column;
-  width: 150px;
-  text-transform: uppercase;
-  font-weight: 600;
-  color: white;
-  justify-content: center;
-  align-items: center;
   flex-grow: 0;
   flex-shrink: 0;
+  font-weight: 600;
+  justify-content: center;
   padding-top: 10px;
-  border-right: 2px solid #121212;
+  text-transform: uppercase;
+  width: 150px;
 `
 
 export const Row = styled.div`

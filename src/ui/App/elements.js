@@ -8,19 +8,19 @@ export const BlackRow = styled(Row)`
 `
 
 export const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  overflow: hidden;
-  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
   min-height: 100%;
+  min-width: 100%;
+  overflow: hidden;
 `
 
 export const Copyright = styled.div`
-  font-size: 12px;
   align-self: center;
+  font-size: 12px;
   justify-self: center;
   margin-top: 0.25rem;
 `

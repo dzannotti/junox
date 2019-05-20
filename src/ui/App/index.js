@@ -22,14 +22,14 @@ export default function App({ synth, audioContext }) {
   const [lastNoteOn, setLastNoteOn] = useState(69)
 
   const {
-    setSynthValue,
-    setSynthPatchValue,
-    patch,
-    noteOn,
-    noteOff,
-    setPatch,
+    lfoRelease,
     lfoTrigger,
-    lfoRelease
+    noteOff,
+    noteOn,
+    patch,
+    setPatch,
+    setSynthPatchValue,
+    setSynthValue
   } = useSynth(synth, setLastNoteOn)
 
   usePatchUrl(setSynthPatchValue)
@@ -37,55 +37,55 @@ export default function App({ synth, audioContext }) {
   return (
     <Container>
       <TopBar
+        audioContext={audioContext}
+        lastNoteOn={lastNoteOn}
+        noteOff={noteOff}
+        noteOn={noteOn}
         patches={patches}
         setPatch={setPatch}
-        lastNoteOn={lastNoteOn}
         synth={synth}
-        audioContext={audioContext}
-        noteOn={noteOn}
-        noteOff={noteOff}
       />
       <Row first centered>
         <LFO
-          frequency={patch.lfo.frequency}
-          delay={patch.lfo.delay}
           autoTrigger={patch.lfo.autoTrigger}
-          setValue={setSynthValue}
-          lfoTrigger={lfoTrigger}
+          delay={patch.lfo.delay}
+          frequency={patch.lfo.frequency}
           lfoRelease={lfoRelease}
+          lfoTrigger={lfoTrigger}
+          setValue={setSynthValue}
         />
         <DCO
-          range={patch.dco.range}
           lfo={patch.dco.lfo}
-          pwm={patch.dco.pwm}
           lfoMod={patch.dco.lfoMod}
+          noise={patch.dco.noise}
           pulse={patch.dco.pulse}
+          pwm={patch.dco.pwm}
+          range={patch.dco.range}
           saw={patch.dco.saw}
+          setValue={setSynthValue}
           sub={patch.dco.sub}
           subAmount={patch.dco.subAmount}
-          noise={patch.dco.noise}
-          setValue={setSynthValue}
         />
         <HPF hpf={patch.hpf} setValue={setSynthValue} />
       </Row>
       <Row centered>
         <VCF
-          frequency={patch.vcf.frequency}
-          resonance={patch.vcf.resonance}
-          modPositive={patch.vcf.modPositive}
-          type={patch.vcf.type}
           envMod={patch.vcf.envMod}
-          lfoMod={patch.vcf.lfoMod}
+          frequency={patch.vcf.frequency}
           keyMod={patch.vcf.lfoMod}
+          lfoMod={patch.vcf.lfoMod}
+          modPositive={patch.vcf.modPositive}
+          resonance={patch.vcf.resonance}
           setValue={setSynthValue}
+          type={patch.vcf.type}
         />
         <VCA vca={patch.vca} vcaType={patch.vcaType} setValue={setSynthValue} />
         <ENV
           attack={patch.env.attack}
           decay={patch.env.decay}
-          sustain={patch.env.sustain}
           release={patch.env.release}
           setValue={setSynthValue}
+          sustain={patch.env.sustain}
         />
         <Chorus chorus={patch.chorus} setValue={setSynthValue} />
       </Row>

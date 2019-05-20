@@ -5,7 +5,7 @@ import Slider from '../Slider'
 export default React.memo(function HPF({ hpf, setValue }) {
   return (
     <Section title="HPF">
-      <Slider label="FREQ" value={hpf} step={0.33} onChange={setValue('hpf')} />
+      <Slider label="FREQ" onChange={setValue('hpf')} step={0.33} value={hpf} />
     </Section>
   )
 })

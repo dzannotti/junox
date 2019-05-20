@@ -7,12 +7,12 @@ export default React.memo(function VCA({ vca, vcaType, setValue }) {
   return (
     <Section title="VCA">
       <ButtonLED
-        label="ENV"
         active={vcaType === 'env'}
+        label="ENV"
         toggle={setValue('vcaType', undefined, val => (val ? 'env' : 'gate'))}
       />
       <AfterButtonLED />
-      <Slider label="level" value={vca} onChange={setValue('vca')} />
+      <Slider label="level" onChange={setValue('vca')} value={vca} />
     </Section>
   )
 })

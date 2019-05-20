@@ -6,29 +6,29 @@ export const Wrapper = styled.div`
 `
 
 export const Container = styled.div`
-  width: 736px;
-  height: 76px;
+  align-items: center;
   background-color: #c0cf35;
-  color: #2f3409;
   box-shadow: inset 0 3px 0 3px #c0cf35;
-  position: relative;
+  color: #2f3409;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  height: 76px;
   justify-content: center;
   padding-top: 4px;
+  position: relative;
+  width: 736px;
 `
 
 export const LCDBorderTop = styled.div`
+  background-color: #99a52a;
   height: 3px;
   width: 100%;
-  background-color: #99a52a;
 `
 export const LCDBorderSide = styled.div`
-  height: 100%;
-  width: 3px;
   background-color: #99a52a;
+  height: 100%;
   position: absolute;
   right: 0;
   top: 0;
+  width: 3px;
 `

@@ -2,22 +2,22 @@ import styled from 'styled-components'
 import LedLight from '../Led'
 
 export const Wrapper = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 0.5rem;
   height: 100%;
+  justify-content: center;
+  margin-left: 0.5rem;
 `
 
 export const Label = styled.div`
-  font-weight: 600;
   color: #cfcfcf;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
+  font-weight: 600;
   height: 1.25rem;
   line-height: 1.25rem;
+  margin-bottom: 0.5rem;
   margin-top: 0.75rem;
+  text-transform: uppercase;
 `
 
 export const Led = styled(LedLight)`
@@ -29,6 +29,6 @@ export const Spacer = styled.div`
 `
 
 export const AfterButtonLED = styled.div`
-  width: 20px;
   height: 100%;
+  width: 20px;
 `
