@@ -20,8 +20,6 @@ class JunoxWorker extends AudioWorkletProcessor {
       sampleRate: 44100,
       polyphony: 6
     })
-    this.bufferL = new Float32Array(256)
-    this.bufferR = new Float32Array(256)
     this.port.onmessage = this.handleMessage.bind(this)
   }
 
@@ -62,10 +60,6 @@ class JunoxWorker extends AudioWorkletProcessor {
   process(inputs, outputs) {
     const output = outputs[0]
     this.sendStartTime(output[0].length)
-    if (output[0].length > this.bufferL.length) {
-      this.bufferL = new Float32Array(output[0].length)
-      this.bufferR = new Float32Array(output[0].length)
-    }
     this.synth.render(output[0], output[1])
     this.sendStopTime()
     return true
