@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/ui/Piano/piano.css"],"names":[],"mappings":"AAAA;AACA;AACA;;AAEA;AACA;AACA;;AAEA;AACA;AACA","file":"app.e6d8233e56792f79f495.css","sourcesContent":[".ReactPiano__Key--accidental {\n  background-color: #232326;\n}\n\n.ReactPiano__Key--active {\n  background: #61b6fc;\n}\n\n.ReactPiano__Keyboard {\n  height: 220px;\n}\n"],"sourceRoot":""}
