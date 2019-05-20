@@ -81,14 +81,16 @@ export default class Junox {
   }
 
   render(outL, outR) {
+    // remove dead voices first
+    this.voices = this.voices.filter(voice => !voice.isFinished())
     for (let i = 0; i < outL.length; i++) {
       this.tick()
-      // remove dead voices first
-      this.voices = this.voices.filter(voice => !voice.isFinished())
 
       let monoOut = 0
       for (let j = 0; j < this.voices.length; j++) {
-        monoOut += this.voices[j].render()
+        if (!this.voices[j].isFinished()) {
+          monoOut += this.voices[j].render()
+        }
       }
 
       if (this.patch.hpf < 0.3) {
@@ -98,9 +100,9 @@ export default class Junox {
         monoOut = this.hpf.render(monoOut)
       }
       if (this.patch.chorus) {
-        const chorus = this.chorus.render(monoOut)
-        outL[i] = chorus[0]
-        outR[i] = chorus[1]
+        this.chorus.render(monoOut)
+        outL[i] = this.chorus.out[0]
+        outR[i] = this.chorus.out[1]
       } else {
         outL[i] = monoOut
         outR[i] = monoOut

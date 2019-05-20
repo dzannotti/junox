@@ -42,7 +42,7 @@ export default class Chorus {
     this.delay = delay * sampleRate
     this.minDelaySamples = this.sampleRate * 0.00369
     this.wet = wet
-    this.dry = 1 - wet
+    this.out = [0, 0]
   }
 
   reset() {
@@ -58,6 +58,7 @@ export default class Chorus {
     const lYN = this.ringBuffer.getSample(leftDelayTime)
     const rYN = this.ringBuffer.getSample(rightDelayTime)
     this.ringBuffer.addSample(input)
-    return [input + lYN * this.wet, input + rYN * this.wet]
+    this.out[0] = input + lYN * this.wet
+    this.out[1] = input + rYN * this.wet
   }
 }
