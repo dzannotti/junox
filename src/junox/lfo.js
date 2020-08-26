@@ -28,7 +28,7 @@ export default class LFO {
     this.delayPhase = 0
     this.attackPhase = 0
     this.attackRateFactor = 0
-    this.attackOutput = 0.01
+    this.attackOutput = 0.001
   }
 
   delayEnv() {
